@@ -1,0 +1,81 @@
+name: SE Ranking API Rate Limits
+description: Rate limits for SE Ranking's Data API and Project API, including standard throughput limits, trial restrictions, error handling, and custom options for high-volume use cases.
+version: "0.1"
+url: https://seranking.com/api/rate-limits/
+
+limits:
+
+  - name: Data API Standard Rate Limit
+    description: Default throughput limit for the SE Ranking Data API for paid accounts.
+    api: Data API
+    scope: account
+    limit: 10
+    period: second
+    unit: requests
+    status: standard
+
+  - name: Project API Standard Rate Limit
+    description: Default throughput limit for the SE Ranking Project API for paid accounts.
+    api: Project API
+    scope: account
+    limit: 5
+    period: second
+    unit: requests
+    status: standard
+
+  - name: Data API Trial Rate Limit
+    description: Reduced throughput limit applied during the 14-day free trial period for the Data API.
+    api: Data API
+    scope: account
+    limit: 1
+    period: second
+    unit: requests
+    status: trial
+    notes: Can be increased upon request by contacting the SE Ranking team.
+
+  - name: Credit Balance (Trial)
+    description: Total API credits available during the 14-day free trial period.
+    api: Data API
+    scope: account
+    limit: 100000
+    period: trial
+    unit: credits
+    status: trial
+
+  - name: Credit Balance (Core Plan)
+    description: Monthly API credits included with the Core platform subscription.
+    api: Data API
+    scope: account
+    limit: 25000
+    period: month
+    unit: credits
+    status: standard
+
+  - name: Credit Balance (Growth Plan)
+    description: Monthly API credits included with the Growth platform subscription.
+    api: Data API
+    scope: account
+    limit: 100000
+    period: month
+    unit: credits
+    status: standard
+
+errors:
+  - code: 429
+    message: Too Many Requests
+    description: Returned when the rate limit is exceeded. Reduce request frequency and implement exponential backoff with jitter.
+
+  - code: 403
+    message: Insufficient funds
+    description: Returned when the account has insufficient API credits to complete the request. No credits are charged on this error.
+
+recommendations:
+  - Implement exponential backoff with jitter when receiving 429 responses.
+  - Use client-side throttling to proactively manage request rates.
+  - Avoid immediate retries after a rate limit error.
+  - For async endpoints (e.g., /backlinks/export), both the task creation request and status polling requests count toward the RPS limit.
+  - Check remaining credits via /account/subscription (free, 0 credits consumed) before executing large workflows.
+
+customLimits:
+  description: Higher throughput and custom rate limits are available for both the Data API and Project API upon request. Contact SE Ranking support to discuss requirements.
+  contactUrl: https://seranking.com/contact.html

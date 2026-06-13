@@ -1,0 +1,96 @@
+aid: se-ranking
+name: SE Ranking
+description: SE Ranking is an SEO platform providing a REST API for keyword rank tracking, competitor analysis, backlink monitoring, on-page auditing, AI search visibility, and generating white-label SEO reports. The platform offers two API layers — a Data API with pay-as-you-go credits for SEO data retrieval and a Project API for managing SEO workflows — covering 5.4B keywords, 2.2B domain profiles, and 188+ regions.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/se-ranking/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - SEO
+  - Keyword Research
+  - Rank Tracking
+  - Backlinks
+  - Competitor Analysis
+  - Website Audit
+  - AI Search
+  - GEO
+  - Digital Marketing
+apis:
+  - aid: se-ranking:data-api
+    name: SE Ranking Data API
+    description: REST API providing access to SE Ranking's SEO datasets including keyword research, backlink analysis, domain analysis, SERP data, website audits, and AI search visibility tracking. Uses a credit-based billing model with per-request and per-record charges.
+    humanURL: https://seranking.com/api/data/reference/
+    baseURL: https://api.seranking.com
+    tags:
+      - Keyword Research
+      - Backlinks
+      - Domain Analysis
+      - SERP
+      - Website Audit
+      - AI Search
+    properties:
+      - type: Documentation
+        url: https://seranking.com/api/data/getting-started/
+      - type: Reference
+        url: https://seranking.com/api/data/reference/
+      - type: Postman
+        url: https://www.postman.com/serankingdev/se-ranking-developers/overview
+      - type: RateLimits
+        url: https://seranking.com/api/rate-limits/
+      - type: Credits
+        url: https://seranking.com/api/api-credits-system/
+    contact:
+      - FN: SE Ranking Support
+        url: https://seranking.com/contact.html
+  - aid: se-ranking:project-api
+    name: SE Ranking Project API
+    description: REST API for creating and managing SEO tracking projects programmatically, including keyword monitoring, competitor tracking, website audits, backlink management, and account administration. Consumes limits tied to the user's subscription plan rather than separate API credits.
+    humanURL: https://seranking.com/api/project/
+    baseURL: https://api.seranking.com
+    tags:
+      - Project Management
+      - Rank Tracking
+      - Competitor Analysis
+      - Website Audit
+      - Backlinks
+      - Account Management
+    properties:
+      - type: Documentation
+        url: https://seranking.com/api/project/getting-started/
+      - type: Reference
+        url: https://seranking.com/api/project/
+      - type: Postman
+        url: https://www.postman.com/serankingdev/se-ranking-developers/overview
+      - type: RateLimits
+        url: https://seranking.com/api/rate-limits/
+    contact:
+      - FN: SE Ranking Support
+        url: https://seranking.com/contact.html
+common:
+  - type: Website
+    url: https://seranking.com
+  - type: Documentation
+    url: https://seranking.com/api.html
+  - type: GitHubOrg
+    url: https://github.com/seranking
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/se-ranking
+  - type: X
+    url: https://x.com/SERanking
+  - type: Blog
+    url: https://seranking.com/blog/
+  - type: Pricing
+    url: https://seranking.com/api-pricing.html
+  - type: StatusPage
+    url: https://status.seranking.com
+  - type: Plans
+    url: plans/se-ranking-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/se-ranking-rate-limits.yml
+  - type: FinOps
+    url: finops/se-ranking-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,98 @@
+name: SE Ranking API FinOps
+description: FinOps Framework 1.0 FOCUS-aligned cost management reference for SE Ranking API usage, covering cost allocation, billing models, optimization strategies, and forecasting for SEO data API consumption.
+version: "1.0"
+url: https://seranking.com/api-pricing.html
+
+billingModels:
+
+  - name: Credit-Based (Data API)
+    description: The Data API uses a credit billing model where each successful API call (HTTP 2xx) consumes credits based on the endpoint and number of records returned. Failed requests (4xx/5xx) do not consume credits.
+    model: credits
+    unit: credit
+    components:
+      - name: Per-Request Charge
+        description: Fixed credit cost charged for each API request, regardless of records returned.
+        billing: per-request
+      - name: Per-Record Charge
+        description: Variable credit cost based on the number of records returned in the response.
+        billing: per-record
+    examples:
+      - endpoint: /backlinks/summary
+        cost: 100 credits per record
+      - endpoint: /backlinks/export
+        cost: 1 credit per backlink returned
+      - endpoint: /backlinks/export/status
+        cost: 0 credits (status polling is free)
+      - endpoint: /account/subscription
+        cost: 0 credits (balance check is free)
+
+  - name: Subscription Limits (Project API)
+    description: The Project API consumes limits tied to the user's platform subscription plan rather than separate API credits. Usage is governed by project, keyword, and audit capacity limits.
+    model: subscription
+    unit: plan-limit
+
+creditPricing:
+  - tier: Wallet (Pay-As-You-Go)
+    creditsPerDollar: 5000
+    pricePerMillion: 200.00
+    currency: USD
+    notes: Credits never expire. Minimum purchase $50 (250K credits).
+
+  - tier: Standalone Annual (1M credits)
+    creditsPerDollar: ~5587
+    pricePerMillion: 179.00
+    currency: USD
+    notes: Billed annually. Credits expire at end of billing cycle.
+
+  - tier: Enterprise (120M+ credits)
+    pricePerMillion: 30.00
+    currency: USD
+    notes: Lowest rate available. Custom pricing negotiated with SE Ranking.
+
+costOptimization:
+  - strategy: Use Free Status Check Endpoints
+    description: The /account/subscription endpoint costs 0 credits, enabling free balance checks before executing large or expensive workflows.
+    savings: Avoids unnecessary credit expenditure from failed workflows due to insufficient balance.
+
+  - strategy: Leverage Async Export Endpoints
+    description: Async endpoints like /backlinks/export can return many records per task at lower per-record cost (1 credit/record) compared to summary endpoints.
+    savings: Significant credit savings for bulk backlink data retrieval.
+
+  - strategy: Annual Plan vs Wallet
+    description: Annual Standalone plan provides credits at $179/M vs $200/M for Wallet, up to 10.5% savings. Enterprise rates go as low as $30/M.
+    savings: Up to 57% discount vs Wallet pricing at scale.
+
+  - strategy: Request Count Forecasting
+    description: Pre-calculate total credit cost by multiplying planned API calls by per-request and per-record costs from the endpoint documentation before executing bulk workflows.
+    savings: Prevents unexpected credit exhaustion and enables accurate budget planning.
+
+  - strategy: Avoid Charged Error Retries
+    description: Credits are only charged on successful (2xx) responses. Build retry logic to handle 4xx/5xx errors without excessive credit consumption.
+    savings: Avoids wasting credits on retryable errors.
+
+  - strategy: Cache API Responses
+    description: Cache responses for data that does not change frequently (e.g., domain analysis, backlink summaries) to reduce redundant API calls.
+    savings: Reduces total credit consumption for stable datasets.
+
+forecasting:
+  description: Estimate monthly API costs by identifying the endpoints to be called, multiplying request volume by per-request credits, adding per-record credits based on expected result sizes, and comparing against available credit balance.
+  steps:
+    - step: 1
+      action: Identify endpoints and expected call frequency.
+    - step: 2
+      action: Look up per-request and per-record credit costs from the SE Ranking endpoint documentation.
+    - step: 3
+      action: Calculate total credits = (requests × per-request cost) + (records × per-record cost).
+    - step: 4
+      action: Compare total estimated credits against current balance via /account/subscription.
+    - step: 5
+      action: Purchase credits or upgrade plan if projected usage exceeds available balance.
+
+visibility:
+  - name: API Dashboard
+    description: SE Ranking's API Dashboard provides real-time credit balance visibility and usage tracking.
+    url: https://seranking.com/api.html
+  - name: Account Subscription Endpoint
+    description: The /account/subscription endpoint returns current credit balance and plan limits at zero credit cost.
+    endpoint: /account/subscription
+    cost: 0 credits

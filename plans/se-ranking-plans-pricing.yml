@@ -1,0 +1,93 @@
+name: SE Ranking Plans and Pricing
+description: Pricing plans and tiers for SE Ranking's SEO platform and API access, covering platform subscriptions and standalone Data API options.
+version: "0.1"
+url: https://seranking.com/api-pricing.html
+
+plans:
+
+  - name: Free Trial
+    description: 14-day trial providing full API and MCP access to test all endpoints with a credit allocation.
+    url: https://seranking.com/api-pricing.html
+    price: 0.00
+    currency: USD
+    billingCycle: once
+    trial: true
+    trialDays: 14
+    features:
+      - Full Data API and MCP access
+      - Access to all six API endpoints
+      - 100,000 API credits included
+      - No commitment required
+
+  - name: Wallet (Pay-As-You-Go)
+    description: Flexible pay-as-you-go Data API access. Credits never expire. Minimum top-up applies.
+    url: https://seranking.com/api-pricing.html
+    price: 50.00
+    currency: USD
+    billingCycle: one-time
+    features:
+      - 250,000 API credits per top-up
+      - Credits never expire
+      - Top up at any time
+      - No annual commitment
+      - Data API access only
+
+  - name: Standalone Annual
+    description: Annual Data API plan with discounted credit pricing compared to Wallet rates. Credits expire at cycle end.
+    url: https://seranking.com/api-pricing.html
+    price: 179.00
+    currency: USD
+    billingCycle: monthly
+    billingAnchor: annual
+    features:
+      - 1,000,000 credits per year (billed annually)
+      - Up to 57% discount vs Wallet rates
+      - Data API access only
+      - Volume-based pricing discounts available
+      - Credits expire at end of billing cycle
+
+  - name: Enterprise
+    description: High-volume custom API plan with dedicated support, custom rate limits, and deep volume discounts.
+    url: https://seranking.com/api-pricing.html
+    price: custom
+    currency: USD
+    billingCycle: annual
+    features:
+      - 120,000,000+ credits per year
+      - Pricing as low as $30 per 1M credits
+      - Custom integrations and support
+      - Custom RPS limits
+      - Data API access
+
+  - name: Core (Platform + API Add-on)
+    description: SE Ranking platform Core plan with included API credits for Data API and Project API access.
+    url: https://seranking.com/subscription.html
+    price: 103.20
+    currency: USD
+    billingCycle: monthly
+    billingAnchor: annual
+    features:
+      - 10 projects, 1 manager seat
+      - 2,000 keywords and 100 prompts daily
+      - 250,000 pages/month audit capacity
+      - 25,000 included API credits/month
+      - Data API and Project API access
+      - API add-on available for +$45/mo (250K–60M credits)
+
+  - name: Growth (Platform + API Add-on)
+    description: SE Ranking platform Growth plan with higher API credit allocation and advanced features including historical data and collaboration.
+    url: https://seranking.com/subscription.html
+    price: 223.20
+    currency: USD
+    billingCycle: monthly
+    billingAnchor: annual
+    features:
+      - 30 projects, 3 manager seats
+      - 5,000 keywords and 250 prompts daily
+      - 2,000,000 pages/month audit capacity
+      - 100,000 included API credits/month
+      - Historical data access
+      - Guest collaboration links
+      - Dedicated support
+      - Data API and Project API access
+      - API add-on available for +$45/mo (250K–60M credits)
