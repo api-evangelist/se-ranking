@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/se-ranking/main/json-schema/se-ranking-domain-overview.json",
+  "title": "SE Ranking Domain Overview",
+  "description": "Domain-level SEO overview data including organic traffic estimates, keyword counts, domain authority, and competitive positioning.",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "The root domain being analyzed (e.g., example.com)."
+    },
+    "organic_keywords": {
+      "type": "integer",
+      "description": "Number of keywords for which the domain ranks in organic search results.",
+      "minimum": 0
+    },
+    "organic_traffic": {
+      "type": "integer",
+      "description": "Estimated monthly organic search traffic.",
+      "minimum": 0
+    },
+    "organic_cost": {
+      "type": "number",
+      "description": "Estimated monthly value of organic traffic in USD.",
+      "minimum": 0
+    },
+    "paid_keywords": {
+      "type": "integer",
+      "description": "Number of paid search keywords the domain is running ads for.",
+      "minimum": 0
+    },
+    "paid_traffic": {
+      "type": "integer",
+      "description": "Estimated monthly paid search traffic.",
+      "minimum": 0
+    },
+    "paid_cost": {
+      "type": "number",
+      "description": "Estimated monthly spend on paid search campaigns in USD.",
+      "minimum": 0
+    },
+    "domain_inlink_rank": {
+      "type": "number",
+      "description": "SE Ranking domain authority score based on backlink profile.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "referring_domains": {
+      "type": "integer",
+      "description": "Number of unique root domains linking to this domain.",
+      "minimum": 0
+    },
+    "total_backlinks": {
+      "type": "integer",
+      "description": "Total backlinks pointing to the domain.",
+      "minimum": 0
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code for the data region.",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "history": {
+      "type": "array",
+      "description": "Historical monthly snapshots of domain metrics.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Snapshot date (YYYY-MM-DD)."
+          },
+          "organic_keywords": {
+            "type": "integer"
+          },
+          "organic_traffic": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "required": ["domain"]
+}

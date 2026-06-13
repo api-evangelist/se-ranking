@@ -1,0 +1,59 @@
+{
+  "description": "Example response from GET /v1/ai-search/overview/aggregated/time-series for AI search visibility tracking",
+  "request": {
+    "method": "GET",
+    "url": "https://api.seranking.com/v1/ai-search/overview/aggregated/time-series",
+    "parameters": {
+      "apikey": "YOUR_API_KEY",
+      "brand": "SE Ranking",
+      "date_from": "2026-01-01",
+      "date_to": "2026-06-01",
+      "granularity": "month"
+    }
+  },
+  "response": {
+    "brand": "SE Ranking",
+    "granularity": "month",
+    "date_from": "2026-01-01",
+    "date_to": "2026-06-01",
+    "total_prompts": 500,
+    "time_series": [
+      {
+        "date": "2026-01-01",
+        "visibility_score": 34.2,
+        "mention_count": 171,
+        "prompt_count": 500
+      },
+      {
+        "date": "2026-02-01",
+        "visibility_score": 37.8,
+        "mention_count": 189,
+        "prompt_count": 500
+      },
+      {
+        "date": "2026-03-01",
+        "visibility_score": 41.4,
+        "mention_count": 207,
+        "prompt_count": 500
+      },
+      {
+        "date": "2026-04-01",
+        "visibility_score": 43.6,
+        "mention_count": 218,
+        "prompt_count": 500
+      },
+      {
+        "date": "2026-05-01",
+        "visibility_score": 46.0,
+        "mention_count": 230,
+        "prompt_count": 500
+      },
+      {
+        "date": "2026-06-01",
+        "visibility_score": 48.2,
+        "mention_count": 241,
+        "prompt_count": 500
+      }
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/se-ranking/main/json-schema/se-ranking-ai-search.json",
+  "title": "SE Ranking AI Search Visibility",
+  "description": "AI search visibility data tracking brand mentions in AI-generated answers across search engines like Google AI Overviews, Perplexity, and Bing Copilot.",
+  "type": "object",
+  "properties": {
+    "brand": {
+      "type": "string",
+      "description": "The brand or company name being monitored in AI search results."
+    },
+    "engine": {
+      "type": "string",
+      "description": "The AI search engine platform.",
+      "enum": ["google", "perplexity", "bing", "chatgpt"]
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of the AI search visibility measurement (YYYY-MM-DD)."
+    },
+    "visibility_score": {
+      "type": "number",
+      "description": "Overall AI search visibility score for the brand.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "mention_count": {
+      "type": "integer",
+      "description": "Number of AI-generated answers that mention the brand.",
+      "minimum": 0
+    },
+    "prompt_count": {
+      "type": "integer",
+      "description": "Total number of tracked prompts checked for brand mentions.",
+      "minimum": 0
+    },
+    "mention_rate": {
+      "type": "number",
+      "description": "Percentage of prompts where the brand is mentioned.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "time_series": {
+      "type": "array",
+      "description": "Time-series data points for AI visibility trend tracking.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "visibility_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "mention_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": ["date"]
+      }
+    },
+    "top_prompts": {
+      "type": "array",
+      "description": "Top prompts where the brand appears in AI-generated answers.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "The search prompt text."
+          },
+          "position": {
+            "type": "integer",
+            "description": "Position of the brand mention in the AI answer.",
+            "minimum": 1
+          },
+          "mentioned": {
+            "type": "boolean",
+            "description": "Whether the brand is mentioned in the AI answer for this prompt."
+          }
+        },
+        "required": ["prompt", "mentioned"]
+      }
+    }
+  },
+  "required": ["brand", "engine"]
+}

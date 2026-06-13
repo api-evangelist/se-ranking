@@ -1,0 +1,208 @@
+vocabulary:
+  provider: SE Ranking
+  description: Domain vocabulary extracted from the SE Ranking Data API covering SEO data retrieval, backlink analysis, keyword research, domain analysis, AI search visibility, SERP tracking, and website auditing.
+  version: 1.0.0
+  source: https://raw.githubusercontent.com/seranking/openapi/main/openapi/data-api.yaml
+
+  domains:
+    - name: backlinks
+      description: Backlink profile analysis including referring domains, anchors, authority scores, and historical link trends for any target domain, host, or URL.
+      endpoints:
+        - /v1/backlinks/summary
+        - /v1/backlinks/metrics
+        - /v1/backlinks/all
+        - /v1/backlinks/raw
+        - /v1/backlinks/count
+        - /v1/backlinks/export
+        - /v1/backlinks/history
+        - /v1/backlinks/anchors
+        - /v1/backlinks/refdomains
+        - /v1/backlinks/referring-ips
+        - /v1/backlinks/indexed-pages
+        - /v1/backlinks/authority
+
+    - name: domain-analysis
+      description: Organic and paid keyword data, competitor research, traffic estimates, domain authority scores, and subdomain analysis.
+      endpoints:
+        - /v1/domain/overview/db
+        - /v1/domain/overview/worldwide
+        - /v1/domain/keywords
+        - /v1/domain/pages
+        - /v1/domain/subdomains
+        - /v1/domain/ads
+        - /v1/domain/competitors
+        - /v1/domain/keywords/comparison
+
+    - name: keyword-research
+      description: Search volume, keyword difficulty, related keywords, long-tail keywords, questions, and similar keyword suggestions.
+      endpoints:
+        - /v1/keywords/export
+        - /v1/keywords/similar
+        - /v1/keywords/related
+        - /v1/keywords/questions
+        - /v1/keywords/longtail
+
+    - name: ai-search
+      description: AI Overview and AI-generated answer analysis including brand monitoring, prompt-level insights, and engine-specific breakdowns.
+      endpoints:
+        - /v1/ai-search/overview/aggregated/time-series
+        - /v1/ai-search/overview/by-engine/time-series
+        - /v1/ai-search/overview/leaderboard
+        - /v1/ai-search/discover-brand
+        - /v1/ai-search/prompts-by-target
+        - /v1/ai-search/prompts-by-brand
+
+    - name: serp-results
+      description: Real-time and on-demand search engine results with full feature parsing for classic SERP.
+      endpoints:
+        - /v1/serp/classic/tasks
+        - /v1/serp/classic/tasks/results_advanced
+        - /v1/serp/classic/tasks/html
+        - /v1/serp/classic/locations
+
+    - name: website-audit
+      description: Technical SEO audits with crawl data, issue detection, page-level analysis, and audit history.
+      endpoints:
+        - /v1/site-audit/audits/standard
+        - /v1/site-audit/audits/advanced
+        - /v1/site-audit/audits
+        - /v1/site-audit/audits/status
+        - /v1/site-audit/audits/report
+        - /v1/site-audit/audits/pages
+        - /v1/site-audit/audits/issue-pages
+        - /v1/site-audit/audits/issues
+        - /v1/site-audit/audits/links
+        - /v1/site-audit/audits/history
+        - /v1/site-audit/audits/recheck/standard
+        - /v1/site-audit/audits/recheck/advanced
+
+    - name: account
+      description: API key validation, subscription information, credit balance, and rate limit details.
+      endpoints:
+        - /v1/account/subscription
+        - /v1/account/credit-balance
+
+  concepts:
+    - term: target
+      definition: The domain, host, or URL being analyzed. Used across backlink and domain analysis endpoints.
+      type: parameter
+
+    - term: mode
+      definition: Specifies the scope of analysis — root domain, host (subdomain), or exact URL.
+      type: parameter
+      values:
+        - domain
+        - host
+        - url
+
+    - term: authority
+      definition: A numerical score (0-100) measuring the strength and trustworthiness of a domain or page based on its backlink profile.
+      type: concept
+
+    - term: inlink_rank
+      definition: SE Ranking's proprietary metric representing the authority of a domain or page derived from its incoming links.
+      type: metric
+
+    - term: referring-domains
+      definition: Unique root domains that contain at least one backlink pointing to the target.
+      type: concept
+
+    - term: dofollow
+      definition: A link attribute instructing search engines to follow and pass authority through the link. Opposite of nofollow.
+      type: attribute
+
+    - term: nofollow
+      definition: A link attribute instructing search engines not to follow or pass authority through the link.
+      type: attribute
+
+    - term: anchor
+      definition: The visible, clickable text of a hyperlink used in backlink analysis to assess relevance and optimization.
+      type: concept
+
+    - term: keyword-difficulty
+      definition: A metric (0-100) estimating how hard it would be to rank in the top 10 organic results for a specific keyword.
+      type: metric
+
+    - term: search-volume
+      definition: The average monthly number of searches for a keyword in a specified region or database.
+      type: metric
+
+    - term: serp-features
+      definition: Non-standard organic result elements appearing in Google search results, such as featured snippets, local packs, image carousels, and AI Overviews.
+      type: concept
+
+    - term: cpc
+      definition: Cost Per Click — the average price advertisers pay for a single click on a paid search ad for a keyword.
+      type: metric
+
+    - term: traffic
+      definition: An estimate of the monthly organic search traffic a domain, page, or keyword drives.
+      type: metric
+
+    - term: ai-overview
+      definition: An AI-generated summary answer that appears at the top of Google search results, potentially incorporating brand mentions and cited sources.
+      type: concept
+
+    - term: granularity
+      definition: The time resolution for time-series data — daily, weekly, or monthly aggregations.
+      type: parameter
+      values:
+        - day
+        - week
+        - month
+
+    - term: site-audit
+      definition: A crawl-based technical SEO assessment of a website identifying issues across crawlability, indexability, performance, and on-page factors.
+      type: concept
+
+    - term: audit-id
+      definition: A unique identifier for a specific site audit run used to retrieve audit results, pages, issues, and links.
+      type: identifier
+
+    - term: task-id
+      definition: A unique identifier for an asynchronous SERP task used to poll for results.
+      type: identifier
+
+    - term: credit-balance
+      definition: The remaining API credits in the account used to pay for Data API requests on a pay-as-you-go basis.
+      type: concept
+
+    - term: subscription
+      definition: The active SE Ranking plan associated with the account, defining limits for the Project API.
+      type: concept
+
+    - term: region
+      definition: A geographic market (country or language+country combination) used to scope keyword and SERP data. Covers 188+ regions.
+      type: concept
+
+    - term: brand
+      definition: A company or product name tracked in AI search visibility endpoints to monitor mentions in AI-generated answers.
+      type: concept
+
+    - term: engine
+      definition: The AI search engine (e.g., Google AI Overviews, Perplexity, Bing Copilot) used to scope AI search analysis.
+      type: parameter
+
+  authentication:
+    type: apiKey
+    in: query
+    name: apikey
+    description: All endpoints require an API key passed as the `apikey` query parameter. Obtain from the SE Ranking dashboard at https://online.seranking.com/dashboard.html.
+
+  pagination:
+    parameters:
+      - name: limit
+        description: Maximum number of records to return per request.
+      - name: offset
+        description: Number of records to skip for pagination.
+      - name: next
+        description: Cursor token for cursor-based pagination on some endpoints.
+
+  filtering:
+    description: Many endpoints support structured filter parameters in the format filter[field][operator]=value for numeric ranges and filter[field]=value for exact matches.
+    examples:
+      - filter[volume][from]=1000
+      - filter[volume][to]=10000
+      - filter[difficulty][from]=0
+      - filter[difficulty][to]=30
+      - filter[keyword]=seo+tools

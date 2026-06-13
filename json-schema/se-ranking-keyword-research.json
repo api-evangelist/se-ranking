@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/se-ranking/main/json-schema/se-ranking-keyword-research.json",
+  "title": "SE Ranking Keyword Research Result",
+  "description": "Keyword data returned from SE Ranking keyword research endpoints including search volume, difficulty, CPC, and SERP features.",
+  "type": "object",
+  "properties": {
+    "keyword": {
+      "type": "string",
+      "description": "The search query term."
+    },
+    "volume": {
+      "type": "integer",
+      "description": "Average monthly search volume for the keyword.",
+      "minimum": 0
+    },
+    "difficulty": {
+      "type": "integer",
+      "description": "Keyword difficulty score 0-100 estimating ranking competition.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "cpc": {
+      "type": "number",
+      "description": "Cost Per Click in USD for paid search ads targeting this keyword.",
+      "minimum": 0
+    },
+    "competition": {
+      "type": "number",
+      "description": "Paid search competition level between 0 and 1.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "intents": {
+      "type": "array",
+      "description": "Search intent classifications for the keyword.",
+      "items": {
+        "type": "string",
+        "enum": ["informational", "navigational", "commercial", "transactional"]
+      }
+    },
+    "serp_features": {
+      "type": "array",
+      "description": "SERP features present for this keyword such as featured snippets, local packs, image carousels.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "trend": {
+      "type": "array",
+      "description": "Monthly search volume trend data for the last 12 months.",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "maxItems": 12
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code for the data region.",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "region_id": {
+      "type": "integer",
+      "description": "SE Ranking internal region identifier."
+    },
+    "keyword_count": {
+      "type": "integer",
+      "description": "Number of words in the keyword phrase.",
+      "minimum": 1
+    }
+  },
+  "required": ["keyword"]
+}

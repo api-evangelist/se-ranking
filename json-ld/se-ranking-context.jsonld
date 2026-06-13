@@ -1,0 +1,213 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "seo": "https://seranking.com/vocab/",
+
+    "SEODataAPI": {
+      "@id": "seo:SEODataAPI",
+      "@type": "@id"
+    },
+    "BacklinkAnalysis": {
+      "@id": "seo:BacklinkAnalysis",
+      "@type": "@id"
+    },
+    "DomainAnalysis": {
+      "@id": "seo:DomainAnalysis",
+      "@type": "@id"
+    },
+    "KeywordResearch": {
+      "@id": "seo:KeywordResearch",
+      "@type": "@id"
+    },
+    "AISearchVisibility": {
+      "@id": "seo:AISearchVisibility",
+      "@type": "@id"
+    },
+    "SERPResult": {
+      "@id": "seo:SERPResult",
+      "@type": "@id"
+    },
+    "WebsiteAudit": {
+      "@id": "seo:WebsiteAudit",
+      "@type": "@id"
+    },
+    "AccountInfo": {
+      "@id": "seo:AccountInfo",
+      "@type": "@id"
+    },
+
+    "target": {
+      "@id": "seo:target",
+      "@type": "xsd:string",
+      "description": "The domain, host, or URL being analyzed."
+    },
+    "mode": {
+      "@id": "seo:mode",
+      "@type": "xsd:string",
+      "description": "Analysis scope: domain, host, or url."
+    },
+    "authority": {
+      "@id": "seo:authority",
+      "@type": "xsd:integer",
+      "description": "Numerical score 0-100 measuring domain or page trustworthiness based on backlink profile."
+    },
+    "inlinkRank": {
+      "@id": "seo:inlinkRank",
+      "@type": "xsd:number",
+      "description": "SE Ranking proprietary metric for domain or page authority derived from incoming links."
+    },
+    "referringDomains": {
+      "@id": "seo:referringDomains",
+      "@type": "xsd:integer",
+      "description": "Count of unique root domains with at least one backlink pointing to the target."
+    },
+    "totalBacklinks": {
+      "@id": "seo:totalBacklinks",
+      "@type": "xsd:integer",
+      "description": "Total number of backlinks pointing to the target."
+    },
+    "dofollowLinks": {
+      "@id": "seo:dofollowLinks",
+      "@type": "xsd:integer",
+      "description": "Count of backlinks with dofollow attribute passing link equity."
+    },
+    "nofollowLinks": {
+      "@id": "seo:nofollowLinks",
+      "@type": "xsd:integer",
+      "description": "Count of backlinks with nofollow attribute not passing link equity."
+    },
+    "anchor": {
+      "@id": "seo:anchor",
+      "@type": "xsd:string",
+      "description": "The visible clickable text of a hyperlink used in backlink analysis."
+    },
+    "keywordDifficulty": {
+      "@id": "seo:keywordDifficulty",
+      "@type": "xsd:integer",
+      "description": "Score 0-100 estimating ranking difficulty for a keyword in top 10 organic results."
+    },
+    "searchVolume": {
+      "@id": "seo:searchVolume",
+      "@type": "xsd:integer",
+      "description": "Average monthly search count for a keyword in a specified region."
+    },
+    "cpc": {
+      "@id": "seo:cpc",
+      "@type": "xsd:number",
+      "description": "Cost Per Click — average price advertisers pay per click on a paid search ad."
+    },
+    "organicTraffic": {
+      "@id": "seo:organicTraffic",
+      "@type": "xsd:integer",
+      "description": "Estimated monthly organic search traffic from all ranked keywords."
+    },
+    "serpFeatures": {
+      "@id": "seo:serpFeatures",
+      "@type": "@json",
+      "description": "Non-standard SERP result elements such as featured snippets, local packs, and AI Overviews."
+    },
+    "aiOverview": {
+      "@id": "seo:aiOverview",
+      "@type": "xsd:boolean",
+      "description": "Whether an AI-generated summary answer appears for the target keyword."
+    },
+    "brand": {
+      "@id": "seo:brand",
+      "@type": "xsd:string",
+      "description": "Company or product name tracked for AI search visibility monitoring."
+    },
+    "engine": {
+      "@id": "seo:engine",
+      "@type": "xsd:string",
+      "description": "AI search engine platform (e.g., Google, Perplexity, Bing Copilot) for scoping AI analysis."
+    },
+    "granularity": {
+      "@id": "seo:granularity",
+      "@type": "xsd:string",
+      "description": "Time resolution for time-series data: day, week, or month."
+    },
+    "auditId": {
+      "@id": "seo:auditId",
+      "@type": "xsd:string",
+      "description": "Unique identifier for a site audit run."
+    },
+    "taskId": {
+      "@id": "seo:taskId",
+      "@type": "xsd:string",
+      "description": "Unique identifier for an asynchronous SERP crawl task."
+    },
+    "creditBalance": {
+      "@id": "seo:creditBalance",
+      "@type": "xsd:number",
+      "description": "Remaining API credits for Data API pay-as-you-go requests."
+    },
+    "subscription": {
+      "@id": "seo:subscription",
+      "@type": "@id",
+      "description": "Active SE Ranking plan defining Project API limits."
+    },
+    "region": {
+      "@id": "seo:region",
+      "@type": "xsd:string",
+      "description": "Geographic market (country or language+country) for scoping keyword and SERP data."
+    },
+    "keyword": {
+      "@id": "schema:keywords",
+      "@type": "xsd:string",
+      "description": "A search query term used for keyword research and rank tracking."
+    },
+    "domain": {
+      "@id": "seo:domain",
+      "@type": "xsd:string",
+      "description": "A root domain name used as the subject of domain analysis."
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:anyURI",
+      "description": "A specific page URL for URL-level backlink or SERP analysis."
+    },
+    "position": {
+      "@id": "seo:position",
+      "@type": "xsd:integer",
+      "description": "Organic search ranking position for a keyword in the specified search engine and region."
+    },
+    "limit": {
+      "@id": "hydra:limit",
+      "@type": "xsd:integer",
+      "description": "Maximum number of records to return per request."
+    },
+    "offset": {
+      "@id": "hydra:offset",
+      "@type": "xsd:integer",
+      "description": "Number of records to skip for offset-based pagination."
+    },
+    "dateFrom": {
+      "@id": "seo:dateFrom",
+      "@type": "xsd:date",
+      "description": "Start date for filtering time-range queries (YYYY-MM-DD)."
+    },
+    "dateTo": {
+      "@id": "seo:dateTo",
+      "@type": "xsd:date",
+      "description": "End date for filtering time-range queries (YYYY-MM-DD)."
+    },
+    "indexedPages": {
+      "@id": "seo:indexedPages",
+      "@type": "xsd:integer",
+      "description": "Number of pages from the target that are indexed by search engines."
+    },
+    "linkType": {
+      "@id": "seo:linkType",
+      "@type": "xsd:string",
+      "description": "Classification of a backlink: text, image, redirect, or other."
+    },
+    "countryCode": {
+      "@id": "schema:countryOfOrigin",
+      "@type": "xsd:string",
+      "description": "ISO 3166-1 alpha-2 country code for geographic scoping of data."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "description": "Example response from GET /v1/domain/overview/db for domain analysis",
+  "request": {
+    "method": "GET",
+    "url": "https://api.seranking.com/v1/domain/overview/db",
+    "parameters": {
+      "apikey": "YOUR_API_KEY",
+      "domain": "example.com",
+      "country_code": "US"
+    }
+  },
+  "response": {
+    "domain": "example.com",
+    "country_code": "US",
+    "organic_keywords": 48320,
+    "organic_traffic": 892100,
+    "organic_cost": 1240500.00,
+    "paid_keywords": 1240,
+    "paid_traffic": 34200,
+    "paid_cost": 182300.00,
+    "domain_inlink_rank": 62.4,
+    "referring_domains": 8341,
+    "total_backlinks": 142580,
+    "top_organic_keywords": [
+      {
+        "keyword": "example domain",
+        "position": 1,
+        "volume": 49500,
+        "url": "https://example.com/"
+      },
+      {
+        "keyword": "what is example.com",
+        "position": 2,
+        "volume": 12100,
+        "url": "https://example.com/"
+      }
+    ],
+    "top_competitors": [
+      {
+        "domain": "competitor1.com",
+        "common_keywords": 8420,
+        "organic_traffic": 1240000
+      },
+      {
+        "domain": "competitor2.com",
+        "common_keywords": 6310,
+        "organic_traffic": 780000
+      }
+    ]
+  }
+}

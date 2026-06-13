@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/se-ranking/main/json-schema/se-ranking-backlink-summary.json",
+  "title": "SE Ranking Backlink Summary",
+  "description": "Summary statistics for a domain's backlink profile including referring domains, total backlinks, authority scores, and link type breakdown.",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "description": "The analyzed domain, host, or URL."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["domain", "host", "url"],
+      "description": "Scope of analysis."
+    },
+    "total_backlinks": {
+      "type": "integer",
+      "description": "Total number of backlinks pointing to the target.",
+      "minimum": 0
+    },
+    "referring_domains": {
+      "type": "integer",
+      "description": "Number of unique root domains linking to the target.",
+      "minimum": 0
+    },
+    "referring_ips": {
+      "type": "integer",
+      "description": "Number of unique IP addresses with backlinks to the target.",
+      "minimum": 0
+    },
+    "referring_subnets": {
+      "type": "integer",
+      "description": "Number of unique C-class IP subnets with backlinks to the target.",
+      "minimum": 0
+    },
+    "dofollow": {
+      "type": "integer",
+      "description": "Count of dofollow backlinks.",
+      "minimum": 0
+    },
+    "nofollow": {
+      "type": "integer",
+      "description": "Count of nofollow backlinks.",
+      "minimum": 0
+    },
+    "domain_inlink_rank": {
+      "type": "number",
+      "description": "SE Ranking authority score for the target domain.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "new_backlinks": {
+      "type": "integer",
+      "description": "Number of new backlinks discovered in the last period.",
+      "minimum": 0
+    },
+    "lost_backlinks": {
+      "type": "integer",
+      "description": "Number of backlinks lost in the last period.",
+      "minimum": 0
+    },
+    "text_links": {
+      "type": "integer",
+      "description": "Count of text-based backlinks.",
+      "minimum": 0
+    },
+    "image_links": {
+      "type": "integer",
+      "description": "Count of image-based backlinks.",
+      "minimum": 0
+    },
+    "redirect_links": {
+      "type": "integer",
+      "description": "Count of redirect-based backlinks.",
+      "minimum": 0
+    }
+  }
+}

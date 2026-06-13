@@ -1,0 +1,51 @@
+{
+  "description": "Example response from GET /v1/keywords/similar for keyword research",
+  "request": {
+    "method": "GET",
+    "url": "https://api.seranking.com/v1/keywords/similar",
+    "parameters": {
+      "apikey": "YOUR_API_KEY",
+      "keyword": "seo tools",
+      "country_code": "US"
+    }
+  },
+  "response": {
+    "keyword": "seo tools",
+    "total": 1842,
+    "data": [
+      {
+        "keyword": "seo tools",
+        "volume": 74000,
+        "difficulty": 72,
+        "cpc": 8.45,
+        "competition": 0.84,
+        "intents": ["informational", "commercial"],
+        "serp_features": ["featured_snippet", "image_pack", "site_links"],
+        "trend": [68000, 71000, 74000, 72000, 73000, 76000, 74000, 75000, 77000, 74000, 73000, 74000],
+        "keyword_count": 2
+      },
+      {
+        "keyword": "free seo tools",
+        "volume": 27100,
+        "difficulty": 58,
+        "cpc": 4.12,
+        "competition": 0.71,
+        "intents": ["informational", "commercial"],
+        "serp_features": ["featured_snippet", "top_stories"],
+        "trend": [24000, 25000, 26000, 27000, 27100, 28000, 27500, 27000, 26800, 27100, 27200, 27100],
+        "keyword_count": 3
+      },
+      {
+        "keyword": "best seo tools",
+        "volume": 18100,
+        "difficulty": 65,
+        "cpc": 9.80,
+        "competition": 0.91,
+        "intents": ["commercial"],
+        "serp_features": ["featured_snippet", "knowledge_panel"],
+        "trend": [17000, 17500, 18000, 18100, 18000, 18500, 18100, 18200, 18300, 18100, 18000, 18100],
+        "keyword_count": 3
+      }
+    ]
+  }
+}

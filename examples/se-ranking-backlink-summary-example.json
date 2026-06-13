@@ -1,0 +1,38 @@
+{
+  "description": "Example response from GET /v1/backlinks/summary for a domain target",
+  "request": {
+    "method": "GET",
+    "url": "https://api.seranking.com/v1/backlinks/summary",
+    "parameters": {
+      "apikey": "YOUR_API_KEY",
+      "target": "example.com",
+      "mode": "domain"
+    }
+  },
+  "response": {
+    "target": "example.com",
+    "mode": "domain",
+    "total_backlinks": 142580,
+    "referring_domains": 8341,
+    "referring_ips": 6102,
+    "referring_subnets": 5487,
+    "dofollow": 118430,
+    "nofollow": 24150,
+    "domain_inlink_rank": 62.4,
+    "new_backlinks": 1204,
+    "lost_backlinks": 389,
+    "text_links": 121003,
+    "image_links": 14200,
+    "redirect_links": 7377,
+    "top_anchors": [
+      {"anchor": "example", "count": 18340},
+      {"anchor": "example.com", "count": 9210},
+      {"anchor": "click here", "count": 3450}
+    ],
+    "top_tlds": [
+      {"tld": ".com", "count": 52100},
+      {"tld": ".org", "count": 12400},
+      {"tld": ".net", "count": 8900}
+    ]
+  }
+}

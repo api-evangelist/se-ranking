@@ -1,0 +1,77 @@
+{
+  "description": "Example workflow: create a site audit, poll for status, and retrieve results via /v1/site-audit/audits endpoints",
+  "workflow": [
+    {
+      "step": 1,
+      "description": "Initiate a standard site audit",
+      "request": {
+        "method": "POST",
+        "url": "https://api.seranking.com/v1/site-audit/audits/standard",
+        "parameters": {
+          "apikey": "YOUR_API_KEY"
+        },
+        "body": {
+          "url": "https://example.com",
+          "max_pages": 500,
+          "respect_robots_txt": true
+        }
+      },
+      "response": {
+        "audit_id": "audit_abc123xyz",
+        "status": "queued",
+        "url": "https://example.com",
+        "created_at": "2026-06-13T10:00:00Z"
+      }
+    },
+    {
+      "step": 2,
+      "description": "Poll for audit completion status",
+      "request": {
+        "method": "GET",
+        "url": "https://api.seranking.com/v1/site-audit/audits/status",
+        "parameters": {
+          "apikey": "YOUR_API_KEY",
+          "audit_id": "audit_abc123xyz"
+        }
+      },
+      "response": {
+        "audit_id": "audit_abc123xyz",
+        "status": "completed",
+        "pages_crawled": 487,
+        "pages_total": 500,
+        "completed_at": "2026-06-13T10:12:34Z"
+      }
+    },
+    {
+      "step": 3,
+      "description": "Retrieve audit issue summary report",
+      "request": {
+        "method": "GET",
+        "url": "https://api.seranking.com/v1/site-audit/audits/report",
+        "parameters": {
+          "apikey": "YOUR_API_KEY",
+          "audit_id": "audit_abc123xyz"
+        }
+      },
+      "response": {
+        "audit_id": "audit_abc123xyz",
+        "url": "https://example.com",
+        "pages_crawled": 487,
+        "health_score": 78,
+        "issues_total": 143,
+        "issues_by_severity": {
+          "critical": 12,
+          "warnings": 48,
+          "notices": 83
+        },
+        "issue_categories": [
+          {"category": "crawlability", "count": 8, "severity": "critical"},
+          {"category": "meta_tags", "count": 31, "severity": "warnings"},
+          {"category": "page_speed", "count": 24, "severity": "warnings"},
+          {"category": "structured_data", "count": 19, "severity": "notices"},
+          {"category": "internal_links", "count": 61, "severity": "notices"}
+        ]
+      }
+    }
+  ]
+}
