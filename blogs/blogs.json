@@ -2,6 +2,13 @@
   "repo": "se-ranking",
   "feeds": [
     {
+      "source": "https://seranking.com/blog/feed/",
+      "feed_url": "https://seranking.com/blog/feed/",
+      "title": "",
+      "saved": 8,
+      "method": "feed"
+    },
+    {
       "source": "https://x.com/SERanking",
       "feed_url": "https://x.com/SERanking",
       "title": "",
@@ -9,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 15,
+  "fetched": "2026-06-27T12:03:07Z"
 }
