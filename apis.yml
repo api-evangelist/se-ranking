@@ -69,6 +69,10 @@ apis:
       - FN: SE Ranking Support
         url: https://seranking.com/contact.html
 common:
+  - type: DomainSecurity
+    url: security/se-ranking-domain-security.yml
+  - type: Authentication
+    url: authentication/se-ranking-authentication.yml
   - type: Website
     url: https://seranking.com
   - type: Documentation
