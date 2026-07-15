@@ -69,6 +69,8 @@ apis:
       - FN: SE Ranking Support
         url: https://seranking.com/contact.html
 common:
+  - type: AgenticAccess
+    url: agentic-access/se-ranking-agentic-access.yml
   - type: DomainSecurity
     url: security/se-ranking-domain-security.yml
   - type: Authentication
