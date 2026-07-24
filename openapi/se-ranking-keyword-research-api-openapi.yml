@@ -1,0 +1,597 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system Keyword Research API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: Keyword Research
+  description: "This collection of endpoints is designed for comprehensive keyword analysis and discovery. Use these requests to retrieve performance metrics for large lists of keywords or to generate new keyword ideas based on a seed term.\n\nThis folder is divided into two main categories:\n\n### Bulk Keyword Metrics\n\n- **Export Keywords Metrics**: Submit a list of up to 5,000 keywords to get detailed data points for each, including search volume, CPC, competition score, keyword difficulty, and historical search volume trends. This is ideal for bulk analysis and data enrichment.\n    \n\n### Keyword Discovery\n\nUse these endpoints to expand your keyword lists and uncover new ranking opportunities.\n\n- **Get Similar Keywords**: Find keywords that are semantically similar to your seed keyword, including synonyms and close variations.\n    \n- **Get Related Keywords**: Discover keywords that are topically related, based on having a high number of overlapping URLs in their search results.\n    \n- **Get Question Keywords**: Generate a list of keywords phrased as common user questions, perfect for content marketing and FAQ creation.\n    \n- **Get Longtail Keywords**: Find longer, more specific keyword phrases that often have lower competition and higher conversion rates."
+paths:
+  /v1/keywords/export:
+    post:
+      operationId: createKeywordsExport
+      tags:
+      - Keyword Research
+      summary: Export Keywords Metrics
+      description: Retrieves bulk performance metrics like search volume, CPC, and difficulty for a submitted list of up to 5,000 keywords.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - keywords[]
+              properties:
+                keywords[]:
+                  type: array
+                  items:
+                    type: string
+                  description: List of keywords (max 5,000).
+                  maxItems: 5000
+                sort:
+                  type: string
+                  enum:
+                  - volume
+                  - cpc
+                  - difficulty
+                  - competition
+                  - history_trend
+                sort_order:
+                  type: string
+                  enum:
+                  - asc
+                  - desc
+                cols:
+                  type: string
+                  description: Comma-separated list of columns to include.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+        example: us
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/keywords/similar:
+    get:
+      operationId: getKeywordsSimilar
+      tags:
+      - Keyword Research
+      summary: Get similar keywords
+      description: Discovers semantically similar keywords, including synonyms and close variations, for a given seed term.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        example: seo
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: sort
+        in: query
+        schema:
+          type: string
+        example: keyword
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+        example: asc
+      - name: history_trend
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 100000
+      - name: filter[difficulty][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[difficulty][to]
+        in: query
+        schema:
+          type: integer
+        example: 30
+      - name: filter[cpc][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[cpc][to]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[competition][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[competition][to]
+        in: query
+        schema:
+          type: number
+        example: 0.1
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 3
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 8
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 15
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 50
+      - name: filter[serp_features]
+        in: query
+        schema:
+          type: string
+        example: sge,images
+      - name: filter[intents]
+        in: query
+        schema:
+          type: string
+        example: I,C,T,L
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/keywords/related:
+    get:
+      operationId: getKeywordsRelated
+      tags:
+      - Keyword Research
+      summary: Get related keywords
+      description: Finds topically related keywords that share a high number of overlapping URLs in the search results for a given seed term.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        example: avocado
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: sort
+        in: query
+        schema:
+          type: string
+        example: keyword
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+        example: asc
+      - name: history_trend
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 100000
+      - name: filter[difficulty][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[difficulty][to]
+        in: query
+        schema:
+          type: integer
+        example: 30
+      - name: filter[cpc][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[cpc][to]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[competition][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[competition][to]
+        in: query
+        schema:
+          type: number
+        example: 0.1
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 3
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 8
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 15
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 50
+      - name: filter[serp_features]
+        in: query
+        schema:
+          type: string
+        example: sge,images
+      - name: filter[intents]
+        in: query
+        schema:
+          type: string
+        example: I,C,T,L
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/keywords/questions:
+    get:
+      operationId: getKeywordsQuestions
+      tags:
+      - Keyword Research
+      summary: Get question keywords
+      description: Generates a list of keywords phrased as common user questions that are relevant to a given seed term.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        example: avocado
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: sort
+        in: query
+        schema:
+          type: string
+        example: keyword
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+        example: asc
+      - name: history_trend
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 100000
+      - name: filter[difficulty][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[difficulty][to]
+        in: query
+        schema:
+          type: integer
+        example: 30
+      - name: filter[cpc][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[cpc][to]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[competition][from]
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: filter[competition][to]
+        in: query
+        schema:
+          type: number
+        example: 0.1
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 3
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 8
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 15
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 50
+      - name: filter[serp_features]
+        in: query
+        schema:
+          type: string
+        example: sge,images
+      - name: filter[intents]
+        in: query
+        schema:
+          type: string
+        example: I,C,T,L
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/keywords/longtail:
+    get:
+      operationId: getKeywordsLongtail
+      tags:
+      - Keyword Research
+      summary: Get longtail keywords
+      description: Provides a list of longer, more specific long-tail keyword variations related to a given seed term.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: keyword
+        in: query
+        schema:
+          type: string
+        example: avocado
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - keyword
+          - volume
+          - cpc
+          - difficulty
+          - competition
+        example: volume
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: desc
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+      - name: filter[difficulty][from]
+        in: query
+        schema:
+          type: integer
+      - name: filter[difficulty][to]
+        in: query
+        schema:
+          type: integer
+      - name: filter[cpc][from]
+        in: query
+        schema:
+          type: number
+      - name: filter[cpc][to]
+        in: query
+        schema:
+          type: number
+      - name: filter[competition][from]
+        in: query
+        schema:
+          type: number
+      - name: filter[competition][to]
+        in: query
+        schema:
+          type: number
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+      - name: filter[serp_features]
+        in: query
+        schema:
+          type: string
+      - name: filter[intents]
+        in: query
+        schema:
+          type: string
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey

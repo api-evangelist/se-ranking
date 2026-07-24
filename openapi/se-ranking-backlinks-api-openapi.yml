@@ -1,0 +1,1883 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system backlinks API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: backlinks
+  description: "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis of the backlink profile for any given target, whether it's a root domain, a specific host (subdomain), or a particular URL.\n\nYou can use these endpoints to retrieve high-level statistics, fetch detailed backlink lists, analyze historical trends, and check authority scores.\n\n### Summary & Core Metrics\n\nUse these endpoints to get a quick overview of a target's backlink profile. These requests support batching for up to 100 targets.\n\n- **`summary`**: Returns extended statistics, including the number of referring domains, IPs, top anchors, TLDs, and more.\n    \n- **`metrics`**: Retrieves a set of key metrics, such as the total number of backlinks, referring domains, and dofollow/nofollow link counts.\n    \n- **`count`**: Provides a simple count of the total number of live backlinks for a target.\n    \n\n### Detailed Backlink Retrieval\n\nUse these endpoints to get lists of the actual backlinks pointing to a target.\n\n- **`all`**: Fetches a detailed list of backlinks with powerful filtering and sorting options. This is ideal for getting the \"top\" backlinks based on criteria like InLink Rank.\n    \n- **`raw`**: Retrieves a complete, unfiltered list of all backlinks using efficient cursor-based pagination. This is best for fetching an entire dataset in batches.\n    \n- **`export`**: Exports all backlinks for a target into a downloadable `.csv.gz` file. This process is asynchronous and designed for very large-scale data retrieval.\n    \n\n### Historical Data & Trends\n\nTrack changes in a backlink profile over time.\n\n- **`history`**: Get a list of new and lost backlinks within a specified date range.\n    \n- **`history/count`**: Returns the number of new or lost backlinks for each day in a given period.\n    \n- **`history/cumulative`**: Provides the total number of live backlinks for each day in a given period.\n    \n\n### Analyze Specific Backlink Aspects\n\nDive deeper into specific components of the backlink profile.\n\n- **`anchors`**: Returns information about the anchor texts used in links pointing to a target.\n    \n- **`refdomains`**: Provides details on the unique referring domains, including their authority and the number of links from each.\n    \n- **`referring-ips`** **&** **`subnets`**: Analyzes the network distribution of backlinks by IP address and C-class subnets.\n    \n- **`indexed-pages`**: Lists the pages on the target site that have received one or more backlinks.\n    \n\n### Authority Scores\n\nCheck the calculated authority of a target based on its backlink profile.\n\n- **`authority`**: Retrieves both the InLink Rank (Page Authority) and Domain InLink Rank (Domain Authority).\n    \n- **`authority/domain`**: Focuses specifically on Domain Authority, including its distribution and historical values.\n    \n- **`authority/page`**: Focuses specifically on Page Authority and its historical values."
+paths:
+  /v1/backlinks/summary:
+    get:
+      operationId: getBacklinksSummary
+      tags:
+      - backlinks
+      summary: summary
+      description: Retrieves a comprehensive summary of backlink statistics for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+          description: Supports multiple targets by repeating this parameter.
+        example: rubyonrails.org
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: host
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksSummary
+      tags:
+      - backlinks
+      summary: summary
+      description: Retrieves a comprehensive summary of backlink statistics for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.google.com/
+                mode: host
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/metrics:
+    get:
+      operationId: getBacklinksMetrics
+      tags:
+      - backlinks
+      summary: metrics
+      description: Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: target-rfunqmac.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksMetrics
+      tags:
+      - backlinks
+      summary: metrics
+      description: Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.seranking.com/
+                mode: url
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/all:
+    get:
+      operationId: getBacklinksAll
+      tags:
+      - backlinks
+      summary: all
+      description: Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: http://accordconsultants.in/
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: url
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10000
+      - name: per_domain
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: order_by
+        in: query
+        schema:
+          type: string
+        example: inlink_rank
+      - name: url_from_filter
+        in: query
+        schema:
+          type: string
+        example: unsam.edu.ar
+      - name: url_to_filter
+        in: query
+        schema:
+          type: string
+        example: .jpg
+      - name: url_to_filter_mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - contains
+          - does_not_contain
+        example: does_not_contain
+      - name: url_from_filter_mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - contains
+          - does_not_contain
+          default: contains
+        example: contains
+      - name: anchor_filter
+        in: query
+        description: Filter by anchor text. Max 2063 characters.
+        schema:
+          type: string
+          maxLength: 2063
+      - name: anchor_filter_mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - contains
+          - does_not_contain
+          default: contains
+        example: contains
+      - name: nofollow_filter
+        in: query
+        schema:
+          type: string
+          enum:
+          - nofollow_only
+          - dofollow_only
+      - name: inlink_rank_from
+        in: query
+        description: Minimum InLink Rank (0-100).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+      - name: inlink_rank_to
+        in: query
+        description: Maximum InLink Rank (0-100).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+      - name: domain_inlink_rank_from
+        in: query
+        description: Minimum Domain InLink Rank (0-100).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+      - name: domain_inlink_rank_to
+        in: query
+        description: Maximum Domain InLink Rank (0-100).
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksAll
+      tags:
+      - backlinks
+      summary: all
+      description: Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com/
+                mode: domain
+                limit: 10
+                per_domain: 1
+                order_by: date_found
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/raw:
+    get:
+      operationId: getBacklinksRaw
+      tags:
+      - backlinks
+      summary: raw
+      description: Fetches the complete list of backlinks for a target in batches using cursor-based pagination.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: teilon.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: host
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: next
+        in: query
+        schema:
+          type: string
+        example: Pju9uZR4A2dylhvnUQ1UAu1NWfBjWoutYn_z2MHcVcZqH2eGVtT6Z6j2DjgyJKqyLem4yIj_it6xfHqasMXnj7/_zbLyBX93MmSekLiLxHa_gA9MRIrnPC2sxL4mDNzCzAsbK54U4UCScqvMexsrDx2obPcxHWZMl_yU7hQDa/9GJwcutpU0_v7TbtefRP9EVw/5eFZjvsNERYxl8jORIyNxL4N5t5LK75BaM51pYQ5q8bfuw/F42rIB8xKM0vD0i090_65JHrZPsDoAkKce/XELUwhGcoDqyRgG2P3AXAbZOe5RDFV/vz0YFTyI9tqynHJtP2olEKQ079f3hwroR6YML5AgTsVPwIynxNILAd_OHU5aFTReKIy686fBoIFZWR2dsyeGgN3r/n0jolcHNg==
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      - name: per_domain
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 1
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - date_found
+          - domain_inlink_rank
+          - inlink_rank
+          default: date_found
+        example: date_found
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/count:
+    get:
+      operationId: getBacklinksCount
+      tags:
+      - backlinks
+      summary: count
+      description: Returns the total number of live backlinks for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+          description: Supports multiple targets by repeating this parameter.
+        example: anandaioga.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: url
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksCount
+      tags:
+      - backlinks
+      summary: count
+      description: Returns the total number of live backlinks for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.google.com/
+                mode: host
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/export:
+    get:
+      operationId: getBacklinksExport
+      tags:
+      - backlinks
+      summary: export
+      description: Initiates an asynchronous task to export all backlinks for a target to a downloadable CSV file.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/export/status:
+    get:
+      operationId: getBacklinksExportStatus
+      tags:
+      - backlinks
+      summary: export/status
+      description: Status of the asynchronous task to export all backlinks for a target to a downloadable CSV file.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: task_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '1_878619'
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/history:
+    get:
+      operationId: getBacklinksHistory
+      tags:
+      - backlinks
+      summary: history
+      description: Returns a list of new or lost backlinks for a single target within a specified date range.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://www.seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: new_lost_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - new
+          - lost
+        example: new
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2024-01-14'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2025-08-28'
+      - name: link_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - href
+          - redirect
+        example: href
+      - name: anchor_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - text
+          - image
+          - undefined
+        example: text
+      - name: dofollow
+        in: query
+        schema:
+          type: string
+          enum:
+          - dofollow
+          - nofollow
+          - undefined
+        example: dofollow
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      - name: url_from
+        in: query
+        description: Filter by referring page URL.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+          default: 100
+        example: 100
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - new_lost_date
+          - domain_inlink_rank
+          - inlink_rank
+          default: new_lost_date
+        example: new_lost_date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksHistory
+      tags:
+      - backlinks
+      summary: history
+      description: Returns a list of new or lost backlinks for a single target within a specified date range.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com
+                mode: domain
+                date_from: '2025-09-15'
+                date_to: '2025-10-01'
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/history/count:
+    get:
+      operationId: getBacklinksHistoryCount
+      tags:
+      - backlinks
+      summary: history/count
+      description: Returns the daily count of new and lost backlinks for a target over a specified period.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://www.seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: new_lost_type
+        in: query
+        schema:
+          type: string
+        example: new
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2025-09-14'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2025-10-28'
+      - name: link_type
+        in: query
+        schema:
+          type: string
+        example: href
+      - name: anchor_type
+        in: query
+        schema:
+          type: string
+        example: text
+      - name: dofollow
+        in: query
+        schema:
+          type: string
+        example: dofollow
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      - name: url_from
+        in: query
+        description: Filter by referring page URL.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksHistoryCount
+      tags:
+      - backlinks
+      summary: history/count
+      description: Returns the daily count of new and lost backlinks for a target over a specified period.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com
+                mode: domain
+                date_from: '2025-09-15'
+                date_to: '2025-10-15'
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/history/cumulative:
+    get:
+      operationId: getBacklinksHistoryCumulative
+      tags:
+      - backlinks
+      summary: history/cumulative
+      description: Returns the total number of live backlinks for a target for each day in a specified date range.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://www.seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2024-01-14'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2024-08-28'
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksHistoryCumulative
+      tags:
+      - backlinks
+      summary: history/cumulative
+      description: Returns the total number of live backlinks for a target for each day in a specified date range.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com
+                mode: domain
+                date_from: '2024-01-14'
+                date_to: '2024-08-28'
+                output: json
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/anchors:
+    get:
+      operationId: getBacklinksAnchors
+      tags:
+      - backlinks
+      summary: anchors
+      description: Returns information about the anchor texts used in backlinks that point to a single target.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - backlinks
+          - refdomains
+        example: backlinks
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 2
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksAnchors
+      tags:
+      - backlinks
+      summary: anchors
+      description: Returns information about the anchor texts used in backlinks that point to a single target.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com/
+                order_by: backlinks
+                mode: domain
+                limit: 2
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/refdomains:
+    get:
+      operationId: getBacklinksRefdomains
+      tags:
+      - backlinks
+      summary: refdomains
+      description: Retrieves a list of referring domains pointing to a single target, with sorting options.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - date_found
+          - domain_inlink_rank
+          - inlink_rank
+          default: date_found
+        example: date_found
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksRefdomains
+      tags:
+      - backlinks
+      summary: refdomains
+      description: Retrieves a list of referring domains pointing to a single target, with sorting options.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com/
+                order_by: date_found
+                mode: domain
+                limit: 2
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/refdomains/count:
+    get:
+      operationId: getBacklinksRefdomainsCount
+      tags:
+      - backlinks
+      summary: refdomains/count
+      description: Returns the total number of unique referring domains for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+          description: Supports multiple targets by repeating this parameter.
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksRefdomainsCount
+      tags:
+      - backlinks
+      summary: refdomains/count
+      description: Returns the total number of unique referring domains for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.anandaioga.com/
+                order_by: date_found
+                mode: domain
+                limit: 2
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/refdomains/history:
+    get:
+      operationId: getBacklinksRefdomainsHistory
+      tags:
+      - backlinks
+      summary: refdomains/history
+      description: Retrieves a list of new and lost referring domains for a target within a specified date range.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: new_lost_type
+        in: query
+        schema:
+          type: string
+        example: new
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2025-03-01'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2025-06-01'
+      - name: order_by
+        in: query
+        schema:
+          type: string
+        example: new_lost_date
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksRefdomainsHistory
+      tags:
+      - backlinks
+      summary: refdomains/history
+      description: Retrieves a list of new and lost referring domains for a target within a specified date range.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com
+                mode: domain
+                new_lost_type: new
+                date_from: '2025-01-15'
+                date_to: '2025-04-16'
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/refdomains/history/count:
+    get:
+      operationId: getBacklinksRefdomainsHistoryCount
+      tags:
+      - backlinks
+      summary: refdomains/history/count
+      description: Returns the daily count of new and lost referring domains for a target over a specified period.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: new_lost_type
+        in: query
+        schema:
+          type: string
+        example: new
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2025-03-01'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2025-06-01'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksRefdomainsHistoryCount
+      tags:
+      - backlinks
+      summary: refdomains/history/count
+      description: Returns the daily count of new and lost referring domains for a target over a specified period.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com
+                mode: domain
+                new_lost_type: new
+                date_from: '2025-01-15'
+                date_to: '2025-04-16'
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/referring-ips:
+    get:
+      operationId: getBacklinksReferringIps
+      tags:
+      - backlinks
+      summary: referring-ips
+      description: Returns information about the IPv4 addresses that host backlinks pointing to a single target.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: order_by
+        in: query
+        schema:
+          type: string
+        example: backlinks
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksReferringIps
+      tags:
+      - backlinks
+      summary: referring-ips
+      description: Returns information about the IPv4 addresses that host backlinks pointing to a single target.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com/
+                order_by: refdomains
+                mode: domain
+                limit: 2
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/referring-ips/count:
+    get:
+      operationId: getBacklinksReferringIpsCount
+      tags:
+      - backlinks
+      summary: referring-ips/count
+      description: Returns the total number of unique referring IPs for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+          description: Supports multiple targets by repeating this parameter.
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksReferringIpsCount
+      tags:
+      - backlinks
+      summary: referring-ips/count
+      description: Returns the total number of unique referring IPs for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.us-seranking.com/
+                mode: host
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/referring-subnets/count:
+    get:
+      operationId: getBacklinksReferringSubnetsCount
+      tags:
+      - backlinks
+      summary: referring-subnets/count
+      description: Returns the total number of unique referring subnets (C-blocks) for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+          description: Supports multiple targets by repeating this parameter.
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksReferringSubnetsCount
+      tags:
+      - backlinks
+      summary: referring-subnets/count
+      description: Returns the total number of unique referring subnets (C-blocks) for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.us-seranking.com/
+                mode: host
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/indexed-pages:
+    get:
+      operationId: getBacklinksIndexedPages
+      tags:
+      - backlinks
+      summary: indexed-pages
+      description: Retrieves a list of pages on a target site that have received at least one backlink.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: domain
+      - name: output
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        example: json
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: order_by
+        in: query
+        schema:
+          type: string
+        example: backlinks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksIndexedPages
+      tags:
+      - backlinks
+      summary: indexed-pages
+      description: Retrieves a list of pages on a target site that have received at least one backlink.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target: https://www.seranking.com/
+                order_by: backlinks
+                mode: domain
+                limit: 2
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority:
+    get:
+      operationId: getBacklinksAuthority
+      tags:
+      - backlinks
+      summary: authority
+      description: Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksAuthority
+      tags:
+      - backlinks
+      summary: authority
+      description: Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.seranking.com/rank-tracker/
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority/domain:
+    get:
+      operationId: getBacklinksAuthorityDomain
+      tags:
+      - backlinks
+      summary: authority/domain
+      description: Returns the Domain Authority (Domain InLink Rank) for one or more targets.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksAuthorityDomain
+      tags:
+      - backlinks
+      summary: authority/domain
+      description: Returns the Domain Authority (Domain InLink Rank) for one or more targets.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.seranking.com/rank-tracker/
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority/domain/distribution:
+    get:
+      operationId: getBacklinksAuthorityDomainDistribution
+      tags:
+      - backlinks
+      summary: authority/domain/distribution
+      description: Returns the distribution of Domain Authority scores for all domains linking to a single target.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          - url
+          default: host
+        example: host
+      - name: histogramMode
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - host
+          default: host
+        example: host
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority/page:
+    get:
+      operationId: getBacklinksAuthorityPage
+      tags:
+      - backlinks
+      summary: authority/page
+      description: Returns the Page Authority (InLink Rank) for one or more target URLs.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      operationId: createBacklinksAuthorityPage
+      tags:
+      - backlinks
+      summary: authority/page
+      description: Returns the Page Authority (InLink Rank) for one or more target URLs.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                target:
+                - https://www.seranking.com/
+                - https://www.seranking.com/rank-tracker/
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority/page/history:
+    get:
+      operationId: getBacklinksAuthorityPageHistory
+      tags:
+      - backlinks
+      summary: authority/page/history
+      description: Returns the historical Page Authority (InLink Rank) values for a single target URL.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com
+      - name: date_from
+        in: query
+        schema:
+          type: string
+        example: '2025-01-01'
+      - name: date_to
+        in: query
+        schema:
+          type: string
+        example: '2025-05-30'
+      - name: granularity
+        in: query
+        schema:
+          type: string
+        example: by_week
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/backlinks/authority/domain/history:
+    get:
+      operationId: getBacklinksAuthorityDomainHistory
+      tags:
+      - backlinks
+      summary: authority/domain/history
+      description: Returns historical Domain InLink Rank (Domain Authority) values for a target domain. GET only, single target.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: date_from
+        in: query
+        schema:
+          type: string
+      - name: date_to
+        in: query
+        schema:
+          type: string
+      - name: granularity
+        in: query
+        schema:
+          type: string
+        example: by_day
+      - name: output
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey

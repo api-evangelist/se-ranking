@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: Account & system
+  description: "This collection contains endpoints for retrieving information about your account status, subscription details, and current credit and API unit balances. Use these requests to monitor your usage and plan details programmatically.\n\n### Endpoints\n\n- **Get Subscription Info**: Returns detailed information about your current API subscription plan, including its status (e.g., active, expired), validity dates, and the total and remaining API units available.\n    \n- **Get Credit Balance**: Returns the current account-wide credit balance, showing the total limit and the amount of credits that have been used."
+paths:
+  /v1/account/subscription:
+    get:
+      operationId: getAccountSubscription
+      tags:
+      - Account & system
+      summary: subscription
+      description: Retrieves detailed information about the API subscription plan, including its status, dates, and remaining API units.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/account/credit-balance:
+    get:
+      operationId: getAccountCreditBalance
+      tags:
+      - Account & system
+      summary: credit-balance
+      description: Returns the current account-wide credit balance, showing the total limit and the amount of credits used.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+      - name: output
+        in: query
+        schema:
+          type: string
+        example: json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey

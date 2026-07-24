@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system AI search API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: AI search
+  description: "This collection of endpoints allows you to analyze a domain or brand's visibility and performance within various Large Language Model (LLM) results, such as ChatGPT, Gemini, and Perplexity. Use these tools to track your presence in AI-generated answers, discover the prompts that feature your brand or domain, and understand your overall AI search footprint.\n\n### Overview & Discovery\n\n- **Overview**: Get a high-level summary of a domain's performance and historical trends within a specific LLM, including metrics like link presence, average position, and AI-driven traffic.\n    \n- **Discover Brand by URL**: A utility endpoint to identify the primary brand name associated with a target domain, useful for subsequent brand-based queries.\n    \n\n### Prompt Analysis\n\n- **Get Prompts by Target**: Retrieve a list of all prompts where a specific domain, subdomain, or URL is featured as a link or mention in an LLM's answer.\n    \n- **Get Prompts by Brand**: Find all prompts where a specific brand name is mentioned in an LLM's answer, allowing you to track brand visibility and context."
+paths:
+  /v1/ai-search/overview/aggregated/time-series:
+    get:
+      tags:
+      - AI search
+      summary: overview (aggregated)
+      description: Retrieves a high-level aggregated summary of a domain's key performance metrics and historical trends across all LLM engines.
+      operationId: getAiOverviewAggregated
+      parameters:
+      - name: target
+        in: query
+        required: true
+        schema:
+          type: string
+        example: seranking.com
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+        example: us
+      - name: brand
+        in: query
+        schema:
+          type: string
+        example: SE Ranking
+      - name: scope
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - base_domain
+          - url
+          default: base_domain
+        example: base_domain
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/ai-search/overview/by-engine/time-series:
+    get:
+      operationId: getAiSearchOverviewByEngineTimeSeries
+      tags:
+      - AI search
+      summary: overview
+      description: Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: engine
+        in: query
+        schema:
+          type: string
+        example: ai-overview
+      - name: brand
+        in: query
+        schema:
+          type: string
+        example: SE Ranking
+      - name: scope
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - base_domain
+          - url
+          default: base_domain
+        example: base_domain
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/ai-search/overview/leaderboard:
+    post:
+      operationId: createAiSearchOverviewLeaderboard
+      tags:
+      - AI search
+      summary: leaderboard
+      description: Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                primary:
+                  target: seranking.com
+                  brand: SE Ranking
+                competitors:
+                - target: semrush.com
+                  brand: Semrush
+                - target: ahrefs.com
+                  brand: Ahrefs
+                scope: base_domain
+                source: us
+                engines:
+                - ai-overview
+                - chatgpt
+                - perplexity
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: brand
+        in: query
+        schema:
+          type: string
+        example: SE Ranking
+      - name: scope
+        in: query
+        schema:
+          type: string
+        example: base_domain
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/ai-search/discover-brand:
+    get:
+      operationId: getAiSearchDiscoverBrand
+      tags:
+      - AI search
+      summary: discover brand
+      description: Identifies and returns the brand name associated with a given target domain, subdomain, or URL.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: scope
+        in: query
+        schema:
+          type: string
+          enum:
+          - domain
+          - base_domain
+          - url
+          default: domain
+        description: base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)
+        example: domain
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/ai-search/prompts-by-target:
+    get:
+      operationId: getAiSearchPromptsByTarget
+      tags:
+      - AI search
+      summary: prompts by target
+      description: Fetches a list of prompts where a specified domain, subdomain, or URL appears in the results of a chosen LLM.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: scope
+        in: query
+        schema:
+          type: string
+        description: base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)
+        example: domain
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: engine
+        in: query
+        schema:
+          type: string
+        example: ai-mode
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - volume
+          - type
+          - snippet_length
+          default: volume
+        example: volume
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        example: desc
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]"
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 100000
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 5
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 8
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 15
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/ai-search/prompts-by-brand:
+    get:
+      operationId: getAiSearchPromptsByBrand
+      tags:
+      - AI search
+      summary: prompts by brand
+      description: Retrieves a list of prompts where a specified brand name is mentioned in the results of a chosen LLM.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: brand
+        in: query
+        schema:
+          type: string
+        example: SE Ranking
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: engine
+        in: query
+        schema:
+          type: string
+        example: perplexity
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - volume
+          - type
+          - snippet_length
+          default: volume
+        example: volume
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        example: desc
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]"
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 100
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 100000
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 5
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 8
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: integer
+        example: 15
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: integer
+        example: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey

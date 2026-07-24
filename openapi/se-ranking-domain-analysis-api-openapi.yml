@@ -1,0 +1,781 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system Domain Analysis API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: Domain Analysis
+  description: "This collection of endpoints allows you to perform in-depth competitive analysis on any domain. Use these requests to uncover keyword strategies, traffic trends, and competitor performance in both organic and paid search.\n\n### Performance Overviews\n\nGet high-level statistics about a domain's search performance.\n\n- **Regional database**: Get detailed organic and paid stats for a domain within a single, selected regional database.\n    \n- **Worldwide aggregate**: Aggregate a domain's global search performance metrics for the current month.\n    \n- **History trends**: Track historical trends for keywords, traffic, and cost for organic or paid search within a specific region.\n    \n\n### Keyword Analysis\n\nDive deep into the specific keywords a domain ranks for.\n\n- **Domain keywords**: Fetch a filterable and sortable list of all organic or paid keywords for a domain.\n    \n- **Domain keywords comparison**: Compare two domains to find common keywords (overlap) or identify keyword gaps.\n    \n\n### Competitor & Ad Analysis\n\nAnalyze the competitive landscape and paid advertising strategies.\n\n- **Competitors**: Discover a domain's top organic or paid competitors and see the number of keywords you have in common.\n    \n- **Paid ads**: Analyze paid ads either by keyword (to see who is bidding) or by domain (to see what a specific domain is bidding on)."
+paths:
+  /v1/domain/overview/db:
+    get:
+      operationId: getDomainOverviewDb
+      tags:
+      - Domain Analysis
+      summary: Regional database
+      description: Provides a detailed breakdown of a domain's organic and paid keyword performance within a single specified regional database.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: url
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com/api.html
+      - name: with_subdomains
+        in: query
+        schema:
+          type: boolean
+          default: true
+        example: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/overview/worldwide:
+    get:
+      operationId: getDomainOverviewWorldwide
+      tags:
+      - Domain Analysis
+      summary: Worldwide aggregate
+      description: Aggregates a domain’s current global search performance statistics for both organic and paid traffic.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: fields
+        in: query
+        schema:
+          type: string
+        example: price,traffic,keywords,positions_diff,positions_tops
+      - name: show_zones_list
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          default: 0
+        example: 0
+      - name: currency
+        in: query
+        description: ISO 4217 currency code.
+        schema:
+          type: string
+          maxLength: 3
+          default: USD
+        example: USD
+      - name: with_subdomains
+        in: query
+        schema:
+          type: boolean
+          default: true
+        example: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/overview/worldwide/url:
+    get:
+      operationId: getDomainOverviewWorldwideUrl
+      tags:
+      - Domain Analysis
+      summary: Worldwide aggregate for URL
+      description: Aggregates a domain’s current global search performance statistics for both organic and paid traffic.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: fields
+        in: query
+        schema:
+          type: string
+        example: price,traffic,keywords
+      - name: url
+        in: query
+        schema:
+          type: string
+        example: https://seranking.com/api.html
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/overview/history:
+    get:
+      operationId: getDomainOverviewHistory
+      tags:
+      - Domain Analysis
+      summary: History Trends
+      description: Fetches historical data, including keyword counts and traffic trends, for a domain's organic or paid performance in a specific region.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - organic
+          - adv
+          default: organic
+        example: organic
+      - name: with_subdomains
+        in: query
+        schema:
+          type: boolean
+          default: true
+        example: true
+      - name: url
+        in: query
+        description: Specific URL to get history for instead of domain.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/keywords:
+    get:
+      operationId: getDomainKeywords
+      tags:
+      - Domain Analysis
+      summary: Domain keywords
+      description: Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: wix.com
+      - name: url
+        in: query
+        schema:
+          type: string
+        example: https://www.mywage.de/blog/baufinanzierung-trotz-schufa
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - organic
+          - adv
+        example: organic
+      - name: with_subdomains
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: order_field
+        in: query
+        schema:
+          type: string
+          enum:
+          - traffic
+          - volume
+          - position
+          - cpc
+          - competition
+          - kei
+          - difficulty
+        example: traffic
+      - name: order_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: desc
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+        example: 1
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: cols
+        in: query
+        schema:
+          type: string
+      - name: pos_change
+        in: query
+        schema:
+          type: string
+          enum:
+          - up
+          - down
+          - new
+          - lost
+          - diff
+          - same
+      - name: filter[volume][from]
+        in: query
+        schema:
+          type: integer
+        example: 500
+      - name: filter[volume][to]
+        in: query
+        schema:
+          type: integer
+        example: 2000
+      - name: filter[difficulty][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[difficulty][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[url]
+        in: query
+        schema:
+          type: string
+        example: "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"/blog/\"\n }\n ]\n]"
+      - name: filter[multi_keyword_excluded]
+        in: query
+        schema:
+          type: string
+        example: "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+      - name: filter[multi_keyword_included]
+        in: query
+        schema:
+          type: string
+        example: '[[{"type":"contains", "value":"seo"}]]'
+      - name: filter[serp_features]
+        in: query
+        schema:
+          type: string
+      - name: filter[intents]
+        in: query
+        schema:
+          type: string
+      - name: filter[keyword]
+        in: query
+        schema:
+          type: string
+        example: scholar
+      - name: filter[characters_count][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[characters_count][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[keyword_count][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[keyword_count][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[position][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[position][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[competition][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[competition][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[cpc][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[cpc][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_percent][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_percent][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[price][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[price][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[serp_features_2][mode]
+        in: query
+        schema:
+          type: string
+        example: with_link
+      - name: filter[serp_features_2][value][0]
+        in: query
+        schema:
+          type: string
+        example: sge
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/pages:
+    get:
+      operationId: getDomainPages
+      tags:
+      - Domain Analysis
+      summary: Domain pages
+      description: Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: scope
+        in: query
+        schema:
+          type: string
+        example: base_domain
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: type
+        in: query
+        schema:
+          type: string
+        example: organic
+      - name: order_field
+        in: query
+        schema:
+          type: string
+        example: keywords_count
+      - name: order_type
+        in: query
+        schema:
+          type: string
+        example: desc
+      - name: offset
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 1000
+      - name: filter[domain_url]
+        in: query
+        schema:
+          type: string
+      - name: filter[domain_traffic_percent][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[domain_traffic_percent][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[keywords_count][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[keywords_count][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_sum][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_sum][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[price_sum][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[price_sum][to]
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/subdomains:
+    get:
+      operationId: getDomainSubdomains
+      tags:
+      - Domain Analysis
+      summary: Domain subdomains
+      description: Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: target
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: scope
+        in: query
+        schema:
+          type: string
+        example: base_domain
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: type
+        in: query
+        schema:
+          type: string
+        example: organic
+      - name: order_field
+        in: query
+        schema:
+          type: string
+        example: keywords_count
+      - name: order_type
+        in: query
+        schema:
+          type: string
+        example: asc
+      - name: offset
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 1000
+      - name: filter[domain_url]
+        in: query
+        schema:
+          type: string
+      - name: filter[domain_traffic_percent][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[domain_traffic_percent][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[keywords_count][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[keywords_count][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_sum][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[traffic_sum][to]
+        in: query
+        schema:
+          type: string
+      - name: filter[price_sum][from]
+        in: query
+        schema:
+          type: string
+      - name: filter[price_sum][to]
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/ads:
+    get:
+      operationId: getDomainAds
+      tags:
+      - Domain Analysis
+      summary: Paid ads for domain
+      description: Returns a list of keywords a specific domain is bidding on, along with the ad creatives used for those keywords.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: booking.com
+      - name: from
+        in: query
+        schema:
+          type: string
+        example: 2023-01
+      - name: to
+        in: query
+        schema:
+          type: string
+        example: 2023-12
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+        example: us
+      - name: keyword
+        in: query
+        description: Search by keyword instead of domain. Mutually exclusive with domain.
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+        example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/competitors:
+    get:
+      operationId: getDomainCompetitors
+      tags:
+      - Domain Analysis
+      summary: Competitors
+      description: Identifies a list of top organic or paid competitors for a specified domain and shows the number of keywords they have in common.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: seranking.com
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - organic
+          - adv
+        example: organic
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+        example: us
+      - name: url
+        in: query
+        description: Specific URL to analyze instead of the full domain.
+        schema:
+          type: string
+        example: https://seranking.com/api.html
+      - name: stats
+        in: query
+        description: Include additional statistics (0 or 1).
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          default: 0
+        example: 0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/domain/keywords/comparison:
+    get:
+      operationId: getDomainKeywordsComparison
+      tags:
+      - Domain Analysis
+      summary: Domain keyword comparison
+      description: Compares two domains to find either their common keywords or the keywords for which one ranks and the other does not.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: source
+        in: query
+        schema:
+          type: string
+        example: us
+      - name: compare
+        in: query
+        schema:
+          type: string
+        example: samsung.com
+      - name: domain
+        in: query
+        schema:
+          type: string
+        example: apple.com
+      - name: url
+        in: query
+        description: Specific URL to compare instead of full domain.
+        schema:
+          type: string
+        example: https://www.apple.com
+      - name: type
+        in: query
+        schema:
+          type: string
+        example: organic
+      - name: diff
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: order_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: desc
+      - name: order_field
+        in: query
+        schema:
+          type: string
+          enum:
+          - keyword
+          - volume
+          - cpc
+          - competition
+          - difficulty
+          - position
+        example: volume
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: page
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: cols
+        in: query
+        description: Comma-separated list of columns to include in the response.
+        schema:
+          type: string
+        example: keyword,position,volume,traffic,cpc,competition
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey

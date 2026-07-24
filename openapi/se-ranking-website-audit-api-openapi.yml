@@ -1,0 +1,536 @@
+openapi: 3.0.0
+info:
+  title: SE Ranking Data Account & system Website Audit API
+  description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
+  version: 1.0.0
+  contact:
+    name: SE Ranking API Support
+    url: https://seranking.com/api
+servers:
+- url: https://api.seranking.com
+  description: Production
+security:
+- apikeyAuth: []
+tags:
+- name: Website Audit
+  description: "This collection of endpoints provides a comprehensive suite of tools to programmatically manage the full lifecycle of your technical SEO audits. These requests allow you to launch new crawls, monitor their progress in real-time, and retrieve detailed reports and page-level data for in-depth analysis.\n\n**Note on Costs:** Audits are billed on a per-page basis.\n\n- **Standard Audits:** 2 credits per crawled page.\n    \n- **Advanced Audits (with JavaScript rendering):** 20 credits per crawled page.\n    \n\n### 1\\. Create & Manage Audits\n\nUse these endpoints to start new crawls, re-run previous ones, or manage your list of audits.\n\n- **Create Audits**: Launch a new **Standard** (HTML crawl) or **Advanced** (JavaScript rendering) audit with highly customizable settings.\n    \n- **List Audits**: Retrieve a paginated list of all audits associated with your account.\n    \n- **Update Audit Title**: Change the display title of an existing audit report.\n    \n- **Delete Audit**: Permanently remove an audit and all of its associated data.\n    \n- **Recheck Audit**: Initiate a new crawl for a completed audit using its original settings.\n    \n\n### 2\\. Monitor & Retrieve Data\n\nOnce an audit is running or complete, use these endpoints to check its progress and pull detailed results.\n\n- **Get Audit Status**: Check the real-time progress of an ongoing audit.\n    \n- **Get Audit Report**: Fetch the full, high-level report for a completed audit, including the overall health score and a summary of issues.\n    \n- **Get Audit History**: Retrieve a historical snapshot of a specific audit run from a particular date.\n    \n- **Get All Crawled Pages**: Return a complete, paginated list of every URL discovered during an audit.\n    \n- **Get Audit Pages by Issue**: Get a list of all URLs affected by a single, specific issue.\n    \n- **Get All Issues for a Specific URL**: Retrieve all errors, warnings, and notices found on a single page.\n    \n- **Get All Found Links**: Fetch a complete list of every internal and external link discovered across the entire site during the audit."
+paths:
+  /v1/site-audit/audits/standard:
+    post:
+      operationId: createSiteAuditAuditsStandard
+      tags:
+      - Website Audit
+      summary: Create standard audit
+      description: Launches a new website audit by crawling the site's raw HTML.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                domain: example.com
+                title: Example Audit Title
+                settings:
+                  source_site: 1
+                  source_sitemap: 1
+                  source_subdomain: 0
+                  source_file: 0
+                  check_robots: 1
+                  ignore_params: 0
+                  custom_params: utm_source,utm_medium,utm_term,utm_content,utm_campaign
+                  ignore_noindex: 0
+                  ignore_nofollow: 0
+                  user_agent: 0
+                  login: ''
+                  password: ''
+                  max_pages: 10000
+                  max_depth: 10
+                  max_req: 500
+                  max_redirects: 5
+                  min_title_len: 20
+                  max_title_len: 65
+                  min_description_len: 1
+                  max_description_len: 158
+                  max_size: 3000
+                  min_words: 250
+                  max_h1_len: 100
+                  max_h2_len: 100
+                  allow: ''
+                  disallow: ''
+                  hide: ''
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{vault:api_key_data_api}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/advanced:
+    post:
+      operationId: createSiteAuditAuditsAdvanced
+      tags:
+      - Website Audit
+      summary: Create advanced audit
+      description: Launches a new website audit that renders JavaScript to analyze dynamically-loaded content, ideal for SPAs.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                domain: example.com
+                title: Example Audit Title
+                settings:
+                  source_site: 1
+                  source_sitemap: 1
+                  source_subdomain: 0
+                  source_file: 0
+                  check_robots: 1
+                  ignore_params: 0
+                  custom_params: utm_source,utm_medium,utm_term,utm_content,utm_campaign
+                  ignore_noindex: 0
+                  ignore_nofollow: 0
+                  user_agent: 0
+                  login: ''
+                  password: ''
+                  max_pages: 100
+                  max_depth: 10
+                  max_req: 500
+                  max_redirects: 5
+                  min_title_len: 20
+                  max_title_len: 65
+                  min_description_len: 1
+                  max_description_len: 158
+                  max_size: 3000
+                  min_words: 250
+                  max_h1_len: 100
+                  max_h2_len: 100
+                  allow: ''
+                  disallow: ''
+                  hide: ''
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits:
+    get:
+      operationId: getSiteAuditAudits
+      tags:
+      - Website Audit
+      summary: List audits
+      description: Retrieves a paginated list of all website audits associated with your account, including their current status and summary stats.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+        example: 100
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 0
+      - name: search
+        in: query
+        description: Filter audits by title or URL.
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: Filter audits created on or after this date (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+      - name: date_end
+        in: query
+        description: Filter audits created on or before this date (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      operationId: updateSiteAuditAudits
+      tags:
+      - Website Audit
+      summary: Update audit
+      description: Changes the display title of an existing website audit report.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: New Example Audit Title
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700387192
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      operationId: deleteSiteAuditAudits
+      tags:
+      - Website Audit
+      summary: Delete audit
+      description: Permanently deletes a specified website audit report and all of its associated data.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700387192
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/status:
+    get:
+      operationId: getSiteAuditAuditsStatus
+      tags:
+      - Website Audit
+      summary: Get audit status
+      description: Checks the real-time progress of a specific audit, including the number of pages crawled and issues found so far.
+      parameters:
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700313923
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/report:
+    get:
+      operationId: getSiteAuditAuditsReport
+      tags:
+      - Website Audit
+      summary: Get audit report
+      description: Retrieves the full summary report for a completed audit, including the overall health score and a breakdown of all issues.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/pages:
+    get:
+      operationId: getSiteAuditAuditsPages
+      tags:
+      - Website Audit
+      summary: Get all crawled pages
+      description: Returns a paginated list of every URL discovered during an audit, along with detailed on-page and technical metrics for each.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/issue-pages:
+    get:
+      operationId: getSiteAuditAuditsIssuePages
+      tags:
+      - Website Audit
+      summary: Get audit pages by issue
+      description: Returns a list of all URLs affected by a single, specific issue within an audit report.
+      parameters:
+      - name: code
+        in: query
+        schema:
+          type: string
+        example: title_duplicate
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/issues:
+    get:
+      operationId: getSiteAuditAuditsIssues
+      tags:
+      - Website Audit
+      summary: Get All Issues for a Specific URL
+      description: Retrieves a detailed list of all technical and on-page issues found on a single, specific page.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: url_id
+        in: query
+        schema:
+          type: integer
+        example: 50958380
+      - name: url
+        in: query
+        schema:
+          type: string
+        example: https://www.vitality.co.uk/
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        example: 0
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/links:
+    get:
+      operationId: getSiteAuditAuditsLinks
+      tags:
+      - Website Audit
+      summary: Get all found links
+      description: Fetches a complete, filterable list of every internal and external hyperlink discovered across the entire site during an audit.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: page_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - internal
+          - external
+          default: all
+        example: internal
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 10
+      - name: filter[0][param]
+        in: query
+        schema:
+          type: string
+        example: status
+      - name: filter[0][value]
+        in: query
+        schema:
+          type: integer
+        example: 301
+      - name: filter[1][param]
+        in: query
+        schema:
+          type: string
+        example: status
+      - name: filter[1][value]
+        in: query
+        schema:
+          type: integer
+        example: 302
+      - name: filter[1][type]
+        in: query
+        schema:
+          type: string
+        example: or
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/history:
+    get:
+      operationId: getSiteAuditAuditsHistory
+      tags:
+      - Website Audit
+      summary: Get audit history by date
+      description: Retrieves a complete historical snapshot of a specific audit run, including the settings, domain data, and issue counts for that date.
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700183831
+      - name: date
+        in: query
+        schema:
+          type: string
+        example: '2025-07-29'
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/recheck/standard:
+    post:
+      operationId: createSiteAuditAuditsRecheckStandard
+      tags:
+      - Website Audit
+      summary: Recheck audit standard
+      description: Initiates a new standard (HTML) crawl for a previously completed audit using its original settings.
+      requestBody:
+        content: {}
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700237033
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/site-audit/audits/recheck/advanced:
+    post:
+      operationId: createSiteAuditAuditsRecheckAdvanced
+      tags:
+      - Website Audit
+      summary: Recheck audit advanced
+      description: Initiates a new advanced (JavaScript rendering) crawl for a previously completed audit using its original settings.
+      requestBody:
+        content: {}
+      parameters:
+      - name: audit_id
+        in: query
+        schema:
+          type: integer
+        example: 700237033
+      - name: apikey
+        in: query
+        schema:
+          type: string
+        example: '{{secret_key_data}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
