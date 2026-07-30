@@ -2,7 +2,20 @@ aid: se-ranking
 name: SE Ranking
 description: SE Ranking is an SEO platform providing a REST API for keyword rank tracking, competitor analysis, backlink monitoring, on-page auditing, AI search visibility, and generating white-label SEO reports. The platform offers two API layers — a Data API with pay-as-you-go credits for SEO data retrieval and a Project API for managing SEO workflows — covering 5.4B keywords, 2.2B domain profiles, and 188+ regions.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/se-ranking.png
 url: https://raw.githubusercontent.com/api-evangelist/se-ranking/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -18,56 +31,226 @@ tags:
   - GEO
   - Digital Marketing
 apis:
-  - aid: se-ranking:data-api
-    name: SE Ranking Data API
-    description: REST API providing access to SE Ranking's SEO datasets including keyword research, backlink analysis, domain analysis, SERP data, website audits, and AI search visibility tracking. Uses a credit-based billing model with per-request and per-record charges.
-    humanURL: https://seranking.com/api/data/reference/
-    baseURL: https://api.seranking.com
-    tags:
-      - Keyword Research
-      - Backlinks
-      - Domain Analysis
-      - SERP
-      - Website Audit
-      - AI Search
-    properties:
-      - type: Documentation
-        url: https://seranking.com/api/data/getting-started/
-      - type: Reference
-        url: https://seranking.com/api/data/reference/
-      - type: Postman
-        url: https://www.postman.com/serankingdev/se-ranking-developers/overview
-      - type: RateLimits
-        url: https://seranking.com/api/rate-limits/
-      - type: Credits
-        url: https://seranking.com/api/api-credits-system/
-    contact:
-      - FN: SE Ranking Support
-        url: https://seranking.com/contact.html
-  - aid: se-ranking:project-api
-    name: SE Ranking Project API
-    description: REST API for creating and managing SEO tracking projects programmatically, including keyword monitoring, competitor tracking, website audits, backlink management, and account administration. Consumes limits tied to the user's subscription plan rather than separate API credits.
-    humanURL: https://seranking.com/api/project/
-    baseURL: https://api.seranking.com
-    tags:
-      - Project Management
-      - Rank Tracking
-      - Competitor Analysis
-      - Website Audit
-      - Backlinks
-      - Account Management
-    properties:
-      - type: Documentation
-        url: https://seranking.com/api/project/getting-started/
-      - type: Reference
-        url: https://seranking.com/api/project/
-      - type: Postman
-        url: https://www.postman.com/serankingdev/se-ranking-developers/overview
-      - type: RateLimits
-        url: https://seranking.com/api/rate-limits/
-    contact:
-      - FN: SE Ranking Support
-        url: https://seranking.com/contact.html
+- aid: se-ranking:data-api
+  name: SE Ranking Data API
+  description: >-
+    REST API providing access to SE Ranking's SEO datasets including keyword research, backlink analysis,
+    domain analysis, SERP data, website audits, and AI search visibility tracking. Uses a credit-based
+    billing model with per-request and per-record charges.
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - Keyword Research
+  - Backlinks
+  - Domain Analysis
+  - SERP
+  - Website Audit
+  - AI Search
+  properties:
+  - type: Documentation
+    url: https://seranking.com/api/data/getting-started/
+  - type: Reference
+    url: https://seranking.com/api/data/reference/
+  - type: Postman
+    url: https://www.postman.com/serankingdev/se-ranking-developers/overview
+  - type: RateLimits
+    url: https://seranking.com/api/rate-limits/
+  - type: Credits
+    url: https://seranking.com/api/api-credits-system/
+  contact:
+  - FN: SE Ranking Support
+    url: https://seranking.com/contact.html
+- aid: se-ranking:project-api
+  name: SE Ranking Project API
+  description: >-
+    REST API for creating and managing SEO tracking projects programmatically, including keyword monitoring,
+    competitor tracking, website audits, backlink management, and account administration. Consumes limits
+    tied to the user's subscription plan rather than separate API credits.
+  humanURL: https://seranking.com/api/project/
+  baseURL: https://api.seranking.com
+  tags:
+  - Project Management
+  - Rank Tracking
+  - Competitor Analysis
+  - Website Audit
+  - Backlinks
+  - Account Management
+  properties:
+  - type: Documentation
+    url: https://seranking.com/api/project/getting-started/
+  - type: Reference
+    url: https://seranking.com/api/project/
+  - type: Postman
+    url: https://www.postman.com/serankingdev/se-ranking-developers/overview
+  - type: RateLimits
+    url: https://seranking.com/api/rate-limits/
+  contact:
+  - FN: SE Ranking Support
+    url: https://seranking.com/contact.html
+- aid: se-ranking:se-ranking-account-system-api
+  name: SE Ranking Account & system API
+  description: "This collection contains endpoints for retrieving information about your account status,\
+    \ subscription details, and current credit and API unit balances. Use these requests to monitor your\
+    \ usage and plan details programmatically.\n\n### Endpoints\n\n- **Get Subscription Info**: Returns\
+    \ detailed information about your current API subscription plan, including its status (e.g., active,\
+    \ expired), validity dates, and the total and remaining API units available.\n    \n- **Get Credit\
+    \ Balance**: Returns the current account-wide credit balance, showing the total limit and the amount\
+    \ of credits that have been used."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - Account & system
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-account-system-api-openapi.yml
+- aid: se-ranking:se-ranking-ai-search-api
+  name: SE Ranking AI search API
+  description: "This collection of endpoints allows you to analyze a domain or brand's visibility and\
+    \ performance within various Large Language Model (LLM) results, such as ChatGPT, Gemini, and Perplexity.\
+    \ Use these tools to track your presence in AI-generated answers, discover the prompts that feature\
+    \ your brand or domain, and understand your overall AI search footprint.\n\n### Overview & Discovery\n\
+    \n- **Overview**: Get a high-level summary of a domain's performance and historical trends within\
+    \ a specific LLM, including metrics like link presence, average position, and AI-driven traffic.\n\
+    \    \n- **Discover Brand by URL**: A utility endpoint to identify the primary brand name associated\
+    \ with a target domain, useful for subsequent brand-based queries.\n    \n\n### Prompt Analysis\n\n\
+    - **Get Prompts by Target**: Retrieve a list of all prompts where a specific domain, subdomain, or\
+    \ URL is featured as a link or mention in an LLM's answer.\n    \n- **Get Prompts by Brand**: Find\
+    \ all prompts where a specific brand name is mentioned in an LLM's answer, allowing you to track brand\
+    \ visibility and context."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - AI search
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-ai-search-api-openapi.yml
+- aid: se-ranking:se-ranking-backlinks-api
+  name: SE Ranking backlinks API
+  description: "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis\
+    \ of the backlink profile for any given target, whether it's a root domain, a specific host (subdomain),\
+    \ or a particular URL.\n\nYou can use these endpoints to retrieve high-level statistics, fetch detailed\
+    \ backlink lists, analyze historical trends, and check authority scores.\n\n### Summary & Core Metrics\n\
+    \nUse these endpoints to get a quick overview of a target's backlink profile. These requests support\
+    \ batching for up to 100 targets.\n\n- **`summary`**: Returns extended statistics, including the number\
+    \ of referring domains, IPs, top anchors, TLDs, and more.\n    \n- **`metrics`**: Retrieves a set\
+    \ of key metrics, such as the total number of backlinks, referring domains, and dofollow/nofollow\
+    \ link counts.\n    \n- **`count`**: Provides a simple count of the total number of live backlinks\
+    \ for a target.\n    \n\n### Detailed Backlink Retrieval\n\nUse these endpoints to get lists of the\
+    \ actual backlinks pointing to a target.\n\n- **`all`**: Fetches a detailed list of backlinks with\
+    \ powerful filtering and sorting options. This is ideal for getting the \"top\" backlinks based on\
+    \ criteria like InLink Rank.\n    \n- **`raw`**: Retrieves a complete, unfiltered list of all backlinks\
+    \ using efficient cursor-based pagination. This is best for fetching an entire dataset in batches.\n\
+    \    \n- **`export`**: Exports all backlinks for a target into a downloadable `.csv.gz` file. This\
+    \ process is asynchronous and designed for very large-scale data retrieval.\n    \n\n### Historical\
+    \ Data & Trends\n\nTrack changes in a backlink profile over time.\n\n- **`history`**: Get a list of\
+    \ new and lost backlinks within a specified date range.\n    \n- **`history/count`**: Returns the\
+    \ number of new or lost backlinks for each day in a given period.\n    \n- **`history/cumulative`**:\
+    \ Provides the total number of live backlinks for each day in a given period.\n    \n\n### Analyze\
+    \ Specific Backlink Aspects\n\nDive deeper into specific components of the backlink profile.\n\n-\
+    \ **`anchors`**: Returns information about the anchor texts used in links pointing to a target.\n\
+    \    \n- **`refdomains`**: Provides details on the unique referring domains, including their authority\
+    \ and the number of links from each.\n    \n- **`referring-ips`** **&** **`subnets`**: Analyzes the\
+    \ network distribution of backlinks by IP address and C-class subnets.\n    \n- **`indexed-pages`**:\
+    \ Lists the pages on the target site that have received one or more backlinks.\n    \n\n### Authority\
+    \ Scores\n\nCheck the calculated authority of a target based on its backlink profile.\n\n- **`authority`**:\
+    \ Retrieves both the InLink Rank (Page Authority) and Domain InLink Rank (Domain Authority).\n   \
+    \ \n- **`authority/domain`**: Focuses specifically on Domain Authority, including its distribution\
+    \ and historical values.\n    \n- **`authority/page`**: Focuses specifically on Page Authority and\
+    \ its historical values."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - backlinks
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-backlinks-api-openapi.yml
+- aid: se-ranking:se-ranking-domain-analysis-api
+  name: SE Ranking Domain Analysis API
+  description: "This collection of endpoints allows you to perform in-depth competitive analysis on any\
+    \ domain. Use these requests to uncover keyword strategies, traffic trends, and competitor performance\
+    \ in both organic and paid search.\n\n### Performance Overviews\n\nGet high-level statistics about\
+    \ a domain's search performance.\n\n- **Regional database**: Get detailed organic and paid stats for\
+    \ a domain within a single, selected regional database.\n    \n- **Worldwide aggregate**: Aggregate\
+    \ a domain's global search performance metrics for the current month.\n    \n- **History trends**:\
+    \ Track historical trends for keywords, traffic, and cost for organic or paid search within a specific\
+    \ region.\n    \n\n### Keyword Analysis\n\nDive deep into the specific keywords a domain ranks for.\n\
+    \n- **Domain keywords**: Fetch a filterable and sortable list of all organic or paid keywords for\
+    \ a domain.\n    \n- **Domain keywords comparison**: Compare two domains to find common keywords (overlap)\
+    \ or identify keyword gaps.\n    \n\n### Competitor & Ad Analysis\n\nAnalyze the competitive landscape\
+    \ and paid advertising strategies.\n\n- **Competitors**: Discover a domain's top organic or paid competitors\
+    \ and see the number of keywords you have in common.\n    \n- **Paid ads**: Analyze paid ads either\
+    \ by keyword (to see who is bidding) or by domain (to see what a specific domain is bidding on)."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - Domain Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-domain-analysis-api-openapi.yml
+- aid: se-ranking:se-ranking-keyword-research-api
+  name: SE Ranking Keyword Research API
+  description: "This collection of endpoints is designed for comprehensive keyword analysis and discovery.\
+    \ Use these requests to retrieve performance metrics for large lists of keywords or to generate new\
+    \ keyword ideas based on a seed term.\n\nThis folder is divided into two main categories:\n\n### Bulk\
+    \ Keyword Metrics\n\n- **Export Keywords Metrics**: Submit a list of up to 5,000 keywords to get detailed\
+    \ data points for each, including search volume, CPC, competition score, keyword difficulty, and historical\
+    \ search volume trends. This is ideal for bulk analysis and data enrichment.\n    \n\n### Keyword\
+    \ Discovery\n\nUse these endpoints to expand your keyword lists and uncover new ranking opportunities.\n\
+    \n- **Get Similar Keywords**: Find keywords that are semantically similar to your seed keyword, including\
+    \ synonyms and close variations.\n    \n- **Get Related Keywords**: Discover keywords that are topically\
+    \ related, based on having a high number of overlapping URLs in their search results.\n    \n- **Get\
+    \ Question Keywords**: Generate a list of keywords phrased as common user questions, perfect for content\
+    \ marketing and FAQ creation.\n    \n- **Get Longtail Keywords**: Find longer, more specific keyword\
+    \ phrases that often have lower competition and higher conversion rates."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - Keyword Research
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-keyword-research-api-openapi.yml
+- aid: se-ranking:se-ranking-serp-results-classic-api
+  name: SE Ranking SERP Results > classic API
+  description: >-
+    The SERP Results > classic API from SE Ranking — 4 operation(s) for serp results > classic.
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - SERP Results > classic
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-serp-results-classic-api-openapi.yml
+- aid: se-ranking:se-ranking-website-audit-api
+  name: SE Ranking Website Audit API
+  description: "This collection of endpoints provides a comprehensive suite of tools to programmatically\
+    \ manage the full lifecycle of your technical SEO audits. These requests allow you to launch new crawls,\
+    \ monitor their progress in real-time, and retrieve detailed reports and page-level data for in-depth\
+    \ analysis.\n\n**Note on Costs:** Audits are billed on a per-page basis.\n\n- **Standard Audits:**\
+    \ 2 credits per crawled page.\n    \n- **Advanced Audits (with JavaScript rendering):** 20 credits\
+    \ per crawled page.\n    \n\n### 1\\. Create & Manage Audits\n\nUse these endpoints to start new crawls,\
+    \ re-run previous ones, or manage your list of audits.\n\n- **Create Audits**: Launch a new **Standard**\
+    \ (HTML crawl) or **Advanced** (JavaScript rendering) audit with highly customizable settings.\n \
+    \   \n- **List Audits**: Retrieve a paginated list of all audits associated with your account.\n \
+    \   \n- **Update Audit Title**: Change the display title of an existing audit report.\n    \n- **Delete\
+    \ Audit**: Permanently remove an audit and all of its associated data.\n    \n- **Recheck Audit**:\
+    \ Initiate a new crawl for a completed audit using its original settings.\n    \n\n### 2\\. Monitor\
+    \ & Retrieve Data\n\nOnce an audit is running or complete, use these endpoints to check its progress\
+    \ and pull detailed results.\n\n- **Get Audit Status**: Check the real-time progress of an ongoing\
+    \ audit.\n    \n- **Get Audit Report**: Fetch the full, high-level report for a completed audit, including\
+    \ the overall health score and a summary of issues.\n    \n- **Get Audit History**: Retrieve a historical\
+    \ snapshot of a specific audit run from a particular date.\n    \n- **Get All Crawled Pages**: Return\
+    \ a complete, paginated list of every URL discovered during an audit.\n    \n- **Get Audit Pages by\
+    \ Issue**: Get a list of all URLs affected by a single, specific issue.\n    \n- **Get All Issues\
+    \ for a Specific URL**: Retrieve all errors, warnings, and notices found on a single page.\n    \n\
+    - **Get All Found Links**: Fetch a complete list of every internal and external link discovered across\
+    \ the entire site during the audit."
+  humanURL: https://seranking.com/api/data/reference/
+  baseURL: https://api.seranking.com
+  tags:
+  - Website Audit
+  properties:
+  - type: OpenAPI
+    url: openapi/se-ranking-website-audit-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/se-ranking-agentic-access.yml
