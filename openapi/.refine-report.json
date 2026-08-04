@@ -1,0 +1,26 @@
+{
+  "provider": "se-ranking",
+  "sources": [
+    "se-ranking-account-system-api-openapi.yml",
+    "se-ranking-ai-search-api-openapi.yml",
+    "se-ranking-backlinks-api-openapi.yml",
+    "se-ranking-domain-analysis-api-openapi.yml",
+    "se-ranking-keyword-research-api-openapi.yml",
+    "se-ranking-serp-results-classic-api-openapi.yml",
+    "se-ranking-website-audit-api-openapi.yml"
+  ],
+  "outputs": [
+    "se-ranking-account-system-api-openapi.yml",
+    "se-ranking-ai-search-api-openapi.yml",
+    "se-ranking-backlinks-api-openapi.yml",
+    "se-ranking-domain-analysis-api-openapi.yml",
+    "se-ranking-keyword-research-api-openapi.yml",
+    "se-ranking-serp-results-classic-api-openapi.yml",
+    "se-ranking-website-audit-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
