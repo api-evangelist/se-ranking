@@ -18,7 +18,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/se-ranking.png
 url: https://raw.githubusercontent.com/api-evangelist/se-ranking/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: "2026-08-13"
 specificationVersion: "0.19"
 tags:
   - SEO
@@ -30,6 +30,9 @@ tags:
   - AI Search
   - GEO
   - Digital Marketing
+  - MCP
+  - AI Agents
+  - Agent Skills
 apis:
 - aid: se-ranking:data-api
   name: SE Ranking Data API
@@ -103,6 +106,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-account-system-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-account-system-api-overlay.yaml
 - aid: se-ranking:se-ranking-ai-search-api
   name: SE Ranking AI search API
   description: "This collection of endpoints allows you to analyze a domain or brand's visibility and\
@@ -124,6 +129,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-ai-search-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-ai-search-api-overlay.yaml
 - aid: se-ranking:se-ranking-backlinks-api
   name: SE Ranking backlinks API
   description: "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis\
@@ -187,6 +194,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-domain-analysis-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-domain-analysis-api-overlay.yaml
 - aid: se-ranking:se-ranking-keyword-research-api
   name: SE Ranking Keyword Research API
   description: "This collection of endpoints is designed for comprehensive keyword analysis and discovery.\
@@ -209,6 +218,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-keyword-research-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-keyword-research-api-overlay.yaml
 - aid: se-ranking:se-ranking-serp-results-classic-api
   name: SE Ranking SERP Results > classic API
   description: >-
@@ -220,6 +231,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-serp-results-classic-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-serp-results-classic-api-overlay.yaml
 - aid: se-ranking:se-ranking-website-audit-api
   name: SE Ranking Website Audit API
   description: "This collection of endpoints provides a comprehensive suite of tools to programmatically\
@@ -251,7 +264,73 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/se-ranking-website-audit-api-openapi.yml
+  - type: Overlay
+    url: overlays/se-ranking-website-audit-api-overlay.yaml
+- aid: se-ranking:mcp-server
+  name: SE Ranking MCP Server
+  description: >-
+    Hosted remote Model Context Protocol server exposing 217 tools and 5 prompts across three SE Ranking surfaces:
+    the credit-billed Data API (66 DATA_* tools, backed 1:1 by the published OpenAPI), the Project API (127 PROJECT_*
+    tools for projects, keywords, competitors, audits, AI Results Tracker prompts and sub-accounts) and SE Visible
+    (24 SEV_* tools for LLM/AI-search visibility). Streamable HTTP transport with OAuth 2.1 + PKCE and dynamic client
+    registration, or an X-Api-Key header for headless use. tools/list and prompts/list answer anonymously; tools/call
+    requires a token. For the Project API and SE Visible this MCP manifest is the only machine-readable contract
+    SE Ranking publishes — neither has an OpenAPI.
+  humanURL: https://seranking.com/api/mcp/
+  baseURL: https://api.seranking.com/mcp
+  tags:
+  - MCP
+  - AI Agents
+  - SEO
+  - AI Search
+  - Project Management
+  properties:
+  - type: Documentation
+    url: https://seranking.com/api/mcp/
+  - type: MCPServer
+    url: mcp/se-ranking-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/se-ranking-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: OAuthScopes
+    url: scopes/se-ranking-scopes.yml
+  contact:
+  - FN: SE Ranking API Support
+    email: api@seranking.com
+    url: https://seranking.com/api/mcp/
 common:
+  - type: OpenAPI
+    url: openapi/_original/se-ranking-data-api-openapi.yml
+  - type: SourceCode
+    name: SE Ranking OpenAPI specification repository
+    url: https://github.com/seranking/openapi
+  - type: MCPServer
+    url: mcp/se-ranking-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/se-ranking-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: WellKnown
+    url: well-known/se-ranking-well-known.yml
+  - type: OAuthScopes
+    url: scopes/se-ranking-scopes.yml
+  - type: Conventions
+    url: conventions/se-ranking-conventions.yml
+  - type: ErrorCatalog
+    url: errors/se-ranking-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/se-ranking-lifecycle.yml
+  - type: Conformance
+    url: conformance/se-ranking-conformance.yml
+  - type: DataModel
+    url: data-model/se-ranking-data-model.yml
+  - type: Packages
+    url: packages/se-ranking-packages.yml
+  - type: ChangeLog
+    url: changelog/se-ranking-changelog.yml
+  - type: LLMsTxt
+    url: llms/se-ranking-llms.txt
   - type: AgenticAccess
     url: agentic-access/se-ranking-agentic-access.yml
   - type: DomainSecurity
@@ -260,9 +339,21 @@ common:
     url: authentication/se-ranking-authentication.yml
   - type: Website
     url: https://seranking.com
+  - type: DeveloperPortal
+    url: https://seranking.com/api.html
   - type: Documentation
     url: https://seranking.com/api.html
+  - type: APIReference
+    url: https://seranking.com/api/data/reference/
+  - type: GettingStarted
+    url: https://seranking.com/api/data/getting-started/
+  - type: Postman
+    url: https://www.postman.com/serankingdev/se-ranking-developers/overview
+  - type: Support
+    url: https://seranking.com/contact.html
   - type: GitHubOrg
+    url: https://github.com/seranking
+  - type: GitHubOrganization
     url: https://github.com/seranking
   - type: LinkedIn
     url: https://www.linkedin.com/company/se-ranking
@@ -272,6 +363,12 @@ common:
     url: https://seranking.com/blog/
   - type: Pricing
     url: https://seranking.com/api-pricing.html
+  - type: SignUp
+    url: https://seranking.com/sign-up.html
+  - type: TermsOfService
+    url: https://seranking.com/terms-of-use.html
+  - type: PrivacyPolicy
+    url: https://seranking.com/privacy-policy.html
   - type: StatusPage
     url: https://status.seranking.com
   - type: Plans
@@ -283,3 +380,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 56
+  pass: local-v1
