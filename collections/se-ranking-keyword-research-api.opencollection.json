@@ -1,0 +1,601 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system Keyword Research API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Keyword Research",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Keywords Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/keywords/export",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "keywords[]",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "sort",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "sort_order",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "cols",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Retrieves bulk performance metrics like search volume, CPC, and difficulty for a submitted list of up to 5,000 keywords."
+        },
+        {
+          "info": {
+            "name": "Get similar keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/keywords/similar",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "seo",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "keyword",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query"
+              },
+              {
+                "name": "history_trend",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "100000",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][to]",
+                "value": "30",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][to]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][to]",
+                "value": "0.1",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "3",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "8",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "15",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "50",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features]",
+                "value": "sge,images",
+                "type": "query"
+              },
+              {
+                "name": "filter[intents]",
+                "value": "I,C,T,L",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Discovers semantically similar keywords, including synonyms and close variations, for a given seed term."
+        },
+        {
+          "info": {
+            "name": "Get related keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/keywords/related",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "avocado",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "keyword",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query"
+              },
+              {
+                "name": "history_trend",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "100000",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][to]",
+                "value": "30",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][to]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][to]",
+                "value": "0.1",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "3",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "8",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "15",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "50",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features]",
+                "value": "sge,images",
+                "type": "query"
+              },
+              {
+                "name": "filter[intents]",
+                "value": "I,C,T,L",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Finds topically related keywords that share a high number of overlapping URLs in the search results for a given seed term."
+        },
+        {
+          "info": {
+            "name": "Get question keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/keywords/questions",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "avocado",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "keyword",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query"
+              },
+              {
+                "name": "history_trend",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "100000",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][to]",
+                "value": "30",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][to]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][from]",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][to]",
+                "value": "0.1",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "3",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "8",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "15",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "50",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features]",
+                "value": "sge,images",
+                "type": "query"
+              },
+              {
+                "name": "filter[intents]",
+                "value": "I,C,T,L",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generates a list of keywords phrased as common user questions that are relevant to a given seed term."
+        },
+        {
+          "info": {
+            "name": "Get longtail keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/keywords/longtail",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "avocado",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "volume",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[intents]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides a list of longer, more specific long-tail keyword variations related to a given seed term."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

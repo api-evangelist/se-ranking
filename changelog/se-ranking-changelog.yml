@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/whats-new.html + https://github.com/seranking/seo-skills/blob/main/CHANGELOG.md + https://github.com/seranking/openapi/commits/main
+scheme: grouped-by-year (product) / semver + Keep a Changelog (skills plugin)
+current_version: v1 (API) · 2.10.4 (seo-skills plugin) · 2.1.0 (n8n node)
+url: https://seranking.com/whats-new.html
+note: 'SE Ranking publishes a product release timeline at /whats-new.html, but it is grouped by YEAR with no per-entry publication date
+  and the entry list is JS-rendered, so no dated API changelog exists on the marketing site. The only dated, machine-readable changelogs
+  SE Ranking maintains are in GitHub: seo-skills/CHANGELOG.md (Keep a Changelog, semver, ISO dates) and the openapi repo history. The
+  entries[] below are recorded from those two dated sources plus the API-specific headlines on the release timeline, which carry no
+  dates and are marked date: null rather than guessed.'
+entries:
+- version: 2.10.4
+  date: '2026-06-17'
+  scope: seo-skills plugin
+  breaking: false
+  highlights:
+  - Cursor marketplace packaging (.cursor-plugin/plugin.json, mcp.json declaring the hosted MCP server)
+  - CI guard validating the Cursor manifest against the published draft-07 schema
+  source: https://github.com/seranking/seo-skills/blob/main/CHANGELOG.md
+- version: 2.10.3
+  date: '2026-06-03'
+  scope: seo-skills plugin
+  breaking: false
+  highlights:
+  - Tag-triggered release automation; first signed (Verified) release
+  source: https://github.com/seranking/seo-skills/blob/main/CHANGELOG.md
+- version: 2.10.2
+  date: '2026-06-03'
+  scope: seo-skills plugin
+  breaking: false
+  highlights:
+  - Fixed seo-keyword-cluster YAML frontmatter (colon-space terminated the scalar; skill loaded with no metadata)
+  - Added claude plugin validate --strict CI
+  source: https://github.com/seranking/seo-skills/blob/main/CHANGELOG.md
+- version: 2.10.1
+  date: '2026-05-22'
+  scope: seo-skills plugin
+  breaking: false
+  highlights:
+  - 'Live smoke test against the SE Ranking MCP corrected three documented facts: DATA_getCreditBalance is NOT an alias of DATA_getSubscription,
+    DATA_getDomainCompetitors costs a flat 100 credits/request, and credit costs are not carried in MCP tool descriptions'
+  - Documented a 60KB MCP transport overflow on DATA_getDomainCompetitors
+  source: https://github.com/seranking/seo-skills/blob/main/CHANGELOG.md
+- version: 2.1.0
+  date: '2026-07-14'
+  scope: n8n node
+  breaking: false
+  highlights:
+  - 225 operations across 22 resources, adding SE Visible (AI visibility)
+  source: https://www.npmjs.com/package/@seranking/n8n-nodes-seranking
+- version: 1.0.0
+  date: '2026-04-08'
+  scope: OpenAPI specification
+  breaking: false
+  highlights:
+  - Initial public release of the SE Ranking Data API OpenAPI 3.0.0 (64 paths / 86 operations)
+  source: https://github.com/seranking/openapi
+- version: null
+  date: null
+  scope: API platform
+  breaking: false
+  highlights:
+  - SE Ranking API — Remote MCP Server
+  - All Plans Now Feature API Access
+  - 'New Project API release: AI Results Tracker'
+  - 'New API Endpoint release: AI Search Leaderboard'
+  - Latest Updates for SE Ranking API and Planable
+  source: https://seranking.com/whats-new.html
+  note: 2026 section of the release timeline. Undated at source — dates are NOT inferred.
+gaps:
+- No dated API-specific changelog.
+- openapi repo README points at GitHub Releases for spec history; the repo has zero releases.
+- No RSS/Atom or JSON feed for API changes.

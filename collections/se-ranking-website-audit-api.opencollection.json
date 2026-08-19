@@ -1,0 +1,463 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system Website Audit API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Website Audit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create standard audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/site-audit/audits/standard",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{vault:api_key_data_api}}",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launches a new website audit by crawling the site's raw HTML."
+        },
+        {
+          "info": {
+            "name": "Create advanced audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/site-audit/audits/advanced",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launches a new website audit that renders JavaScript to analyze dynamically-loaded content, ideal for SPAs."
+        },
+        {
+          "info": {
+            "name": "List audits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter audits by title or URL."
+              },
+              {
+                "name": "date_start",
+                "value": "",
+                "type": "query",
+                "description": "Filter audits created on or after this date (YYYY-MM-DD)."
+              },
+              {
+                "name": "date_end",
+                "value": "",
+                "type": "query",
+                "description": "Filter audits created on or before this date (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of all website audits associated with your account, including their current status and summary stats."
+        },
+        {
+          "info": {
+            "name": "Update audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.seranking.com/v1/site-audit/audits",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700387192",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the display title of an existing website audit report."
+        },
+        {
+          "info": {
+            "name": "Delete audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.seranking.com/v1/site-audit/audits",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700387192",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a specified website audit report and all of its associated data."
+        },
+        {
+          "info": {
+            "name": "Get audit status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/status",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "audit_id",
+                "value": "700313923",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Checks the real-time progress of a specific audit, including the number of pages crawled and issues found so far."
+        },
+        {
+          "info": {
+            "name": "Get audit report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/report",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the full summary report for a completed audit, including the overall health score and a breakdown of all issues."
+        },
+        {
+          "info": {
+            "name": "Get all crawled pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/pages",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of every URL discovered during an audit, along with detailed on-page and technical metrics for each."
+        },
+        {
+          "info": {
+            "name": "Get audit pages by issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/issue-pages",
+            "params": [
+              {
+                "name": "code",
+                "value": "title_duplicate",
+                "type": "query"
+              },
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all URLs affected by a single, specific issue within an audit report."
+        },
+        {
+          "info": {
+            "name": "Get All Issues for a Specific URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/issues",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "url_id",
+                "value": "50958380",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://www.vitality.co.uk/",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a detailed list of all technical and on-page issues found on a single, specific page."
+        },
+        {
+          "info": {
+            "name": "Get all found links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/links",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "page_type",
+                "value": "internal",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "filter[0][param]",
+                "value": "status",
+                "type": "query"
+              },
+              {
+                "name": "filter[0][value]",
+                "value": "301",
+                "type": "query"
+              },
+              {
+                "name": "filter[1][param]",
+                "value": "status",
+                "type": "query"
+              },
+              {
+                "name": "filter[1][value]",
+                "value": "302",
+                "type": "query"
+              },
+              {
+                "name": "filter[1][type]",
+                "value": "or",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetches a complete, filterable list of every internal and external hyperlink discovered across the entire site during an audit."
+        },
+        {
+          "info": {
+            "name": "Get audit history by date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/site-audit/audits/history",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700183831",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "2025-07-29",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a complete historical snapshot of a specific audit run, including the settings, domain data, and issue counts for that date."
+        },
+        {
+          "info": {
+            "name": "Recheck audit standard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/site-audit/audits/recheck/standard",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700237033",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Initiates a new standard (HTML) crawl for a previously completed audit using its original settings."
+        },
+        {
+          "info": {
+            "name": "Recheck audit advanced",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/site-audit/audits/recheck/advanced",
+            "params": [
+              {
+                "name": "audit_id",
+                "value": "700237033",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Initiates a new advanced (JavaScript rendering) crawl for a previously completed audit using its original settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

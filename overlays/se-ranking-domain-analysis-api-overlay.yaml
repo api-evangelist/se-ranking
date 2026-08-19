@@ -1,0 +1,53 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for SE Ranking Data Account & system Domain Analysis API
+  version: 1.0.0
+extends: openapi/se-ranking-domain-analysis-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://seranking.com/api/rate-limits/ + https://seranking.com/api/data/getting-started/ + https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+  + mcp/se-ranking-mcp-tools.json
+x-note: 'Captures what API Evangelist established about this API that the published spec does not say. Every action below is grounded
+  in a SE Ranking source: the documented Authorization: Token header scheme (absent from the spec, which declares only the apikey query
+  parameter), the documented 401/403/429 error envelope (the spec declares 200 only, on every operation), and the published rate limits.
+  The original spec is never mutated.'
+actions:
+- target: $.info
+  description: Record the API Evangelist provenance and the surfaces this API is also reachable through.
+  update:
+    x-apievangelist:
+      provider: se-ranking
+      profile: https://apis.io/provider/se-ranking/
+      enriched: '2026-08-13'
+    x-mcp-server: https://api.seranking.com/mcp
+    x-agent-skills: https://github.com/seranking/seo-skills
+- target: $.components.securitySchemes
+  description: Add the header auth scheme SE Ranking documents and recommends but does not declare in the spec. The prefix is `Token`,
+    not `Bearer`.
+  update:
+    authorizationTokenHeader:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Recommended authentication. Value form: `Token YOUR_API_KEY`. Documented at https://seranking.com/api/data/getting-started/
+        — the scheme prefix is `Token`, not `Bearer`. Preferred over the apikey query parameter, which leaks the key into access logs,
+        browser history and referrers.'
+- target: $.info
+  description: 'Record the runtime semantics an agent needs that the spec omits: rate limits, the error envelope, and the absence of
+    idempotency and rate-limit headers.'
+  update:
+    x-rate-limits:
+      data_api: 10 rps per API key
+      project_api: 5 rps per API key
+      trial: 1 rps
+      window: rolling 1s
+      status_on_exhaustion: 429
+      response_headers: null
+      docs: https://seranking.com/api/rate-limits/
+    x-error-envelope:
+      shape: '{"error":{"code","message","description"}}'
+      rfc9457: false
+      billing: 4xx and 5xx never consume credits
+    x-idempotency:
+      supported: false
+      note: No idempotency key exists on any SE Ranking surface.

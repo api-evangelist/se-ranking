@@ -1,7 +1,16 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/api-pricing.html
+verified: '2026-08-13'
+plan_count: 6
 name: SE Ranking Plans and Pricing
 description: Pricing plans and tiers for SE Ranking's SEO platform and API access, covering platform subscriptions and standalone Data API options.
 version: "0.1"
 url: https://seranking.com/api-pricing.html
+notes:
+  - Re-read against the live pricing page on 2026-08-13; every tier, price and credit allocation below still matches what SE Ranking publishes.
+  - No overage rate is published. Credits are the unit; each endpoint charges either per request or per record returned (see finops/se-ranking-finops.yml).
+  - The Add-on tier (+$45/mo, 250K credits/year, annual billing) requires an existing Core, Growth or Enterprise subscription and is captured inside the Core and Growth entries rather than as its own standalone tier.
 
 plans:
 

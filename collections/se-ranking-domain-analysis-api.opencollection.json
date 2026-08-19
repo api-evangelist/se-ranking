@@ -1,0 +1,773 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system Domain Analysis API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domain Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Regional database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/overview/db",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://seranking.com/api.html",
+                "type": "query"
+              },
+              {
+                "name": "with_subdomains",
+                "value": "false",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides a detailed breakdown of a domain's organic and paid keyword performance within a single specified regional database."
+        },
+        {
+          "info": {
+            "name": "Worldwide aggregate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/overview/worldwide",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "price,traffic,keywords,positions_diff,positions_tops",
+                "type": "query"
+              },
+              {
+                "name": "show_zones_list",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "USD",
+                "type": "query",
+                "description": "ISO 4217 currency code."
+              },
+              {
+                "name": "with_subdomains",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Aggregates a domain’s current global search performance statistics for both organic and paid traffic."
+        },
+        {
+          "info": {
+            "name": "Worldwide aggregate for URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/overview/worldwide/url",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "price,traffic,keywords",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://seranking.com/api.html",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Aggregates a domain’s current global search performance statistics for both organic and paid traffic."
+        },
+        {
+          "info": {
+            "name": "History Trends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/overview/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "with_subdomains",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Specific URL to get history for instead of domain."
+              }
+            ]
+          },
+          "docs": "Fetches historical data, including keyword counts and traffic trends, for a domain's organic or paid performance in a specific region."
+        },
+        {
+          "info": {
+            "name": "Domain keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/keywords",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "wix.com",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://www.mywage.de/blog/baufinanzierung-trotz-schufa",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "with_subdomains",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "order_field",
+                "value": "traffic",
+                "type": "query"
+              },
+              {
+                "name": "order_type",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "cols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pos_change",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "500",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "2000",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[difficulty][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[url]",
+                "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"/blog/\"\n }\n ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[[{\"type\":\"contains\", \"value\":\"seo\"}]]",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[intents]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword]",
+                "value": "scholar",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[position][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[position][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[competition][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[cpc][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_percent][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_percent][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features_2][mode]",
+                "value": "with_link",
+                "type": "query"
+              },
+              {
+                "name": "filter[serp_features_2][value][0]",
+                "value": "sge",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database."
+        },
+        {
+          "info": {
+            "name": "Domain pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/pages",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "base_domain",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "order_field",
+                "value": "keywords_count",
+                "type": "query"
+              },
+              {
+                "name": "order_type",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "1000",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_url]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_traffic_percent][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_traffic_percent][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keywords_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keywords_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_sum][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_sum][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price_sum][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price_sum][to]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database."
+        },
+        {
+          "info": {
+            "name": "Domain subdomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/subdomains",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "base_domain",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "order_field",
+                "value": "keywords_count",
+                "type": "query"
+              },
+              {
+                "name": "order_type",
+                "value": "asc",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "1000",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_url]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_traffic_percent][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[domain_traffic_percent][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keywords_count][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[keywords_count][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_sum][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[traffic_sum][to]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price_sum][from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[price_sum][to]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database."
+        },
+        {
+          "info": {
+            "name": "Paid ads for domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/ads",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "booking.com",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "2023-01",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "2023-12",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Search by keyword instead of domain. Mutually exclusive with domain."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of keywords a specific domain is bidding on, along with the ad creatives used for those keywords."
+        },
+        {
+          "info": {
+            "name": "Competitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/competitors",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://seranking.com/api.html",
+                "type": "query",
+                "description": "Specific URL to analyze instead of the full domain."
+              },
+              {
+                "name": "stats",
+                "value": "0",
+                "type": "query",
+                "description": "Include additional statistics (0 or 1)."
+              }
+            ]
+          },
+          "docs": "Identifies a list of top organic or paid competitors for a specified domain and shows the number of keywords they have in common."
+        },
+        {
+          "info": {
+            "name": "Domain keyword comparison",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/domain/keywords/comparison",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "compare",
+                "value": "samsung.com",
+                "type": "query"
+              },
+              {
+                "name": "domain",
+                "value": "apple.com",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "https://www.apple.com",
+                "type": "query",
+                "description": "Specific URL to compare instead of full domain."
+              },
+              {
+                "name": "type",
+                "value": "organic",
+                "type": "query"
+              },
+              {
+                "name": "diff",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "order_type",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "order_field",
+                "value": "volume",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "cols",
+                "value": "keyword,position,volume,traffic,cpc,competition",
+                "type": "query",
+                "description": "Comma-separated list of columns to include in the response."
+              }
+            ]
+          },
+          "docs": "Compares two domains to find either their common keywords or the keywords for which one ranks and the other does not."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

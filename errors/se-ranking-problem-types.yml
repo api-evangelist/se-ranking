@@ -1,0 +1,53 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/api/rate-limits/ + https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+  + https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/rate-limits-and-credits.md
+format: vendor-envelope
+rfc9457: false
+envelope:
+  shape: '{"error":{"code":<int>,"message":"<short>","description":"<remediation>"}}'
+  media_type: application/json
+  note: SE Ranking does NOT use RFC 9457 application/problem+json. The published OpenAPI documents only 200 responses across all 86
+    operations — every error below was harvested from the docs and from SE Ranking's own published skill references, not from the spec.
+    That spec gap is the finding.
+billing_rule: 4xx and 5xx responses never consume API credits; only 2xx are billed.
+problems:
+- status: 401
+  message: Unauthorized
+  title: Missing, malformed or revoked API key
+  remediation: Check the Authorization header format — the REST scheme prefix is `Token`, not `Bearer`. Re-mint the key in the API Dashboard
+    if revoked.
+  source: https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+- status: 401
+  message: API key provided via X-Api-Key failed validation.
+  title: MCP header key failed the liveness probe
+  remediation: The key is UUID-shaped but revoked or mistyped. Re-issue it.
+  surface: mcp
+  source: https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+- status: 403
+  message: Insufficient funds
+  title: Data API credit balance too low
+  remediation: Top up in the API Dashboard or downsize the request. No partial billing — the whole request is rejected and costs 0 credits.
+  source: https://seranking.com/api/rate-limits/
+- status: 403
+  message: Subscription required
+  title: Project API called from a plan without Project API access
+  remediation: Project API requires Business or Enterprise. Upgrade at https://seranking.com/subscription.html or stay on the Data API.
+  source: https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+- status: 403
+  message: Limit reached
+  title: Project API plan limit exceeded (Sites / Keywords / Audit Pages / AIRT Prompts)
+  remediation: Free quota with the matching PROJECT_delete* operation, or upgrade the plan. Read PROJECT_getUserProfile before mutating.
+  source: https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+- status: 429
+  message: Too Many Requests
+  title: Call-rate limit reached
+  description: The call-rate limit has been reached. Please reduce your request frequency.
+  remediation: Exponential backoff with +/-20% jitter; limits are enforced per API key over a rolling one-second window. No Retry-After
+    header is published.
+  source: https://seranking.com/api/rate-limits/
+gaps:
+- No RFC 9457 problem+json.
+- No error responses of any kind declared in the OpenAPI.
+- No documented machine-readable error-code registry beyond the HTTP status + message string.
+- No Retry-After or RateLimit-* response headers documented.

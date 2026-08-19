@@ -1,0 +1,40 @@
+generated: '2026-08-13'
+method: probed
+source: https://seranking.com/.well-known/oauth-authorization-server
+docs: https://seranking.com/api/mcp/
+note: 'SE Ranking''s REST OpenAPI declares no oauth2 scheme (apiKey only), so there are no REST scopes. The OAuth surface belongs entirely
+  to the hosted MCP server: an RFC 8414 authorization server at https://seranking.com issuing tokens for the MCP resource. It advertises
+  exactly ONE scope, `mcp`, which is coarse — a granted token carries the whole 217-tool surface including destructive PROJECT_delete*/SEV_delete*
+  tools. Recorded as published, not as an endorsement.'
+schemes:
+- name: MCP OAuth 2.1
+  source: https://seranking.com/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/authorize
+    tokenUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/token
+    revocationUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/revoke
+    registrationUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/register
+    pkce:
+    - S256
+    grant_types:
+    - authorization_code
+    - refresh_token
+    token_endpoint_auth_methods:
+    - none
+scopes:
+- scope: mcp
+  description: Full access to the SE Ranking MCP server at https://api.seranking.com/mcp — all 217 tools across the DATA, PROJECT and
+    SE Visible namespaces.
+  flows:
+  - authorizationCode
+  sources:
+  - https://seranking.com/.well-known/oauth-authorization-server
+protected_resource:
+  resource: https://seranking.com/wp-json/seranking-mcp-oauth/v1/mcp
+  authorization_servers:
+  - https://seranking.com
+  bearer_methods_supported:
+  - header
+  source: https://seranking.com/.well-known/oauth-protected-resource
+scope_count: 1

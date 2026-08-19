@@ -1,0 +1,834 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/se-ranking-mcp-tools.json + openapi/_original/se-ranking-data-api-openapi.yml
+note: Binds every SE Ranking MCP tool to the OpenAPI operation(s) that back it. The DATA_* namespace is a 1:1 projection of the published
+  Data API OpenAPI, so each of those 66 tools inherits a real inputSchema from its backing operation. The PROJECT_* (127) and SEV_*
+  (24) namespaces have NO published OpenAPI — for those the MCP tool schema in mcp/se-ranking-mcp-tools.json is the only machine-readable
+  contract SE Ranking ships, which is the single largest surface divergence in this repo.
+surfaces:
+  openapi:
+    file: openapi/_original/se-ranking-data-api-openapi.yml
+    operations: 86
+    gated: false
+    upstream: https://github.com/seranking/openapi
+  mcp:
+    url: https://api.seranking.com/mcp
+    tools: 217
+    gated: false
+    note: tools/list answers anonymously (HTTP 200); tools/call requires a Bearer token.
+  graphql: null
+coverage:
+  tools_total: 217
+  tools_bound_to_rest: 66
+  mcp_only: 151
+  rest_operations_total: 86
+  rest_operations_with_a_tool: 85
+  rest_only: 1
+crosswalk:
+- tool: DATA_createAdvancedAudit
+  category: website-audit
+  rest:
+  - createSiteAuditAuditsAdvanced
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_createStandardAudit
+  category: website-audit
+  rest:
+  - createSiteAuditAuditsStandard
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_deleteAudit
+  category: website-audit
+  rest:
+  - deleteSiteAuditAudits
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_exportBacklinksData
+  category: backlinks
+  rest:
+  - getBacklinksExport
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: Async export; task_id polled via DATA_getBacklinksExportStatus.
+- tool: DATA_getAiSearchBrand
+  category: ai-search
+  rest:
+  - getAiSearchDiscoverBrand
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAiSearchLeaderboard
+  category: ai-search
+  rest:
+  - createAiSearchOverviewLeaderboard
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAiSearchOverview
+  category: ai-search
+  rest:
+  - getAiSearchOverviewByEngineTimeSeries
+  - getAiOverviewAggregated
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: 'Tool fans out: engine set -> by-engine time series; engine omitted -> aggregated time series.'
+- tool: DATA_getAiSearchPromptsByBrand
+  category: ai-search
+  rest:
+  - getAiSearchPromptsByBrand
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAiSearchPromptsByTarget
+  category: ai-search
+  rest:
+  - getAiSearchPromptsByTarget
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAllBacklinks
+  category: backlinks
+  rest:
+  - getBacklinksAll
+  - createBacklinksAll
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: GET single-target / POST batch variant of the same resource.
+- tool: DATA_getAuditHistory
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAuditPagesByIssue
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsIssuePages
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAuditReport
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsReport
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getAuditStatus
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsStatus
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksAnchors
+  category: backlinks
+  rest:
+  - getBacklinksAnchors
+  - createBacklinksAnchors
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksAuthority
+  category: backlinks
+  rest:
+  - getBacklinksAuthority
+  - createBacklinksAuthority
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksCount
+  category: backlinks
+  rest:
+  - getBacklinksCount
+  - createBacklinksCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksExportStatus
+  category: backlinks
+  rest:
+  - getBacklinksExportStatus
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksIndexedPages
+  category: backlinks
+  rest:
+  - getBacklinksIndexedPages
+  - createBacklinksIndexedPages
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksMetrics
+  category: backlinks
+  rest:
+  - getBacklinksMetrics
+  - createBacklinksMetrics
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksRaw
+  category: backlinks
+  rest:
+  - getBacklinksRaw
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: Cursor-paginated bulk read.
+- tool: DATA_getBacklinksRefDomains
+  category: backlinks
+  rest:
+  - getBacklinksRefdomains
+  - createBacklinksRefdomains
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getBacklinksSummary
+  category: backlinks
+  rest:
+  - getBacklinksSummary
+  - createBacklinksSummary
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getCrawledPages
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsPages
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getCumulativeBacklinksHistory
+  category: backlinks
+  rest:
+  - getBacklinksHistoryCumulative
+  - createBacklinksHistoryCumulative
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDistributionOfDomainAuthority
+  category: domain-analysis
+  rest:
+  - getBacklinksAuthorityDomainDistribution
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainAdsByDomain
+  category: domain-analysis
+  rest:
+  - getDomainAds
+  binding: rest
+  confidence: medium
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: Both ads tools bind to the one /v1/domain/ads operation; the tool splits it by which of domain/keyword is supplied.
+- tool: DATA_getDomainAdsByKeyword
+  category: keyword-research
+  rest:
+  - getDomainAds
+  binding: rest
+  confidence: medium
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: See DATA_getDomainAdsByDomain.
+- tool: DATA_getDomainAuthority
+  category: domain-analysis
+  rest:
+  - getBacklinksAuthorityDomain
+  - createBacklinksAuthorityDomain
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainAuthorityHistory
+  category: domain-analysis
+  rest:
+  - getBacklinksAuthorityDomainHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainCompetitors
+  category: domain-analysis
+  rest:
+  - getDomainCompetitors
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainKeywords
+  category: keyword-research
+  rest:
+  - getDomainKeywords
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainKeywordsComparison
+  category: keyword-research
+  rest:
+  - getDomainKeywordsComparison
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainOverviewByCountry
+  category: domain-analysis
+  rest:
+  - getDomainOverviewDb
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainOverviewHistory
+  category: domain-analysis
+  rest:
+  - getDomainOverviewHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainOverviewWorldwide
+  category: domain-analysis
+  rest:
+  - getDomainOverviewWorldwide
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainPages
+  category: domain-analysis
+  rest:
+  - getDomainPages
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getDomainSubdomains
+  category: domain-analysis
+  rest:
+  - getDomainSubdomains
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getFoundLinks
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsLinks
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getIssuesByUrl
+  category: website-audit
+  rest:
+  - getSiteAuditAuditsIssues
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getKeywordQuestions
+  category: keyword-research
+  rest:
+  - getKeywordsQuestions
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getKeywordsMetrics
+  category: keyword-research
+  rest:
+  - createKeywordsExport
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: Bulk keyword metrics; POST /v1/keywords/export accepts up to 5,000 keywords.
+- tool: DATA_getLongTailKeywords
+  category: keyword-research
+  rest:
+  - getKeywordsLongtail
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getNewLostBacklinksCount
+  category: backlinks
+  rest:
+  - getBacklinksHistoryCount
+  - createBacklinksHistoryCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getNewLostRefDomainsCount
+  category: backlinks
+  rest:
+  - getBacklinksRefdomainsHistoryCount
+  - createBacklinksRefdomainsHistoryCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getPageAuthority
+  category: backlinks
+  rest:
+  - getBacklinksAuthorityPage
+  - createBacklinksAuthorityPage
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getPageAuthorityHistory
+  category: backlinks
+  rest:
+  - getBacklinksAuthorityPageHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getReferringIps
+  category: backlinks
+  rest:
+  - getBacklinksReferringIps
+  - createBacklinksReferringIps
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getReferringIpsCount
+  category: backlinks
+  rest:
+  - getBacklinksReferringIpsCount
+  - createBacklinksReferringIpsCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getReferringSubnetsCount
+  category: backlinks
+  rest:
+  - getBacklinksReferringSubnetsCount
+  - createBacklinksReferringSubnetsCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getRelatedKeywords
+  category: keyword-research
+  rest:
+  - getKeywordsRelated
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getSerpHtmlDump
+  category: serp
+  rest:
+  - getSerpClassicTasksHtml
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getSerpLocations
+  category: serp
+  rest:
+  - getSerpClassicLocations
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getSerpResults
+  category: serp
+  rest:
+  - createSerpClassicTasks
+  - getSerpClassicTasks
+  - getSerpClassicTasksResults_advanced
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: 'SERVER-SIDE COMPOSITE: the tool creates the SERP task then polls to completion (5s interval, 5min timeout) and returns standard
+    or advanced results. No single REST operation does this.'
+- tool: DATA_getSerpTaskAdvancedResults
+  category: serp
+  rest:
+  - getSerpClassicTasksResults_advanced
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getSerpTaskResults
+  category: serp
+  rest:
+  - getSerpClassicTasks
+  binding: rest
+  confidence: medium
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: GET /v1/serp/classic/tasks serves both the 24h task list and per-task status/results depending on task_id.
+- tool: DATA_getSerpTasks
+  category: serp
+  rest:
+  - getSerpClassicTasks
+  binding: rest
+  confidence: medium
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: See DATA_getSerpTaskResults — same operation, no task_id supplied.
+- tool: DATA_getSimilarKeywords
+  category: keyword-research
+  rest:
+  - getKeywordsSimilar
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getSubscription
+  category: account
+  rest:
+  - getAccountSubscription
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getTotalRefDomainsCount
+  category: backlinks
+  rest:
+  - getBacklinksRefdomainsCount
+  - createBacklinksRefdomainsCount
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_getUrlOverviewWorldwide
+  category: domain-analysis
+  rest:
+  - getDomainOverviewWorldwideUrl
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_listAudits
+  category: website-audit
+  rest:
+  - getSiteAuditAudits
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_listNewLostBacklinks
+  category: backlinks
+  rest:
+  - getBacklinksHistory
+  - createBacklinksHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_listNewLostReferringDomains
+  category: domain-analysis
+  rest:
+  - getBacklinksRefdomainsHistory
+  - createBacklinksRefdomainsHistory
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+- tool: DATA_recheckAudit
+  category: website-audit
+  rest:
+  - createSiteAuditAuditsRecheckStandard
+  - createSiteAuditAuditsRecheckAdvanced
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+  note: Tool `type` argument selects the standard or advanced recheck operation.
+- tool: DATA_updateAuditTitle
+  category: website-audit
+  rest:
+  - updateSiteAuditAudits
+  binding: rest
+  confidence: high
+  source_spec: openapi/_original/se-ranking-data-api-openapi.yml
+mcp_only:
+- tool: PROJECT_addCompetitor
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addDisavowedBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addKeywords
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addPlanTask
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addProjectBacklink
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addPrompts
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addSearchEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addTag
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_changePromptGroupOrder
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createBacklinkGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createKeywordGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createLlmEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createProject
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createProjectGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createPromptGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createSubAccount
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteAllPromptsInGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteBacklinkGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteCompetitor
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteDisavowedBacklink
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteKeywordGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteKeywords
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteLlmEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deletePlanTask
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteProject
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteProjectBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteProjectGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deletePromptGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deletePrompts
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteSearchEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteSubAccount
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteTag
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAdsStats
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAirtCompetitorDates
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAirtCompetitors
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAirtCompetitorSourceMetrics
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAirtSourcesRecommendations
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAirtSourcesSummary
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAllCompetitorsMetrics
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAvailableRegions
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAvailableSearchEngines
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getBacklinkGscImportStatus
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getBacklinkStats
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getCheckDates
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getCompetitorPositions
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getCompetitorSerp10
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getCompetitorSerp100
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getGoogleLanguages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getGoogleSearchConsole
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getHistoricalDates
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getKeywordStats
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getLlmEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getLlmStatistics
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getLlmStatus
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getMarketingPlan
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getPositionHistory
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getPromptAnswer
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getPromptsRankings
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getSearchEngines
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getSeoPotential
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getSiteBrand
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getSubAccountDetails
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getSummary
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getUserProfile
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_importProjectBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listAirtSourceDomains
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listAirtSourcePages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listBacklinkGroups
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listCompetitors
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listDisavowedBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listKeywordGroups
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listKeywords
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listLlmEngines
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listOwnedProjects
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listProjectBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listProjectGroups
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listProjects
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listPromptGroups
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listPrompts
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listSharedProjects
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listSubAccounts
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listTags
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_moveBacklinksToGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_moveKeywordsToGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_moveProjectsToGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_movePromptsToGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addAuditSitemap
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_addAuditSourcePages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_createAudit
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteAudit
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteAuditSitemap
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_deleteAuditSourcePages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAuditHistory
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAuditPagesByIssue
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAuditReport
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAuditSettings
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getAuditStatus
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getCrawledPages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getFoundLinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_getIssuesByUrl
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listAudits
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listAuditSitemaps
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_listAuditSourcePages
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_recheckAudit
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_resetAuditSettings
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateAuditSettings
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateAuditTitle
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_recheckProjectBacklinks
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_renameBacklinkGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_runBacklinkGscImport
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_runPositionCheck
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_saveSiteBrand
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_setKeywordPosition
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_setPlanTaskStatus
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_shareProject
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_transferPrompts
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateBacklinkImportSettings
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateKeyword
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateKeywordGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateLlmEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updatePlanTask
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateProject
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateProjectGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updatePromptGroup
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateSearchEngine
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateSubAccount
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: PROJECT_updateUrlTags
+  reason: Project API — SE Ranking publishes no OpenAPI for the Project API; the MCP tool schema is the only machine-readable contract.
+- tool: SEV_addBrandAliases
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_createBrand
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_createProject
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_createPrompts
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_createTopics
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_deleteBrand
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_deleteProject
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_deletePrompts
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_deleteTopic
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getBrandMetrics
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getProject
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getPrompt
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getPromptResult
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getPromptResultDump
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getSources
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_getSubscription
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_listBrands
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_listMentionedBrands
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_listProjects
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_listPromptResults
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_listPrompts
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_movePrompts
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_updateBrand
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+- tool: SEV_updateTopic
+  reason: SE Visible (AI-visibility) API — no published OpenAPI; MCP-only surface.
+rest_only:
+- operationId: getAccountCreditBalance
+  method: GET
+  path: /v1/account/credit-balance
+  tag: Account & system
+  reason: No MCP tool exposes this operation. DATA_getCreditBalance was cited by the published skills but is absent from the live tools/list
+    — see skills/_index.yml tools_cited_not_in_live_list.

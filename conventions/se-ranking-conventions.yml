@@ -1,0 +1,97 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/api/data/getting-started/ + https://seranking.com/api/rate-limits/ + https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+  + openapi/_original/se-ranking-data-api-openapi.yml + mcp/se-ranking-mcp-tools.json
+base_url: https://api.seranking.com
+authentication:
+  style: API key
+  preferred: 'Authorization: Token <key>'
+  fallback: ?apikey=<key>
+  mcp: OAuth 2.1 or X-Api-Key header
+  detail: authentication/se-ranking-authentication.yml
+idempotency:
+  supported: false
+  evidence: No Idempotency-Key header or parameter appears anywhere in the 86-operation OpenAPI, in the 217 MCP tool inputSchemas, or
+    in SE Ranking's published API docs and skill references.
+  note: This is a real gap on a surface with 151 mutating MCP tools (PROJECT_create*/PROJECT_delete*/SEV_delete*). A retried PROJECT_addKeywords
+    or PROJECT_createProject after a timeout will consume plan limits twice with no client-side way to deduplicate. No Idempotency pointer
+    is emitted in apis.yml because the contract does not exist.
+pagination:
+  styles:
+  - offset
+  - cursor
+  offset:
+    params:
+    - page
+    - limit
+    - offset
+    note: Most Data API list endpoints and MCP list tools take page/limit; several MCP tools take limit/offset.
+  cursor:
+    operations:
+    - getBacklinksRaw
+    note: GET /v1/backlinks/raw uses cursor-based pagination for full-dataset retrieval in batches.
+  source: openapi/_original/se-ranking-data-api-openapi.yml + mcp/se-ranking-mcp-tools.json
+filtering:
+  style: flat query parameters with from/to suffixes
+  examples:
+  - filter_volume_from
+  - filter_volume_to
+  - filter_difficulty_from
+  - filter_intents
+  - filter_serp_features
+  sorting:
+  - sort
+  - sort_order
+  - order_by
+  source: mcp/se-ranking-mcp-tools.json
+output_format:
+  param: output
+  values:
+  - json
+  - xml
+  default: json
+  note: Data API operations accept an `output` query parameter; JSON is the default.
+async:
+  pattern: task create -> poll status -> download
+  operations:
+    backlinks_export:
+    - getBacklinksExport
+    - getBacklinksExportStatus
+    serp:
+    - createSerpClassicTasks
+    - getSerpClassicTasks
+    - getSerpClassicTasksResults_advanced
+  callback:
+    param: pingback_url
+    surface:
+    - DATA_getSerpResults
+    - POST /v1/serp/classic/tasks
+    note: A pingback_url on SERP task creation is the ONLY callback/webhook-shaped mechanism in the whole surface. It is a single per-task
+      ping, not a subscribable event catalogue — see asyncapi/ notes in lifecycle and the absence of any Webhooks pointer.
+  billing: Both the task-creation call and every status poll count against the RPS budget; polls cost 0 credits.
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: lifecycle/se-ranking-lifecycle.yml
+request_tracing:
+  request_id_header: null
+  note: No request-id / correlation-id response header is documented. Nothing to correlate a support ticket against.
+error_envelope:
+  shape: '{"error":{"code","message","description"}}'
+  rfc9457: false
+  detail: errors/se-ranking-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  headers_published: []
+  note: SE Ranking publishes the numeric limits (10 RPS Data, 5 RPS Project, 1 RPS trial) but NO RateLimit-*/X-RateLimit-*/Retry-After
+    response headers. An agent gets a 429 with no machine-readable budget or reset time and must pace client-side.
+  detail: rate-limits/se-ranking-rate-limits.yml
+metering:
+  model:
+  - cost per record
+  - cost per request
+  free: 4xx/5xx and status polls cost 0 credits
+  balance: GET /v1/account/subscription -> subscription_info.units_left
+  detail: finops/se-ranking-finops.yml
+field_expansion: null
+metadata_fields: null

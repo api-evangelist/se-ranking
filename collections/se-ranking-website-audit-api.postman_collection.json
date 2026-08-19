@@ -1,0 +1,1715 @@
+{
+  "item": [
+    {
+      "id": "f0f1b76c-40b3-47af-ae62-c3742415fb56",
+      "name": "Website Audit",
+      "description": {
+        "content": "This collection of endpoints provides a comprehensive suite of tools to programmatically manage the full lifecycle of your technical SEO audits. These requests allow you to launch new crawls, monitor their progress in real-time, and retrieve detailed reports and page-level data for in-depth analysis.\n\n**Note on Costs:** Audits are billed on a per-page basis.\n\n- **Standard Audits:** 2 credits per crawled page.\n    \n- **Advanced Audits (with JavaScript rendering):** 20 credits per crawled page.\n    \n\n### 1\\. Create & Manage Audits\n\nUse these endpoints to start new crawls, re-run previous ones, or manage your list of audits.\n\n- **Create Audits**: Launch a new **Standard** (HTML crawl) or **Advanced** (JavaScript rendering) audit with highly customizable settings.\n    \n- **List Audits**: Retrieve a paginated list of all audits associated with your account.\n    \n- **Update Audit Title**: Change the display title of an existing audit report.\n    \n- **Delete Audit**: Permanently remove an audit and all of its associated data.\n    \n- **Recheck Audit**: Initiate a new crawl for a completed audit using its original settings.\n    \n\n### 2\\. Monitor & Retrieve Data\n\nOnce an audit is running or complete, use these endpoints to check its progress and pull detailed results.\n\n- **Get Audit Status**: Check the real-time progress of an ongoing audit.\n    \n- **Get Audit Report**: Fetch the full, high-level report for a completed audit, including the overall health score and a summary of issues.\n    \n- **Get Audit History**: Retrieve a historical snapshot of a specific audit run from a particular date.\n    \n- **Get All Crawled Pages**: Return a complete, paginated list of every URL discovered during an audit.\n    \n- **Get Audit Pages by Issue**: Get a list of all URLs affected by a single, specific issue.\n    \n- **Get All Issues for a Specific URL**: Retrieve all errors, warnings, and notices found on a single page.\n    \n- **Get All Found Links**: Fetch a complete list of every internal and external link discovered across the entire site during the audit.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5705576b-75fa-40be-b885-718779116532",
+          "name": "Create standard audit",
+          "request": {
+            "name": "Create standard audit",
+            "description": {
+              "content": "Launches a new website audit by crawling the site's raw HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "standard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e1e81d3-7355-4328-9238-52894db49447",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "standard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{vault:api_key_data_api}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"example.com\",\n  \"title\": \"Example Audit Title\",\n  \"settings\": {\n    \"source_site\": 1,\n    \"source_sitemap\": 1,\n    \"source_subdomain\": 0,\n    \"source_file\": 0,\n    \"check_robots\": 1,\n    \"ignore_params\": 0,\n    \"custom_params\": \"utm_source,utm_medium,utm_term,utm_content,utm_campaign\",\n    \"ignore_noindex\": 0,\n    \"ignore_nofollow\": 0,\n    \"user_agent\": 0,\n    \"login\": \"\",\n    \"password\": \"\",\n    \"max_pages\": 10000,\n    \"max_depth\": 10,\n    \"max_req\": 500,\n    \"max_redirects\": 5,\n    \"min_title_len\": 20,\n    \"max_title_len\": 65,\n    \"min_description_len\": 1,\n    \"max_description_len\": 158,\n    \"max_size\": 3000,\n    \"min_words\": 250,\n    \"max_h1_len\": 100,\n    \"max_h2_len\": 100,\n    \"allow\": \"\",\n    \"disallow\": \"\",\n    \"hide\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40d0297a-644c-4f13-ad9b-7da9bb6cbc2e",
+          "name": "Create advanced audit",
+          "request": {
+            "name": "Create advanced audit",
+            "description": {
+              "content": "Launches a new website audit that renders JavaScript to analyze dynamically-loaded content, ideal for SPAs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "advanced"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53fcbd72-1827-46e1-971d-111254012cf4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "advanced"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"example.com\",\n  \"title\": \"Example Audit Title\",\n  \"settings\": {\n    \"source_site\": 1,\n    \"source_sitemap\": 1,\n    \"source_subdomain\": 0,\n    \"source_file\": 0,\n    \"check_robots\": 1,\n    \"ignore_params\": 0,\n    \"custom_params\": \"utm_source,utm_medium,utm_term,utm_content,utm_campaign\",\n    \"ignore_noindex\": 0,\n    \"ignore_nofollow\": 0,\n    \"user_agent\": 0,\n    \"login\": \"\",\n    \"password\": \"\",\n    \"max_pages\": 100,\n    \"max_depth\": 10,\n    \"max_req\": 500,\n    \"max_redirects\": 5,\n    \"min_title_len\": 20,\n    \"max_title_len\": 65,\n    \"min_description_len\": 1,\n    \"max_description_len\": 158,\n    \"max_size\": 3000,\n    \"min_words\": 250,\n    \"max_h1_len\": 100,\n    \"max_h2_len\": 100,\n    \"allow\": \"\",\n    \"disallow\": \"\",\n    \"hide\": \"\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91a331b8-a353-4027-9f35-4fac506ee8b0",
+          "name": "List audits",
+          "request": {
+            "name": "List audits",
+            "description": {
+              "content": "Retrieves a paginated list of all website audits associated with your account, including their current status and summary stats.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter audits by title or URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_start",
+                  "value": "<date>",
+                  "description": "Filter audits created on or after this date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_end",
+                  "value": "<date>",
+                  "description": "Filter audits created on or before this date (YYYY-MM-DD)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e668fec-6c56-44dc-a493-59a3fddac5a5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04cb461a-b502-4f5c-b107-43ca2ebd329b",
+          "name": "Update audit",
+          "request": {
+            "name": "Update audit",
+            "description": {
+              "content": "Changes the display title of an existing website audit report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05790ba7-62d3-47fe-aec6-d24110abfa7b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700387192"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"New Example Audit Title\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a93f4c60-258b-44f8-ae70-28a765555729",
+          "name": "Delete audit",
+          "request": {
+            "name": "Delete audit",
+            "description": {
+              "content": "Permanently deletes a specified website audit report and all of its associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ed1fc54-2f98-4392-aebb-04520f9c57f9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700387192"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c58092de-e164-4662-9bc3-60de7ba371ac",
+          "name": "Get audit status",
+          "request": {
+            "name": "Get audit status",
+            "description": {
+              "content": "Checks the real-time progress of a specific audit, including the number of pages crawled and issues found so far.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84f178af-dce8-44db-b93b-ac9894771e8b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "audit_id",
+                      "value": "700313923"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b2bad66-4d9e-45cd-b3c2-41aed6f0744a",
+          "name": "Get audit report",
+          "request": {
+            "name": "Get audit report",
+            "description": {
+              "content": "Retrieves the full summary report for a completed audit, including the overall health score and a breakdown of all issues.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "755a32de-ff7a-4176-8522-93fc26a27d12",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad6e1201-a4b2-4cc5-adfa-54178211028e",
+          "name": "Get all crawled pages",
+          "request": {
+            "name": "Get all crawled pages",
+            "description": {
+              "content": "Returns a paginated list of every URL discovered during an audit, along with detailed on-page and technical metrics for each.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c5c5c26-da96-4541-911b-4b6b92ac4986",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e2424b-f065-4597-b317-8c90b640b108",
+          "name": "Get audit pages by issue",
+          "request": {
+            "name": "Get audit pages by issue",
+            "description": {
+              "content": "Returns a list of all URLs affected by a single, specific issue within an audit report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "issue-pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8e72409-e3c9-49d1-a764-c2668818161a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "issue-pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "title_duplicate"
+                    },
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a85606bb-b126-4915-8588-f80130eef4ad",
+          "name": "Get All Issues for a Specific URL",
+          "request": {
+            "name": "Get All Issues for a Specific URL",
+            "description": {
+              "content": "Retrieves a detailed list of all technical and on-page issues found on a single, specific page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8173bac2-fdd5-4240-8079-57d6ae952c28",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "url_id",
+                      "value": "50958380"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.vitality.co.uk/"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "782c35b1-5a85-4666-9a64-f567db044a09",
+          "name": "Get all found links",
+          "request": {
+            "name": "Get all found links",
+            "description": {
+              "content": "Fetches a complete, filterable list of every internal and external hyperlink discovered across the entire site during an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_type",
+                  "value": "all"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[0][param]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[0][value]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[1][param]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[1][value]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[1][type]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7269eb7-9463-411e-aaff-915a692fdd45",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "page_type",
+                      "value": "internal"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filter[0][param]",
+                      "value": "status"
+                    },
+                    {
+                      "key": "filter[0][value]",
+                      "value": "301"
+                    },
+                    {
+                      "key": "filter[1][param]",
+                      "value": "status"
+                    },
+                    {
+                      "key": "filter[1][value]",
+                      "value": "302"
+                    },
+                    {
+                      "key": "filter[1][type]",
+                      "value": "or"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b80cd4d8-ef9a-4d58-bb54-27e9aefd5d79",
+          "name": "Get audit history by date",
+          "request": {
+            "name": "Get audit history by date",
+            "description": {
+              "content": "Retrieves a complete historical snapshot of a specific audit run, including the settings, domain data, and issue counts for that date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9d497c1-793a-43c4-b965-3e99caba4919",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700183831"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2025-07-29"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99b6f9a3-9494-469c-8b4f-aca5765c50e3",
+          "name": "Recheck audit standard",
+          "request": {
+            "name": "Recheck audit standard",
+            "description": {
+              "content": "Initiates a new standard (HTML) crawl for a previously completed audit using its original settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "recheck",
+                "standard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "f00b3e00-5e1f-4ea4-a3cf-99a18e8bf82e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "recheck",
+                    "standard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700237033"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e619136c-f87a-45a0-a077-f42335accf90",
+          "name": "Recheck audit advanced",
+          "request": {
+            "name": "Recheck audit advanced",
+            "description": {
+              "content": "Initiates a new advanced (JavaScript rendering) crawl for a previously completed audit using its original settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "site-audit",
+                "audits",
+                "recheck",
+                "advanced"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "audit_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "eee89e5c-0b39-498a-bc87-d522e497a869",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "site-audit",
+                    "audits",
+                    "recheck",
+                    "advanced"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "audit_id",
+                      "value": "700237033"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.seranking.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9181e5a2-9048-41ca-9933-c1e26c25cdb2",
+    "name": "SE Ranking Data Account & system Website Audit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.\n\nContact Support:\n Name: SE Ranking API Support",
+      "type": "text/plain"
+    }
+  }
+}

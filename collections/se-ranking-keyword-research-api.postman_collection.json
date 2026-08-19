@@ -1,0 +1,1396 @@
+{
+  "item": [
+    {
+      "id": "fa01c11d-51b3-41da-9f1c-9cdc07dd4f74",
+      "name": "Keyword Research",
+      "description": {
+        "content": "This collection of endpoints is designed for comprehensive keyword analysis and discovery. Use these requests to retrieve performance metrics for large lists of keywords or to generate new keyword ideas based on a seed term.\n\nThis folder is divided into two main categories:\n\n### Bulk Keyword Metrics\n\n- **Export Keywords Metrics**: Submit a list of up to 5,000 keywords to get detailed data points for each, including search volume, CPC, competition score, keyword difficulty, and historical search volume trends. This is ideal for bulk analysis and data enrichment.\n    \n\n### Keyword Discovery\n\nUse these endpoints to expand your keyword lists and uncover new ranking opportunities.\n\n- **Get Similar Keywords**: Find keywords that are semantically similar to your seed keyword, including synonyms and close variations.\n    \n- **Get Related Keywords**: Discover keywords that are topically related, based on having a high number of overlapping URLs in their search results.\n    \n- **Get Question Keywords**: Generate a list of keywords phrased as common user questions, perfect for content marketing and FAQ creation.\n    \n- **Get Longtail Keywords**: Find longer, more specific keyword phrases that often have lower competition and higher conversion rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fbbd0aaf-ebc0-480e-a130-065f655d225e",
+          "name": "Export Keywords Metrics",
+          "request": {
+            "name": "Export Keywords Metrics",
+            "description": {
+              "content": "Retrieves bulk performance metrics like search volume, CPC, and difficulty for a submitted list of up to 5,000 keywords.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "keywords",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keywords[]",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) List of keywords (max 5,000)."
+                },
+                {
+                  "key": "sort",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": " (This can only be one of volume,cpc,difficulty,competition,history_trend)"
+                },
+                {
+                  "key": "sort_order",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": " (This can only be one of asc,desc)"
+                },
+                {
+                  "key": "cols",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Comma-separated list of columns to include."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19ba2b37-bcb9-4bb7-a10f-52f7785d762d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "keywords",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) List of keywords (max 5,000).",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of volume,cpc,difficulty,competition,history_trend)",
+                        "type": "text/plain"
+                      },
+                      "key": "sort",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of asc,desc)",
+                        "type": "text/plain"
+                      },
+                      "key": "sort_order",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Comma-separated list of columns to include.",
+                        "type": "text/plain"
+                      },
+                      "key": "cols",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6f86de6-a881-46f2-8c3c-e1a9eae7303d",
+          "name": "Get similar keywords",
+          "request": {
+            "name": "Get similar keywords",
+            "description": {
+              "content": "Discovers semantically similar keywords, including synonyms and close variations, for a given seed term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "keywords",
+                "similar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "history_trend",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][to]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[intents]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "384e6b9c-faed-4d10-baeb-7bdad0d7f746",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "keywords",
+                    "similar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "seo"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "keyword"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "history_trend",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "filter[difficulty][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[difficulty][to]",
+                      "value": "30"
+                    },
+                    {
+                      "key": "filter[cpc][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[cpc][to]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[competition][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[competition][to]",
+                      "value": "0.1"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "8"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "15"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "50"
+                    },
+                    {
+                      "key": "filter[serp_features]",
+                      "value": "sge,images"
+                    },
+                    {
+                      "key": "filter[intents]",
+                      "value": "I,C,T,L"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74ac66bd-02bd-479f-a14f-94c82a16c805",
+          "name": "Get related keywords",
+          "request": {
+            "name": "Get related keywords",
+            "description": {
+              "content": "Finds topically related keywords that share a high number of overlapping URLs in the search results for a given seed term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "keywords",
+                "related"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "history_trend",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][to]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[intents]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d040dd3b-8ad5-4980-b2af-6aad74db7640",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "keywords",
+                    "related"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "avocado"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "keyword"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "history_trend",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "filter[difficulty][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[difficulty][to]",
+                      "value": "30"
+                    },
+                    {
+                      "key": "filter[cpc][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[cpc][to]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[competition][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[competition][to]",
+                      "value": "0.1"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "8"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "15"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "50"
+                    },
+                    {
+                      "key": "filter[serp_features]",
+                      "value": "sge,images"
+                    },
+                    {
+                      "key": "filter[intents]",
+                      "value": "I,C,T,L"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32af34e2-352f-4d4f-9765-211848319405",
+          "name": "Get question keywords",
+          "request": {
+            "name": "Get question keywords",
+            "description": {
+              "content": "Generates a list of keywords phrased as common user questions that are relevant to a given seed term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "keywords",
+                "questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "history_trend",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][to]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[intents]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeff7739-9710-466c-a437-bb4093a20756",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "keywords",
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "avocado"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "keyword"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "history_trend",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "filter[difficulty][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[difficulty][to]",
+                      "value": "30"
+                    },
+                    {
+                      "key": "filter[cpc][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[cpc][to]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[competition][from]",
+                      "value": "0"
+                    },
+                    {
+                      "key": "filter[competition][to]",
+                      "value": "0.1"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "8"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "15"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "50"
+                    },
+                    {
+                      "key": "filter[serp_features]",
+                      "value": "sge,images"
+                    },
+                    {
+                      "key": "filter[intents]",
+                      "value": "I,C,T,L"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "813f3a6d-6df2-4b4b-82f6-8270becd93a7",
+          "name": "Get longtail keywords",
+          "request": {
+            "name": "Get longtail keywords",
+            "description": {
+              "content": "Provides a list of longer, more specific long-tail keyword variations related to a given seed term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "keywords",
+                "longtail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][from]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][to]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][from]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][to]",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[intents]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37a1852d-3d1d-49e8-8531-fac148032723",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "keywords",
+                    "longtail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "avocado"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "volume"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[difficulty][from]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[difficulty][to]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[cpc][from]",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "filter[cpc][to]",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "filter[competition][from]",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "filter[competition][to]",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[serp_features]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[intents]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.seranking.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0755e96e-01f9-45ae-a531-f7bd3456e8d7",
+    "name": "SE Ranking Data Account & system Keyword Research API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.\n\nContact Support:\n Name: SE Ranking API Support",
+      "type": "text/plain"
+    }
+  }
+}

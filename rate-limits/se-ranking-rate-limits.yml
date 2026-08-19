@@ -1,7 +1,23 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/api/rate-limits/
+verified: '2026-08-13'
+limit_count: 6
 name: SE Ranking API Rate Limits
 description: Rate limits for SE Ranking's Data API and Project API, including standard throughput limits, trial restrictions, error handling, and custom options for high-volume use cases.
 version: "0.1"
 url: https://seranking.com/api/rate-limits/
+
+responseHeaders:
+  published: []
+  note: >-
+    SE Ranking publishes the numeric limits but NO rate-limit response headers — no RateLimit-*, no X-RateLimit-*, no
+    Retry-After. Re-read against the live docs page 2026-08-13 and confirmed absent. An agent that hits the limit gets a
+    429 with a JSON error body and no machine-readable remaining budget or reset time, so pacing must be entirely
+    client-side. This is the single biggest runtime-signal gap on the surface.
+  status_on_exhaustion: 429
+  enforcement: per API key, rolling one-second window (not per IP)
+  errorBody: '{"error":{"code":429,"message":"Too Many Requests","description":"The call-rate limit has been reached. Please reduce your request frequency."}}'
 
 limits:
 

@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account & system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/account/subscription",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about the API subscription plan, including its status, dates, and remaining API units."
+        },
+        {
+          "info": {
+            "name": "credit-balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/account/credit-balance",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current account-wide credit balance, showing the total limit and the amount of credits used."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

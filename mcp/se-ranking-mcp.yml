@@ -1,0 +1,1719 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.seranking.com/mcp
+status: published
+deployment:
+  mode: remote
+  endpoint: https://api.seranking.com/mcp
+  auth: oauth
+  verified: probed
+server:
+  name: se-ranking
+  transport: streamable-http
+  url: https://api.seranking.com/mcp
+  docs: https://seranking.com/api/mcp/
+  protocol_versions_supported:
+  - '2025-11-25'
+  - '2025-06-18'
+  - '2025-03-26'
+  - '2024-11-05'
+  - '2024-10-07'
+authentication:
+  primary: OAuth 2.1 with dynamic client registration (RFC 7591) + PKCE S256
+  alternatives:
+  - 'Authorization: Bearer <api-key>'
+  - 'X-Api-Key: <api-key>'
+  authorization_server: https://seranking.com
+  metadata:
+    oauth_authorization_server: https://seranking.com/.well-known/oauth-authorization-server
+    oauth_protected_resource: https://seranking.com/.well-known/oauth-protected-resource
+  scopes:
+  - mcp
+  note: 'tools/list and prompts/list answer ANONYMOUSLY with the full manifest (HTTP 200); initialize and every tools/call require a
+    Bearer token. A second, OAuth-gated MCP route is advertised at https://seranking.com/wp-json/seranking-mcp-oauth/v1/mcp (401 + WWW-Authenticate:
+    Bearer resource_metadata=...); the documented client endpoint is https://api.seranking.com/mcp.'
+install:
+  claude_code: claude mcp add --transport http se-ranking https://api.seranking.com/mcp
+  claude_desktop: 'Settings > Connectors > Add custom connector > Remote MCP server URL: https://api.seranking.com/mcp'
+  cursor: '.cursor/mcp.json: {"mcpServers":{"se-ranking":{"url":"https://api.seranking.com/mcp"}}}'
+  mcp_remote_bridge: npx -y mcp-remote https://api.seranking.com/mcp
+  source: https://seranking.com/api/mcp/
+  note: mcp-remote is a generic third-party stdio<->http bridge, not an SE Ranking package. SE Ranking ships NO first-party stdio server,
+    which is why deployment.mode is remote and not both.
+capabilities:
+  tools: true
+  prompts: true
+  resources: false
+  resources_note: resources/list returns JSON-RPC -32601 Method not found.
+tool_count: 217
+tools_by_namespace:
+  DATA: 66
+  PROJECT: 127
+  SEV: 24
+namespaces:
+  DATA: SE Ranking Data API surface (credit-billed SEO datasets) — backed 1:1 by the published OpenAPI in openapi/.
+  PROJECT: SE Ranking Project API surface (projects, keywords, competitors, audits, AIRT prompts, sub-accounts) — NO published OpenAPI;
+    MCP is the only machine-readable contract for it.
+  SEV: SE Visible surface (LLM/AI-search visibility projects, brands, prompts, topics) — NO published OpenAPI.
+raw_manifest: mcp/se-ranking-mcp-tools.json
+raw_prompts: mcp/se-ranking-mcp-prompts.json
+prompt_count: 5
+prompts:
+- name: serp-analysis
+  title: SERP Analysis
+  description: Compare SERP results across two locations
+  arguments:
+  - keyword
+  - location1
+  - location2
+  - language
+  - device
+- name: backlink-gap
+  title: Backlink Gap Analysis
+  description: Find backlink opportunities by analyzing competitor referring domains
+  arguments:
+  - my_domain
+  - competitors
+  - min_domain_trust
+- name: domain-traffic-competitors
+  title: Domain Traffic & Competitors
+  description: Analyze domain organic traffic and identify top competitors
+  arguments:
+  - domain
+- name: keyword-clusters
+  title: Keyword Clustering
+  description: Generate keyword clusters with search volume and content recommendations
+  arguments:
+  - market
+  - seed_keywords
+- name: ai-share-of-voice
+  title: AI Share of Voice
+  description: Analyze AI share of voice across LLM engines for your domain versus competitors
+  arguments:
+  - domain
+  - competitors
+  - country
+  - llm_engines
+skills: skills/_index.yml
+crosswalk: mcp/se-ranking-tool-crosswalk.yml
+tools:
+- name: DATA_createAdvancedAudit
+  title: Create Advanced Audit
+  description: 'Data Tool: Launches an advanced website audit that renders JavaScript before analyzing the page. Use for Single-Page
+    Applications (SPAs) or dynamic content. For static or server-side-rendered sites, use createStandardAudit instead.'
+  input_params: 3
+  required:
+  - domain
+- name: DATA_createStandardAudit
+  title: Create Standard Audit
+  description: 'Data Tool: Launches a standard website audit that crawls the HTML of a website. Suitable for most static and server-side
+    rendered sites. For JavaScript-rendered sites (SPAs), use createAdvancedAudit instead.'
+  input_params: 3
+  required:
+  - domain
+- name: DATA_deleteAudit
+  title: Delete Audit (Data API)
+  description: 'Data Tool: Permanently deletes a specified website audit report and all of its associated data.'
+  input_params: 1
+  required:
+  - audit_id
+- name: DATA_exportBacklinksData
+  title: Export Backlinks Data
+  description: 'Data Tool: Starts an asynchronous backlinks export for the specified target. When the export is accepted, returns {task_id,
+    task_status}; pass task_id to getBacklinksExportStatus to poll for the download URL. If the export is not accepted (for example,
+    when the account export quota is exhausted), ta'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getAiSearchBrand
+  title: 'AI Search: Brand Resolution (SE Ranking)'
+  description: 'Data Tool: Identifies and returns the brand name SE Ranking attributes to a given target (root domain, subdomain, or
+    URL) in AI search results. Useful for determining what brand name to pass to the other AI search tools.'
+  input_params: 3
+  required:
+  - target
+  - source
+- name: DATA_getAiSearchLeaderboard
+  title: AI Search Comparison & Leaderboard (SE Ranking)
+  description: 'Data Tool: Compare multiple domains/brands in AI search engines (ChatGPT, Perplexity, Gemini, AI Overview, AI Mode).
+    Use this for AI search comparison, competitor analysis, and visibility benchmarking. Returns brand presence, link presence, share
+    of voice rankings, and leaderboard for each domain ac'
+  input_params: 5
+  required:
+  - primary
+  - competitors
+  - source
+  - engines
+- name: DATA_getAiSearchOverview
+  title: AI Search Overview (SE Ranking)
+  description: 'Data Tool: AI search visibility metrics for a target. The summary block contains four metrics (brand_presence, link_presence,
+    ai_opportunity_traffic, average_position) with period-over-period change. `view: ''time-series''` (default) additionally returns
+    monthly trend streams for ai_traffic, organic_t'
+  input_params: 5
+  required:
+  - target
+  - source
+- name: DATA_getAiSearchPromptsByBrand
+  title: 'AI Search: Get Prompts by Brand (SE Ranking)'
+  description: 'Data Tool: Returns AI-search prompts where the specified brand name is mentioned. Provide a brand name (resolve one
+    with getAiSearchBrand). If you have a domain or URL instead of a brand name, use getAiSearchPromptsByTarget.'
+  input_params: 15
+  required:
+  - engine
+  - brand
+  - source
+- name: DATA_getAiSearchPromptsByTarget
+  title: 'AI Search: Get Prompts by Target (SE Ranking)'
+  description: 'Data Tool: Returns AI-search prompts that mention the specified target domain or URL (use scope to widen or narrow the
+    match). If you have a brand name rather than a domain or URL, use getAiSearchPromptsByBrand.'
+  input_params: 16
+  required:
+  - engine
+  - target
+  - source
+- name: DATA_getAllBacklinks
+  title: Backlinks — Filtered List
+  description: 'Data Tool: Returns a filtered, sortable list of backlinks pointing to a target (up to 10,000). Each entry includes url_from,
+    url_to, anchor, nofollow, and inlink_rank. Filter by inlink_rank, domain_inlink_rank, source/target URL, anchor text, and nofollow
+    status; sort via order_by. Use when you want'
+  input_params: 16
+  required:
+  - target
+- name: DATA_getAuditHistory
+  title: Get Audit History (Data API)
+  description: 'Data Tool: Retrieves the data from a past audit run for a given audit ID and date — the settings used, domain data,
+    and the issues found. Use to read or compare an earlier run instead of the latest one.'
+  input_params: 2
+  required:
+  - audit_id
+  - date
+- name: DATA_getAuditPagesByIssue
+  title: Get Audit Pages By Issue (Data API)
+  description: 'Data Tool: Retrieves a paginated list of all URLs affected by a specific issue within a given audit. Use the issue code
+    from getAuditReport (e.g. title_duplicate, http4xx).'
+  input_params: 4
+  required:
+  - audit_id
+  - code
+- name: DATA_getAuditReport
+  title: Get Audit Report (Data API)
+  description: 'Data Tool: Retrieves the report for a completed website audit, including its health score, domain properties, and per-check
+    results. Use after an audit finishes to read its findings.'
+  input_params: 1
+  required:
+  - audit_id
+- name: DATA_getAuditStatus
+  title: Get Audit Status (Data API)
+  description: 'Data Tool: Checks the real-time status of a specific website audit, whether it’s queued, currently processing, or already
+    finished.'
+  input_params: 1
+  required:
+  - audit_id
+- name: DATA_getBacklinksAnchors
+  title: Backlink Anchor Texts
+  description: 'Data Tool: Retrieves a list of anchor texts for backlinks pointing to the specified target, with sorting and limit options.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getBacklinksAuthority
+  title: Backlink Authority Metrics
+  description: 'Data Tool: Returns authority metrics — InLink Rank (page authority) and Domain InLink Rank — for a target domain, host,
+    or URL.'
+  input_params: 1
+  required:
+  - target
+- name: DATA_getBacklinksCount
+  title: Get Total Backlinks Count
+  description: 'Data Tool: Returns the total number of backlinks for the target. Supports batch requests.'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getBacklinksExportStatus
+  title: Get Backlinks Export Status
+  description: 'Data Tool: Checks the status of an asynchronous backlinks export task. Returns task status (queued_for_processing, processing,
+    complete) and download URL when complete.'
+  input_params: 1
+  required:
+  - task_id
+- name: DATA_getBacklinksIndexedPages
+  title: Pages With Backlinks
+  description: 'Data Tool: Returns the target site pages that have backlinks, each with backlink and referring-domain counts and first/last-seen
+    dates. Sort with order_by and cap results with limit.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getBacklinksMetrics
+  title: Get Backlink Metrics
+  description: 'Data Tool: Returns the core backlink counts for one or many targets — backlinks, referring domains, subnets, IPs, and
+    dofollow/nofollow/edu/gov backlink counts. For authority ranks (InLink Rank), home-page link counts, and text-link and referring-domain
+    breakdowns, use getBacklinksSummary. Supports '
+  input_params: 2
+  required:
+  - target
+- name: DATA_getBacklinksRaw
+  title: Backlinks — Bulk Export (Paginated)
+  description: 'Data Tool: Returns all backlinks pointing to a target in large pages (up to 100,000 per page) via a `next` cursor, with
+    no filtering. Use to pull an entire backlink set in batches; for a filtered or sorted slice, use getAllBacklinks.'
+  input_params: 6
+  required:
+  - target
+- name: DATA_getBacklinksRefDomains
+  title: Referring Domains
+  description: 'Data Tool: Retrieves a list of referring domains pointing to the specified target, with options for sorting and limiting
+    results.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getBacklinksSummary
+  title: Backlink Profile Summary
+  description: 'Data Tool: Returns backlink-profile fields for one or many targets — counts plus authority (InLink Rank, Domain InLink
+    Rank), home-page link counts, text-link totals, and referring-domain breakdowns. Use for an at-a-glance profile; for only the core
+    counts, use getBacklinksMetrics. Supports batch re'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getCrawledPages
+  title: Get Crawled Pages (Data API)
+  description: 'Data Tool: Returns a paginated list of all URLs found during an audit, providing a sitemap as discovered by the crawler.
+    Page through results with limit and offset.'
+  input_params: 3
+  required:
+  - audit_id
+- name: DATA_getCumulativeBacklinksHistory
+  title: Get Cumulative Backlinks History
+  description: 'Data Tool: Returns a number of live backlinks for every day within the specified date range for the specified target.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getDistributionOfDomainAuthority
+  title: Get Distribution of Domain Authority
+  description: 'Data Tool: Returns information about the distribution of Domain InLink Rank (Domain Authority) of all the domains that
+    reference a specific target.'
+  input_params: 3
+  required:
+  - target
+- name: DATA_getDomainAdsByDomain
+  title: Domain Paid Ads
+  description: 'Data Tool: Retrieves paid ads for a specific domain.'
+  input_params: 6
+  required:
+  - source
+  - domain
+- name: DATA_getDomainAdsByKeyword
+  title: Keyword Paid Ads
+  description: 'Data Tool: Returns the domains running paid search ads for a specific keyword in the selected country database — each
+    with its ad count, tracked-keyword count, estimated paid traffic and ad spend, and ad snippets (title, URL, and position over time).
+    Use to see who advertises on a keyword and what t'
+  input_params: 6
+  required:
+  - source
+  - keyword
+- name: DATA_getDomainAuthority
+  title: Get Domain Authority
+  description: 'Data Tool: Returns information about the domain InLink Rank (Domain Authority) of the target page’s root domain.'
+  input_params: 1
+  required:
+  - target
+- name: DATA_getDomainAuthorityHistory
+  title: Get Domain Authority History
+  description: 'Data Tool: Returns historical Domain InLink Rank (Domain Authority) values for a target domain. The target is always
+    resolved to its PLD (pay-level domain) regardless of whether a root domain, host, or URL is provided.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getDomainCompetitors
+  title: Domain Competitors
+  description: 'Data Tool: Retrieves up to 500 competing domains (organic or paid) for a target domain. Each row includes common_keywords,
+    domain_relevance, total_keywords, missing_keywords, traffic_sum, price_sum. Rows are returned in an unspecified/internal order —
+    NOT sorted by common_keywords or domain_relevanc'
+  input_params: 3
+  required:
+  - source
+  - domain
+- name: DATA_getDomainKeywords
+  title: Domain Keywords
+  description: 'Data Tool: Retrieves a list of keywords for which a domain ranks in organic or paid search.'
+  input_params: 41
+  required:
+  - source
+  - domain
+- name: DATA_getDomainKeywordsComparison
+  title: Domain Keywords Comparison
+  description: 'Data Tool: Analyzes and compares the keyword rankings of two websites: `domain` and `compare`. It can find keywords
+    they have in common (`diff=0`) or identify a ''keyword gap'' (`diff=1`)—keywords for which the `domain` ranks, but the `compare`
+    domain does not. To find keywords the `compare` domain ha'
+  input_params: 24
+  required:
+  - source
+  - compare
+- name: DATA_getDomainOverviewByCountry
+  title: Domain Overview by Country
+  description: 'Data Tool: Returns the organic and paid search overview for a domain in a single country (set via source, e.g. us, uk,
+    de) — keyword counts, estimated traffic and traffic price, and position-bucket breakdowns. For the worldwide rollup across countries,
+    use getDomainOverviewWorldwide.'
+  input_params: 4
+  required:
+  - source
+  - domain
+- name: DATA_getDomainOverviewHistory
+  title: Domain Overview History
+  description: 'Data Tool: Retrieves historical data for domain traffic and keyword rankings.'
+  input_params: 5
+  required:
+  - source
+  - domain
+- name: DATA_getDomainOverviewWorldwide
+  title: Domain Overview Worldwide
+  description: 'Data Tool: Retrieves an aggregated worldwide overview of domain metrics.'
+  input_params: 5
+  required:
+  - domain
+- name: DATA_getDomainPages
+  title: Domain Pages
+  description: 'Data Tool: Retrieves a list of individual pages ranking within a specified domain.'
+  input_params: 17
+  required:
+  - target
+  - scope
+  - source
+- name: DATA_getDomainSubdomains
+  title: Domain Subdomains
+  description: 'Data Tool: Retrieves a list of subdomains for a specified domain, along with search performance metrics.'
+  input_params: 17
+  required:
+  - target
+  - scope
+  - source
+- name: DATA_getFoundLinks
+  title: Get Found Links (Data API)
+  description: 'Data Tool: Returns a paginated list of every hyperlink discovered across the entire site during the audit. Supports
+    filtering via the `filter` parameter (status, type, source_noindex, nofollow, anchor_type). Page through results with limit and
+    offset.'
+  input_params: 5
+  required:
+  - audit_id
+- name: DATA_getIssuesByUrl
+  title: Get Issues By URL (Data API)
+  description: 'Data Tool: Retrieves the issues (errors, warnings, and notices) found on a single page within an audit. Use to inspect
+    the problems on one page after an audit completes.'
+  input_params: 5
+  required:
+  - audit_id
+- name: DATA_getKeywordQuestions
+  title: Keyword Questions
+  description: 'Data Tool: Retrieves a list of question-based keywords containing the seed keyword.'
+  input_params: 23
+  required:
+  - source
+  - keyword
+- name: DATA_getKeywordsMetrics
+  title: Get Keyword Metrics (Bulk)
+  description: 'Data Tool: Retrieves SEO metrics for a bulk list of keywords in a single synchronous call — per keyword it returns volume,
+    cpc, competition, difficulty, intents, and a history_trend of monthly search volume (up to 12 months). By default the trend covers
+    the most recent 12 months; pass history_to to '
+  input_params: 6
+  required:
+  - source
+  - keywords
+- name: DATA_getLongTailKeywords
+  title: Longtail Keywords
+  description: 'Data Tool: Retrieves a list of long-tail variations for the seed keyword.'
+  input_params: 22
+  required:
+  - source
+  - keyword
+- name: DATA_getNewLostBacklinksCount
+  title: Get Daily New and Lost Backlinks Count
+  description: 'Data Tool: Returns a number of (newly) found or lost backlinks for every day within the specified date range.'
+  input_params: 9
+  required:
+  - target
+- name: DATA_getNewLostRefDomainsCount
+  title: Get New and Lost Referring Domains Count
+  description: 'Data Tool: Returns the number of referring domains, at least one backlink from which was newly found or lost in the
+    specified date range, broken down by day.'
+  input_params: 5
+  required:
+  - target
+- name: DATA_getPageAuthority
+  title: Get Page Authority
+  description: 'Data Tool: Returns information about the InLink Rank (Page Authority) for a target URL.'
+  input_params: 1
+  required:
+  - target
+- name: DATA_getPageAuthorityHistory
+  title: Get Page Authority History
+  description: 'Data Tool: Returns information about the historical values of InLink Rank for a specific target page.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getReferringIps
+  title: Get Referring IPs
+  description: 'Data Tool: Returns information about IPv4 addresses that belong to backlinks that point to a target.'
+  input_params: 4
+  required:
+  - target
+- name: DATA_getReferringIpsCount
+  title: Get Referring IPs Count
+  description: 'Data Tool: Returns the number of unique IPs linking to a target. Supports batch requests.'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getReferringSubnetsCount
+  title: Get Referring Subnets Count
+  description: 'Data Tool: Returns the number of unique subnets/C-blocks linking to a target. Supports batch requests.'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getRelatedKeywords
+  title: Related Keywords
+  description: 'Data Tool: Returns keywords semantically related to the seed, each scored by a topical relevance value — use for topic
+    expansion. For close variants and reformulations of the seed, use getSimilarKeywords.'
+  input_params: 23
+  required:
+  - source
+  - keyword
+- name: DATA_getSerpHtmlDump
+  title: Get SERP HTML Dump
+  description: 'Data Tool: Retrieves a completed SERP task''s raw-HTML pages as downloadable .html files (free, 0 credits). By DEFAULT
+    returns only the small manifest index (request metadata + per-page list with byte sizes) and does NOT attach page HTML. To get the
+    .html file(s), pass `pages`: a 1-based index (e.g. '
+  input_params: 2
+  required:
+  - task_id
+- name: DATA_getSerpLocations
+  title: SERP Locations
+  description: 'Data Tool: Look up SE Ranking location_id for CITY/REGION-level SERP targeting (e.g., ''Barcelona'', ''Brooklyn'', ''Bay
+    Area''). Pipe the returned location_id into ''getSerpResults''. DO NOT use this tool for country-level results — pass ''country_code''
+    (ISO alpha-2) directly to ''getSerpResults'' instead and'
+  input_params: 3
+  required:
+  - q
+  - country_code
+- name: DATA_getSerpResults
+  title: Get SERP Results
+  description: 'Data Tool: Runs a SERP query and returns results. Creates task, polls every 5 seconds until complete (5 min timeout),
+    and returns organic/ads/featured snippets (standard) or all SERP types including AI Overview, Maps, Reviews (advanced). Location
+    targeting requires exactly one of: (a) ''country_code'''
+  input_params: 12
+  required:
+  - language_code
+  - query
+- name: DATA_getSerpTaskAdvancedResults
+  title: Get SERP Task Status and Advanced Results
+  description: 'Data Tool: Retrieves the status or advanced results of a specific SERP task. Note that SERP tasks usually take 60 seconds
+    to finish. If the task is still running, returns {"status": "processing"}. If complete, returns the JSON results including "items".
+    Returns ALL SERP item types (Maps, Reviews, AI'
+  input_params: 1
+  required:
+  - task_id
+- name: DATA_getSerpTaskResults
+  title: Get SERP Task Status and Results
+  description: 'Data Tool: Retrieves the status or standard results of a specific SERP task. Note that SERP tasks usually take 60 seconds
+    to finish. If the task is still running, returns {"status": "processing"}. If complete, returns the JSON results including "items".
+    This endpoint provides results for the followi'
+  input_params: 1
+  required:
+  - task_id
+- name: DATA_getSerpTasks
+  title: List SERP Tasks
+  description: 'Data Tool: Retrieves a list of all SERP tasks added to the queue in the last 24 hours.'
+  input_params: 0
+- name: DATA_getSimilarKeywords
+  title: Similar Keywords
+  description: 'Data Tool: Returns close variants and reformulations of the seed keyword. For topically related keywords scored by a
+    relevance value, use getRelatedKeywords.'
+  input_params: 23
+  required:
+  - source
+  - keyword
+- name: DATA_getSubscription
+  title: Get Subscription Data
+  description: 'Data Tool: Get information about the current subscription including status, dates, and unit limits.'
+  input_params: 0
+- name: DATA_getTotalRefDomainsCount
+  title: Get Total Referring Domains Count
+  description: 'Data Tool: Returns the number of unique domains linking to a target. Supports batch requests.'
+  input_params: 2
+  required:
+  - target
+- name: DATA_getUrlOverviewWorldwide
+  title: URL Overview Worldwide
+  description: 'Data Tool: Retrieves an aggregated worldwide overview of organic and paid traffic metrics for a specific URL.'
+  input_params: 2
+  required:
+  - url
+- name: DATA_listAudits
+  title: List Audits (Data API)
+  description: 'Data Tool: Retrieves a list of all website audits associated with your account, providing key details and statistics
+    for each.'
+  input_params: 5
+- name: DATA_listNewLostBacklinks
+  title: List New and Lost Backlinks
+  description: 'Data Tool: Returns a list of backlinks (newly) found or lost within the specified date range for the specified target.'
+  input_params: 11
+  required:
+  - target
+- name: DATA_listNewLostReferringDomains
+  title: List New and Lost Referring Domains
+  description: 'Data Tool: Returns a list of referring domains, at least one backlink from which was (newly) found or lost in the specified
+    date range for the specified target.'
+  input_params: 7
+  required:
+  - target
+- name: DATA_recheckAudit
+  title: Recheck Audit (Data API)
+  description: 'Data Tool: Launches a new crawl of an existing audit, reusing its saved settings (custom limits are preserved, not reset
+    to defaults). The audit need not be completed — queued/processing audits are accepted without error.'
+  input_params: 2
+  required:
+  - audit_id
+  - type
+- name: DATA_updateAuditTitle
+  title: Update Audit Title (Data API)
+  description: 'Data Tool: Changes the title of an existing website audit report.'
+  input_params: 2
+  required:
+  - audit_id
+  - title
+- name: PROJECT_addCompetitor
+  title: Add Competitor
+  description: 'Project Tool: Requires a project ID (site_id). Add a competitor website to a project for position tracking.'
+  input_params: 4
+  required:
+  - site_id
+  - url
+- name: PROJECT_addDisavowedBacklinks
+  title: Add Disavowed Backlinks
+  description: 'Project Tool: Add a list of URLs to the disavowed backlinks list.'
+  input_params: 2
+  required:
+  - site_id
+  - backlink_urls
+- name: PROJECT_addKeywords
+  title: Add Keywords
+  description: 'Project Tool: Requires a project ID. Add new keywords to a project.'
+  input_params: 2
+  required:
+  - site_id
+  - keywords
+- name: PROJECT_addPlanTask
+  title: Add Marketing Plan Task
+  description: 'Project Tool: Add a new task to the marketing plan for a website.'
+  input_params: 4
+  required:
+  - site_id
+  - title
+  - text
+- name: PROJECT_addProjectBacklink
+  title: Add Project Backlink
+  description: 'Project Tool: Add a single backlink to the backlink monitor for a website. Returns `{ id: <backlink_id> }` — the dictionary-level
+    `backlink_id` (accepted by `deleteProjectBacklinks`). IMPORTANT: `moveBacklinksToGroup` and `recheckProjectBacklinks` do NOT accept
+    this value — they require the row-leve'
+  input_params: 6
+  required:
+  - site_id
+  - url
+- name: PROJECT_addPrompts
+  title: Add Prompts
+  description: 'Project Tool: Add new prompts (keywords) to a specific LLM engine in AI Result Tracker. Duplicates are automatically
+    skipped.'
+  input_params: 4
+  required:
+  - site_id
+  - llm_id
+  - prompts
+- name: PROJECT_addSearchEngine
+  title: Add Search Engine to Project
+  description: 'Project Tool: Add a Google search engine to a project for rank tracking. Country targeting takes EXACTLY ONE of: (a)
+    `country_code` — ISO 3166-1 alpha-2 (e.g. "us", "de", "fr"); the server resolves it to the right `search_engine_id`. (b) `search_engine_id`
+    — direct numeric ID for callers who already'
+  input_params: 10
+  required:
+  - site_id
+- name: PROJECT_addTag
+  title: Add Tag
+  description: 'Project Tool: Requires a project ID. Add a tag to the site and attach it to a link and/or domain.'
+  input_params: 4
+  required:
+  - site_id
+  - name
+- name: PROJECT_changePromptGroupOrder
+  title: Change Prompt Group Order
+  description: 'Project Tool: Reorder an AI Result Tracker prompt group relative to another. Specify exactly one of before_id or after_id.'
+  input_params: 4
+  required:
+  - site_id
+  - group_id
+- name: PROJECT_createBacklinkGroup
+  title: Create Backlink Group
+  description: 'Project Tool: Create a new group for organizing backlinks.'
+  input_params: 2
+  required:
+  - site_id
+  - name
+- name: PROJECT_createKeywordGroup
+  title: Create Keyword Group
+  description: 'Project Tool: Requires a project ID. Add a group for project keywords.'
+  input_params: 2
+  required:
+  - name
+  - site_id
+- name: PROJECT_createLlmEngine
+  title: Create LLM Engine
+  description: 'Project Tool: Add a new LLM engine to a site in AI Result Tracker. Site must have a brand configured first.'
+  input_params: 5
+  required:
+  - site_id
+  - base_name
+  - country_code
+- name: PROJECT_createProject
+  title: Create Project
+  description: 'Project Tool: Create a new project (a "site" in SE Ranking terminology) on the authenticated account. Returns `{ site_id
+    }` — pass that ID to every other project-scoped tool (`addSearchEngine`, `listKeywords`, audits, etc.). The URL must be a real,
+    resolvable domain; reserved test domains like `*.ex'
+  input_params: 11
+  required:
+  - url
+  - title
+- name: PROJECT_createProjectGroup
+  title: Create Project Group
+  description: 'Project Tool: Create a new project group — an account-level folder that organizes projects — on the authenticated account.
+    Pass a group name; returns the new group ID, which you can pass as site_group_id when creating or updating a project. No project
+    ID is required.'
+  input_params: 1
+  required:
+  - name
+- name: PROJECT_createPromptGroup
+  title: Create Prompt Group
+  description: 'Project Tool: Create a new AI Result Tracker prompt group for a site. Returns 400 if a group with the same name already
+    exists.'
+  input_params: 2
+  required:
+  - site_id
+  - name
+- name: PROJECT_createSubAccount
+  title: Create Sub-Account
+  description: 'Project Tool: Create a new sub-account. A secure temporary password is generated automatically and delivered to the
+    sub-account by the notification email — it is not exposed in the tool response. The sub-account holder should change it on first
+    login.'
+  input_params: 8
+  required:
+  - account_email
+  - account_first_name
+- name: PROJECT_deleteAllPromptsInGroup
+  title: Delete All Prompts in Group
+  description: 'Project Tool: Remove all prompts (keyword rows) linked to an AI Result Tracker prompt group.'
+  input_params: 2
+  required:
+  - site_id
+  - group_id
+- name: PROJECT_deleteBacklinkGroup
+  title: Delete Backlink Group
+  description: 'Project Tool: Delete a backlink group.'
+  input_params: 2
+  required:
+  - site_id
+  - group_id
+- name: PROJECT_deleteCompetitor
+  title: Delete Competitor
+  description: 'Project Tool: Requires a competitor ID. Remove a competitor website from a user project.'
+  input_params: 1
+  required:
+  - competitor_id
+- name: PROJECT_deleteDisavowedBacklink
+  title: Delete Disavowed Backlink
+  description: 'Project Tool: Remove a backlink from the disavowed backlinks list.'
+  input_params: 2
+  required:
+  - site_id
+  - disavow_id
+- name: PROJECT_deleteKeywordGroup
+  title: Delete Keyword Group
+  description: 'Project Tool: Delete a project keyword group, identified by its group ID (from listKeywordGroups). Takes only group_id;
+    no project ID is required.'
+  input_params: 1
+  required:
+  - group_id
+- name: PROJECT_deleteKeywords
+  title: Delete Keywords
+  description: 'Project Tool: Requires a project ID. Delete one or more keywords from a project in a single request.'
+  input_params: 2
+  required:
+  - site_id
+  - keyword_ids
+- name: PROJECT_deleteLlmEngine
+  title: Delete LLM Engine
+  description: 'Project Tool: Remove an LLM engine from a site in AI Result Tracker.'
+  input_params: 2
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_deletePlanTask
+  title: Delete Marketing Plan Task
+  description: 'Project Tool: Delete a task from the marketing plan. Only tasks created via the API can be deleted.'
+  input_params: 2
+  required:
+  - site_id
+  - task_id
+- name: PROJECT_deleteProject
+  title: Delete Project
+  description: 'Project Tool: Requires a project ID. Delete a project from the user account.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_deleteProjectBacklinks
+  title: Delete Project Backlinks
+  description: 'Project Tool: Delete one or more backlinks from the backlink monitor in a single request.'
+  input_params: 2
+  required:
+  - site_id
+  - backlink_ids
+- name: PROJECT_deleteProjectGroup
+  title: Delete Project Group
+  description: 'Project Tool: Delete a project group, identified by its group ID (from listProjectGroups). Takes only group_id; no project
+    ID is required.'
+  input_params: 1
+  required:
+  - group_id
+- name: PROJECT_deletePromptGroup
+  title: Delete Prompt Group
+  description: 'Project Tool: Delete an AI Result Tracker prompt group. Prompts in the group are moved to the default group. The default
+    group cannot be deleted.'
+  input_params: 2
+  required:
+  - site_id
+  - group_id
+- name: PROJECT_deletePrompts
+  title: Delete Prompts
+  description: 'Project Tool: Delete one or more prompts from a specific LLM engine in AI Result Tracker in a single request.'
+  input_params: 3
+  required:
+  - site_id
+  - llm_id
+  - prompt_llm_ids
+- name: PROJECT_deleteSearchEngine
+  title: Delete Search Engine
+  description: 'Project Tool: Delete a search engine from a project.'
+  input_params: 2
+  required:
+  - site_id
+  - site_engine_id
+- name: PROJECT_deleteSubAccount
+  title: Delete Sub-Account
+  description: 'Project Tool: Delete a user sub-account.'
+  input_params: 1
+  required:
+  - user_id
+- name: PROJECT_deleteTag
+  title: Delete Tag
+  description: 'Project Tool: Requires a project ID. Delete a tag.'
+  input_params: 2
+  required:
+  - site_id
+  - tag_id
+- name: PROJECT_getAdsStats
+  title: Get Ads Stats
+  description: 'Project Tool: Requires a project ID. Get total number of top and bottom advertisements by day.'
+  input_params: 5
+  required:
+  - site_id
+- name: PROJECT_getAirtCompetitorDates
+  title: Get AIRT Competitors Check Dates
+  description: 'Project Tool: List the dates within a range on which a tracked prompt was checked and AI Result Tracker Competitors
+    data is available. Use it to avoid requesting empty periods from getAirtCompetitors. Engine-scoped (llm_id). Free (0 credits). Default
+    range: last 30 days; maximum 366 days.'
+  input_params: 5
+  required:
+  - site_id
+  - llm_id
+  - prompt_llm_id
+- name: PROJECT_getAirtCompetitors
+  title: Get AIRT Competitors Breakdown
+  description: 'Project Tool: AI Result Tracker per-prompt Competitors view — for each requested prompt over a date range, one entry
+    per check date with the brands mentioned in the AI answer (ordered) and the source URLs cited (ordered), plus a cached-copy URL
+    for human verification. Engine-scoped (llm_id). Free (0'
+  input_params: 7
+  required:
+  - site_id
+  - llm_id
+  - prompt_llm_ids
+- name: PROJECT_getAirtCompetitorSourceMetrics
+  title: Get AIRT Competitors Source Metrics
+  description: 'Project Tool: SEO metrics (domain_trust, ref_domains, organic_keywords) for the source URLs — or their domains — cited
+    in the AI answer for a tracked prompt on a given date. Engine-scoped (llm_id). Free (0 credits). Pick the date from getAirtCompetitorDates.
+    A 200 with an empty items array means the'
+  input_params: 5
+  required:
+  - site_id
+  - llm_id
+  - prompt_llm_id
+  - date
+- name: PROJECT_getAirtSourcesRecommendations
+  title: Get AIRT Sources Recommendations
+  description: 'Project Tool: The AI Result Tracker Sources Recommendations panel — an ordered list of outreach suggestions (e.g. "Secure
+    Brand Mentions on High-Impact Sources" and per-domain suggestions like Reddit, YouTube, Wikipedia) where the project is cited but
+    not yet mentioned. Aggregated across all the pro'
+  input_params: 6
+  required:
+  - site_id
+- name: PROJECT_getAirtSourcesSummary
+  title: Get AIRT Sources Summary
+  description: 'Project Tool: Project-level AI Result Tracker Sources overview for a date range — the four opportunity tiles (mention_opportunities,
+    competitor_only_mentions, new_opportunities, mentions_without_backlinks) plus per-competitor bubble-chart data (mentions in AI answers
+    vs in cited source URLs). Aggreg'
+  input_params: 6
+  required:
+  - site_id
+- name: PROJECT_getAllCompetitorsMetrics
+  title: Get All Competitors Metrics
+  description: 'Project Tool: Requires a project ID (site_id), date, and site_engine_id. Returns an aggregated, domain-level list of
+    every site that ranked in the TOP 10 across the project''s tracked queries on that date — each row is {domain_id, domain, backlinks,
+    domains, visibility} (project-wide visibility share'
+  input_params: 5
+  required:
+  - site_id
+  - date
+  - site_engine_id
+- name: PROJECT_getAvailableRegions
+  title: Get Available Regions
+  description: 'Project Tool: Look up Google city/region geo-targets for rank tracking. The catalogue holds ~228,800 rows of `{name,
+    region_id}`; `name` is the canonical `region_name` string to pass verbatim to addSearchEngine / updateSearchEngine / createLlmEngine
+    (abbreviated forms like "New York, NY, USA" are re'
+  input_params: 3
+- name: PROJECT_getAvailableSearchEngines
+  title: Get Available Search Engines
+  description: 'Project Tool: List every search engine SE Ranking can track — Google and Google Mobile plus Bing, Yahoo, and YouTube
+    variants (the `type` field distinguishes them; only ~30% are pure `google`). Most callers do NOT need this — pass `country_code`
+    (e.g. "us", "de") directly to `addSearchEngine` and it'
+  input_params: 0
+- name: PROJECT_getBacklinkGscImportStatus
+  title: Get Backlink GSC Import Status
+  description: 'Project Tool: Get the status of a backlink import from Google Search Console.'
+  input_params: 2
+  required:
+  - site_id
+  - token
+- name: PROJECT_getBacklinkStats
+  title: Get Backlink Statistics
+  description: 'Project Tool: Get backlink statistics for a website: `total` (count), `anchors`, `ip` (referring-IP count, singular
+    key), `domains`, `dofollow`/`nofollow` counts, plus `limit` (the account''s backlink-monitor quota).'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getCheckDates
+  title: Get Check Dates
+  description: 'Project Tool: List of dates on which positions were actually checked for a project (use getHistoricalDates for the standard
+    comparison dates like yesterday/7days/30days/90days).'
+  input_params: 4
+  required:
+  - site_id
+- name: PROJECT_getCompetitorPositions
+  title: Get Competitor Positions
+  description: 'Project Tool: Requires a competitor ID. Get statistics on the positions of competitor keywords that were added to the
+    project.'
+  input_params: 5
+  required:
+  - competitor_id
+- name: PROJECT_getCompetitorSerp10
+  title: Get Competitor SERP — Top 10
+  description: 'Project Tool: Returns the top-10 SERP — the sites ranking 1..10 — for a tracked keyword on a specific date and search
+    engine. Use when you only need the top 10; for positions beyond 10 use getCompetitorSerp100.'
+  input_params: 4
+  required:
+  - site_id
+  - date
+  - site_engine_id
+  - keyword_id
+- name: PROJECT_getCompetitorSerp100
+  title: Get Competitor SERP — Top 100
+  description: 'Project Tool: Returns the top-N SERP (positions 1..N, N up to 100) for a tracked keyword on a specific date and search
+    engine. Use `top` to cap N. For the top-10 path use getCompetitorSerp10.'
+  input_params: 5
+  required:
+  - site_id
+  - date
+  - site_engine_id
+  - keyword_id
+- name: PROJECT_getGoogleLanguages
+  title: Get Google Languages
+  description: 'Project Tool: Reference list of language codes Google accepts as `lang_code` (e.g. when calling `addSearchEngine` /
+    `updateSearchEngine` or AIRT `createLlmEngine`). Returns an OBJECT MAP keyed by ISO 639-1 code (sometimes with a regional suffix
+    like `pt-BR`), valued by the language’s native name — N'
+  input_params: 0
+- name: PROJECT_getGoogleSearchConsole
+  title: Get Google Search Console Data
+  description: 'Project Tool: Get popular queries from Google Search Console for a website.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getHistoricalDates
+  title: Get Historical Dates
+  description: 'Project Tool: Returns standard comparison dates (e.g., yesterday, last month, etc.) available for reporting.'
+  input_params: 2
+  required:
+  - site_id
+- name: PROJECT_getKeywordStats
+  title: Get Keyword Stats
+  description: 'Project Tool: Requires a project ID. Get keyword ranking statistics for a specified time period.'
+  input_params: 8
+  required:
+  - site_id
+- name: PROJECT_getLlmEngine
+  title: Get LLM Engine
+  description: 'Project Tool: Get details of a specific LLM engine in AI Result Tracker.'
+  input_params: 2
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_getLlmStatistics
+  title: Get LLM Statistics
+  description: 'Project Tool: Get statistics for an LLM engine in AI Result Tracker, including presence stats, AI Overview (AIO) presence,
+    and organic-search overlap.'
+  input_params: 5
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_getLlmStatus
+  title: Get LLM Status
+  description: 'Project Tool: Get tracking status for an LLM engine in AI Result Tracker, including progress and check statistics.'
+  input_params: 2
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_getMarketingPlan
+  title: Get Marketing Plan
+  description: 'Project Tool: Get the marketing plan for a website — sections, items, notes, and tasks.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getPositionHistory
+  title: Get Position History Chart
+  description: 'Project Tool: Time-series data for the position history chart. Returns one series per search engine plus an overall
+    average, each with [{date, value}] points. Use type to select which metric to chart.'
+  input_params: 8
+  required:
+  - site_id
+- name: PROJECT_getPromptAnswer
+  title: Get Prompt Answer
+  description: 'Project Tool: Retrieve the cached AI answer for a tracked prompt on a given date, including answer text, cited source
+    URLs, detected brand mentions, and (for Google AI Overview engines) top organic URLs. Answer data is retained for the last year;
+    older dates return 400. Date defaults to the current '
+  input_params: 4
+  required:
+  - site_id
+  - llm_id
+  - prompt_llm_id
+- name: PROJECT_getPromptsRankings
+  title: Get AIRT Rankings for Prompts or Groups
+  description: 'Project Tool: Retrieve AI Result Tracker ranking data within a date range. Default mode returns per-prompt rankings
+    (position, mention, search volume, search intent, organic-AI overlap). With `mode=groups`, returns per-group aggregates — each group
+    object includes group_id, group_name, prompts_count'
+  input_params: 8
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_getSearchEngines
+  title: Get Search Engines
+  description: 'Project Tool: Requires a project ID. Get a list of search engines employed by a project.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getSeoPotential
+  title: Get SEO Potential
+  description: 'Project Tool: Assess the potential traffic volume, traffic cost, and potential number of new customers for a website.'
+  input_params: 4
+  required:
+  - site_id
+- name: PROJECT_getSiteBrand
+  title: Get Site Brand
+  description: 'Project Tool: Retrieve the brand configured for a site in AI Result Tracker.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getSubAccountDetails
+  title: Get Sub-Account Details
+  description: 'Project Tool: Get extended information about a sub-account including settings, access permissions, and limits.'
+  input_params: 1
+  required:
+  - user_id
+- name: PROJECT_getSummary
+  title: Project Summary
+  description: 'Project Tool: Returns summary statistics for a single project (requires a project ID). Use for a high-level overview
+    of the project''s tracking data.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_getUserProfile
+  title: Get User Profile
+  description: 'Project Tool: Get information about the currently logged in user. Returns email, email_verified, first_name, last_name,
+    lang, and the avatar URL under the `picture` field (may be null).'
+  input_params: 0
+- name: PROJECT_importProjectBacklinks
+  title: Import Project Backlinks
+  description: 'Project Tool: Import a list of backlinks to the backlink monitor for a website.'
+  input_params: 8
+  required:
+  - site_id
+  - backlink_urls
+- name: PROJECT_listAirtSourceDomains
+  title: List AIRT Source Domains
+  description: 'Project Tool: Domains cited as sources in the project''s LLM answers (AI Result Tracker Sources → Domains tab) — an
+    outreach target list. Each row carries status, page/AI-answer/prompt counts, coverage %, brand mention rate %, mentioned brands,
+    Domain Trust, backlinks, referring domains, and a per-en'
+  input_params: 14
+  required:
+  - site_id
+- name: PROJECT_listAirtSourcePages
+  title: List AIRT Source Pages
+  description: 'Project Tool: The URL-level twin of listAirtSourceDomains — individual source URLs cited in the project''s LLM answers
+    (AI Result Tracker Sources → Pages tab), with parent domain, page type, HTTP status, brand mentions/links, Domain Trust, traffic,
+    and per-engine usage. Aggregated across all engines '
+  input_params: 15
+  required:
+  - site_id
+- name: PROJECT_listBacklinkGroups
+  title: List Backlink Groups
+  description: 'Project Tool: Get a list and count of backlink groups for a website.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_listCompetitors
+  title: List Competitors
+  description: 'Project Tool: Requires a project ID (site_id). Get a list of all competitors added to the project together with statistics.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_listDisavowedBacklinks
+  title: List Disavowed Backlinks
+  description: 'Project Tool: Get a list and count of disavowed backlinks for a website.'
+  input_params: 3
+  required:
+  - site_id
+- name: PROJECT_listKeywordGroups
+  title: List Keyword Groups
+  description: 'Project Tool: Requires a project ID. Get a list of keyword groups for a specified project.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_listKeywords
+  title: List Keywords
+  description: 'Project Tool: Get a list of keywords with target pages for a project.'
+  input_params: 2
+  required:
+  - site_id
+- name: PROJECT_listLlmEngines
+  title: List LLM Engines
+  description: 'Project Tool: Get all LLM engines configured for a site in AI Result Tracker.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_listOwnedProjects
+  title: List Owned Projects
+  description: 'Project Tool: Get a list of website IDs that belong to a sub-account.'
+  input_params: 1
+  required:
+  - user_id
+- name: PROJECT_listProjectBacklinks
+  title: List Project Backlinks
+  description: 'Project Tool: Get a list of backlinks for a website from the backlink monitor.'
+  input_params: 3
+  required:
+  - site_id
+- name: PROJECT_listProjectGroups
+  title: List Project Groups
+  description: 'Project Tool: Returns the list of account-level project groups for the authenticated account. Takes no inputs.'
+  input_params: 0
+- name: PROJECT_listProjects
+  title: List Projects
+  description: 'Project Tool: Get a list of all user projects.'
+  input_params: 0
+- name: PROJECT_listPromptGroups
+  title: List Prompt Groups
+  description: 'Project Tool: List AI Result Tracker prompt groups for a site (ordered by position). Optionally include per-group prompt
+    counts or filter to groups used by specific LLM engines.'
+  input_params: 3
+  required:
+  - site_id
+- name: PROJECT_listPrompts
+  title: List Prompts
+  description: 'Project Tool: Retrieve list of prompts (keywords) for a specific LLM engine in AI Result Tracker with pagination.'
+  input_params: 5
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_listSharedProjects
+  title: List Shared Projects
+  description: 'Project Tool: Get a list of website IDs that are shared with a sub-account.'
+  input_params: 1
+  required:
+  - user_id
+- name: PROJECT_listSubAccounts
+  title: List Sub-Accounts
+  description: 'Project Tool: Get a list of all sub-accounts of the current user.'
+  input_params: 2
+- name: PROJECT_listTags
+  title: List Tags
+  description: 'Project Tool: Requires a project ID. Get a list of landing page tags that are added to domains and/or links.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_moveBacklinksToGroup
+  title: Move Backlinks to Group
+  description: 'Project Tool: Move backlinks from one group to another. Can move individual backlinks or entire groups.'
+  input_params: 4
+  required:
+  - site_id
+  - target_group_id
+- name: PROJECT_moveKeywordsToGroup
+  title: Move Keywords to Group
+  description: 'Project Tool: Move one or more keywords (by their keyword_ids) into a keyword group (by group_id, from listKeywordGroups).'
+  input_params: 2
+  required:
+  - group_id
+  - keyword_ids
+- name: PROJECT_moveProjectsToGroup
+  title: Move Projects to Group
+  description: 'Project Tool: Move one or more projects (by their site_ids, from listProjects) into a project group (by group_id, from
+    listProjectGroups).'
+  input_params: 2
+  required:
+  - group_id
+  - site_ids
+- name: PROJECT_movePromptsToGroup
+  title: Move Prompts to Group
+  description: 'Project Tool: Move AI Result Tracker prompts into the specified prompt group. Bulk move of N prompts in one LLM engine.'
+  input_params: 3
+  required:
+  - site_id
+  - group_id
+  - prompt_llm_ids
+- name: PROJECT_addAuditSitemap
+  title: Add Audit Sitemap
+  description: 'Project Tool: Adds a sitemap URL as a crawl source for an audit. Automatically sets settings.source_sitemap to 1 so
+    the audit will actually use the sitemap on the next run.'
+  input_params: 2
+  required:
+  - audit_id
+  - url
+- name: PROJECT_addAuditSourcePages
+  title: Add Audit Source Pages
+  description: 'Project Tool: Uploads a custom list of pages to crawl for an audit. Submitted as a multipart text file (one URL per
+    line). Automatically sets settings.source_file to 1 so the audit will actually use the list on the next run.'
+  input_params: 3
+  required:
+  - audit_id
+  - urls
+- name: PROJECT_createAudit
+  title: Create Audit
+  description: 'Project Tool: Launches a website audit that crawls the HTML of a website. Be aware of the page crawl limit included
+    in your plan.'
+  input_params: 3
+  required:
+  - domain
+- name: PROJECT_deleteAudit
+  title: Delete Audit (Project API)
+  description: 'Project Tool: Permanently deletes a website audit report and all associated data. This action cannot be undone.'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_deleteAuditSitemap
+  title: Delete Audit Sitemap
+  description: 'Project Tool: Removes a sitemap from an audit''s crawl sources. Does not toggle source_sitemap off — leave that to updateAuditSettings
+    if you want to disable sitemap crawling entirely.'
+  input_params: 2
+  required:
+  - audit_id
+  - sitemap_id
+- name: PROJECT_deleteAuditSourcePages
+  title: Delete Audit Source Pages
+  description: 'Project Tool: Removes an uploaded source-pages list from an audit. Does not toggle source_file off — leave that to updateAuditSettings
+    if you want to disable custom-list crawling entirely.'
+  input_params: 2
+  required:
+  - audit_id
+  - list_id
+- name: PROJECT_getAuditHistory
+  title: Get Audit History (Project API)
+  description: 'Project Tool: Retrieves a historical snapshot of a specific audit run by date, including settings used, domain data,
+    and a summary of all issues found.'
+  input_params: 2
+  required:
+  - audit_id
+  - date
+- name: PROJECT_getAuditPagesByIssue
+  title: Get Audit Pages By Issue (Project API)
+  description: 'Project Tool: Retrieves a paginated list of all URLs affected by a specific issue within a given audit. Use the issue
+    code from the audit report.'
+  input_params: 4
+  required:
+  - audit_id
+  - code
+- name: PROJECT_getAuditReport
+  title: Get Audit Report (Project API)
+  description: 'Project Tool: Retrieves the report for a completed website audit, including its health score, domain properties, and
+    a section-by-section breakdown of checks. Use after an audit finishes to read its findings.'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_getAuditSettings
+  title: Get Audit Settings
+  description: 'Project Tool: Returns the current audit configuration — crawl sources, limits, thresholds, schedule, notification recipients,
+    disabled issue codes, ignored external URL patterns (disallow_ext), and audit engine version. Use this before calling updateAuditSettings
+    for partial updates, especially when'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_getAuditStatus
+  title: Get Audit Status (Project API)
+  description: 'Project Tool: Check the real-time status of a specific website audit (queued, processing, finished, cancelled, expired).'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_getCrawledPages
+  title: Get Crawled Pages (Project API)
+  description: 'Project Tool: Returns a paginated list of all URLs found during an audit, providing a sitemap as discovered by the crawler.
+    Page through results with limit and offset.'
+  input_params: 3
+  required:
+  - audit_id
+- name: PROJECT_getFoundLinks
+  title: Get Found Links (Project API)
+  description: 'Project Tool: Returns a paginated list of every hyperlink discovered across the entire site during the audit. Supports
+    filtering via the `filter` parameter (status, type, source_noindex, nofollow, anchor_type). Page through results with limit and
+    offset.'
+  input_params: 5
+  required:
+  - audit_id
+- name: PROJECT_getIssuesByUrl
+  title: Get Issues By URL (Project API)
+  description: 'Project Tool: Retrieves the issues (errors, warnings, notices) found on a specific page within an audit, along with
+    the page-level data. Use to inspect the problems on one page after an audit completes.'
+  input_params: 3
+  required:
+  - audit_id
+- name: PROJECT_listAudits
+  title: List Audits (Project API)
+  description: 'Project Tool: Retrieves a list of all website audits associated with your account, providing key details and statistics
+    for each.'
+  input_params: 5
+- name: PROJECT_listAuditSitemaps
+  title: List Audit Sitemaps
+  description: 'Project Tool: Returns all sitemap URLs configured as crawl sources for an audit, with per-sitemap page counts. These
+    sources are active only when settings.source_sitemap is 1 (auto-enabled when you add a sitemap).'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_listAuditSourcePages
+  title: List Audit Source Pages
+  description: 'Project Tool: Returns uploaded custom page lists used as a crawl source for an audit, with per-list page counts. These
+    sources are active only when settings.source_file is 1 (auto-enabled when you add a list).'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_recheckAudit
+  title: Recheck Audit (Project API)
+  description: 'Project Tool: Initiates a new crawl for an existing audit, reusing its saved settings. Consumes the same credits as
+    creating a new audit.'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_resetAuditSettings
+  title: Reset Audit Settings
+  description: 'Project Tool: Restores all audit settings to their defaults (crawl sources, limits, thresholds, schedule, notifications,
+    disabled issues, disallow_ext). This irreversibly overwrites the entire saved configuration — including values set at creation —
+    and cannot be undone. Returns 200 with an empty bo'
+  input_params: 1
+  required:
+  - audit_id
+- name: PROJECT_updateAuditSettings
+  title: Update Audit Settings
+  description: 'Project Tool: Updates the configuration of an existing audit. Partial update — only fields you include are changed.
+    Exceptions: disabled_issues and schedule_wdays are replace operations (the array you send replaces the full list). Use getAuditSettings
+    first to read the current disabled_issues list b'
+  input_params: 2
+  required:
+  - audit_id
+- name: PROJECT_updateAuditTitle
+  title: Update Audit Title (Project API)
+  description: 'Project Tool: Change the title of an existing website audit report.'
+  input_params: 2
+  required:
+  - audit_id
+  - title
+- name: PROJECT_recheckProjectBacklinks
+  title: Recheck Project Backlinks
+  description: 'Project Tool: Run an index or status check for a list of backlinks. NOTE: the ID required here is the row `id` returned
+    by `listProjectBacklinks`, NOT the value returned by `addProjectBacklink` (which is the `backlink_id` dictionary key). Passing `backlink_id`
+    values yields "Backlinks are non exists'
+  input_params: 3
+  required:
+  - site_id
+  - backlink_ids
+- name: PROJECT_renameBacklinkGroup
+  title: Rename Backlink Group
+  description: 'Project Tool: Change the name of a backlink group.'
+  input_params: 3
+  required:
+  - site_id
+  - group_id
+  - name
+- name: PROJECT_runBacklinkGscImport
+  title: Run Backlink GSC Import
+  description: 'Project Tool: Start a backlink import from Google Search Console. Returns a token to check import status.'
+  input_params: 1
+  required:
+  - site_id
+- name: PROJECT_runPositionCheck
+  title: Run Position Check
+  description: 'Project Tool: Requires a project ID. Run a ranking position check for specified keywords or for the entire project.'
+  input_params: 3
+  required:
+  - site_id
+- name: PROJECT_saveSiteBrand
+  title: Save Site Brand
+  description: 'Project Tool: Configure brand for a site in AI Result Tracker. Overwrites existing brand. Brand is shared across all
+    AI search engines.'
+  input_params: 2
+  required:
+  - site_id
+  - brand
+- name: PROJECT_setKeywordPosition
+  title: Set Keyword Position
+  description: 'Project Tool: Manually set position for a project''s keyword.'
+  input_params: 5
+  required:
+  - site_id
+  - keyword_id
+  - date
+  - site_engine_id
+  - position
+- name: PROJECT_setPlanTaskStatus
+  title: Set Marketing Plan Task Status
+  description: 'Project Tool: Set the completion status of a marketing plan task.'
+  input_params: 3
+  required:
+  - site_id
+  - task_id
+  - checked
+- name: PROJECT_shareProject
+  title: Share Project with Sub-Account
+  description: 'Project Tool: Share websites with a client-type sub-account. WARNING: `site_ids` REPLACES the sub-account''s entire
+    shared-project set — it is NOT additive. Sharing [C] when [A,B] were already shared leaves the sub-account with ONLY [C] (A and
+    B are un-shared). To add to existing shares, call listSha'
+  input_params: 2
+  required:
+  - user_id
+  - site_ids
+- name: PROJECT_transferPrompts
+  title: Transfer All Prompts Between Groups
+  description: 'Project Tool: Transfer every AI Result Tracker prompt from one group to another for a site. The source group is left
+    empty.'
+  input_params: 3
+  required:
+  - site_id
+  - from_group_id
+  - to_group_id
+- name: PROJECT_updateBacklinkImportSettings
+  title: Update Backlink Import Settings
+  description: 'Project Tool: Update settings for automatic backlink import from Google Search Console.'
+  input_params: 2
+  required:
+  - site_id
+  - gsc_autoimport
+- name: PROJECT_updateKeyword
+  title: Update Keyword
+  description: 'Project Tool: Update a single project keyword (rename, change group, change target URL, toggle strict matching, update
+    comment, or change which search engines track it).'
+  input_params: 8
+  required:
+  - site_id
+  - keyword_id
+- name: PROJECT_updateKeywordGroup
+  title: Update Keyword Group
+  description: 'Project Tool: Rename a project keyword group, identified by its group ID (from listKeywordGroups). Takes group_id and
+    the new name; no project ID is required.'
+  input_params: 2
+  required:
+  - group_id
+  - name
+- name: PROJECT_updateLlmEngine
+  title: Update LLM Engine
+  description: 'Project Tool: Partially update configuration of an LLM engine in AI Result Tracker (region_name and/or lang_code). A
+    VALID canonical `region_name` is geocoded and stored on ALL engine types; an INVALID/abbreviated region is rejected with HTTP 400
+    on location-aware engines (google_ai_overview, google'
+  input_params: 4
+  required:
+  - site_id
+  - llm_id
+- name: PROJECT_updatePlanTask
+  title: Update Marketing Plan Task
+  description: 'Project Tool: Update an existing marketing plan task title and description.'
+  input_params: 4
+  required:
+  - site_id
+  - task_id
+  - title
+  - text
+- name: PROJECT_updateProject
+  title: Update Project
+  description: 'Project Tool: Requires a project ID. Change/update project settings.'
+  input_params: 10
+  required:
+  - site_id
+- name: PROJECT_updateProjectGroup
+  title: Update Project Group
+  description: 'Project Tool: Rename a project group, identified by its group ID (from listProjectGroups). Takes group_id and the new
+    name; no project ID is required.'
+  input_params: 2
+  required:
+  - group_id
+  - name
+- name: PROJECT_updatePromptGroup
+  title: Rename Prompt Group
+  description: 'Project Tool: Rename an AI Result Tracker prompt group.'
+  input_params: 3
+  required:
+  - site_id
+  - group_id
+  - name
+- name: PROJECT_updateSearchEngine
+  title: Update Search Engine
+  description: 'Project Tool: Partially update a search engine already attached to a project. Identify the engine by its project-local
+    `site_engine_id` (returned by `addSearchEngine` / `getSearchEngines`), not the global `search_engine_id`.'
+  input_params: 9
+  required:
+  - site_id
+  - site_engine_id
+- name: PROJECT_updateSubAccount
+  title: Update Sub-Account
+  description: 'Project Tool: Edit an existing sub-account''s settings, limits, and permissions. Omitted scalar fields (email, name,
+    language, limits) are left unchanged (partial update); but the `access` array, when provided, REPLACES the entire permission set
+    (see that field).'
+  input_params: 9
+  required:
+  - user_id
+- name: PROJECT_updateUrlTags
+  title: Update URL Tags
+  description: 'Project Tool: Requires a project ID (site_id). Changes which tags are attached to the given URLs and/or domains — this
+    is NOT an additive "add tags" call. For each submitted URL/domain: if it currently has NO tags, the submitted tag_ids are attached;
+    if it already has one or more tags, the submitted'
+  input_params: 4
+  required:
+  - site_id
+- name: SEV_addBrandAliases
+  title: Add SE Visible Brand Aliases
+  description: 'SE Visible Tool: Add one or more aliases to an existing brand (works for both the primary brand and competitors). Each
+    alias title must be unique within the project and not match any existing brand or alias. To replace/clear the whole alias set instead,
+    use SEV_updateBrand.'
+  input_params: 3
+  required:
+  - project_id
+  - brand_id
+  - aliases
+- name: SEV_createBrand
+  title: Add SE Visible Competitor Brand
+  description: 'SE Visible Tool: Add a competitor brand to a project, with a domain and optional aliases. Brands created here are always
+    competitors (is_primary: false); the primary brand is set at project creation. The title must be unique within the project.'
+  input_params: 4
+  required:
+  - project_id
+  - title
+  - domain
+- name: SEV_createProject
+  title: Create SE Visible Project
+  description: 'SE Visible Tool: Create a project that tracks a brand''s visibility across AI assistants. Processing is asynchronous:
+    the response returns the new project UUID immediately, before any results are ready — poll SEV_getProject until project.status is
+    "success" and check.processed_percent is 100.'
+  input_params: 5
+  required:
+  - domain
+  - country_code
+  - lang_code
+  - brand_names
+  - topics
+- name: SEV_createPrompts
+  title: Create SE Visible Prompts
+  description: 'SE Visible Tool: Create one or more prompts under a topic. The prompts are added to the given topic and start being
+    processed against the project''s AI models. Returns the created prompt IDs.'
+  input_params: 3
+  required:
+  - project_id
+  - topic_id
+  - prompts
+- name: SEV_createTopics
+  title: Create SE Visible Topics
+  description: 'SE Visible Tool: Create one or more topics in a project. Topics group related prompts so you can organise what you track
+    and slice metrics by theme. Returns the created topics. (There is no separate list-topics call — read topics via SEV_getProject.)'
+  input_params: 2
+  required:
+  - project_id
+  - titles
+- name: SEV_deleteBrand
+  title: Delete SE Visible Brand
+  description: 'SE Visible Tool: Delete a competitor brand and all its aliases. The primary brand cannot be deleted (returns 422 "Cannot
+    delete the primary brand"). Returns 204 No Content on success.'
+  input_params: 2
+  required:
+  - project_id
+  - brand_id
+- name: SEV_deleteProject
+  title: Delete SE Visible Project
+  description: 'SE Visible Tool: Soft-delete a project from the organisation. The project is removed from active use but can be restored.
+    Returns 204 No Content on success.'
+  input_params: 1
+  required:
+  - project_id
+- name: SEV_deletePrompts
+  title: Delete SE Visible Prompts
+  description: 'SE Visible Tool: Delete one or more prompts from a project in a single request. Returns 204 No Content on success.'
+  input_params: 2
+  required:
+  - project_id
+  - prompt_ids
+- name: SEV_deleteTopic
+  title: Delete SE Visible Topic
+  description: 'SE Visible Tool: Delete a topic AND all prompts grouped under it. This removes the prompts and their results — move
+    prompts out first with SEV_movePrompts if you want to keep them. Returns 204 No Content on success.'
+  input_params: 2
+  required:
+  - project_id
+  - topic_id
+- name: SEV_getBrandMetrics
+  title: SE Visible Brand Metrics
+  description: 'SE Visible Tool: Aggregated brand visibility metrics for dynamic table rendering. Choose how rows are grouped (dimensions,
+    1-3 — the LAST dimension is the pivot/columns) and which metrics to return (1-5). With 1 dimension the response is flat rows; with
+    2-3, meta.columns.dynamic lists the pivot IDs '
+  input_params: 16
+  required:
+  - project_id
+  - dimensions
+  - metrics
+  - date_from
+  - date_to
+- name: SEV_getProject
+  title: Get SE Visible Project
+  description: 'SE Visible Tool: Get one project in detail — metadata, check processing progress (check.processed_percent), the topics
+    being tracked (with prompt counts), available historical check dates, the next scheduled check, and the competitor brands attached.
+    Poll this to track asynchronous processing after '
+  input_params: 1
+  required:
+  - project_id
+- name: SEV_getPrompt
+  title: Get SE Visible Prompt
+  description: 'SE Visible Tool: Get the details of a single prompt — id, text, topic_id, created_at, and is_parsed.'
+  input_params: 2
+  required:
+  - project_id
+  - prompt_id
+- name: SEV_getPromptResult
+  title: Get SE Visible Prompt Result
+  description: 'SE Visible Tool: Get the full detail of a single result — the complete AI response text, the source URLs cited, the
+    brands mentioned, sentiment, average position, and the model that produced it. Use SEV_getPromptResultDump for the raw unmodified
+    LLM response.'
+  input_params: 3
+  required:
+  - project_id
+  - prompt_id
+  - result_id
+- name: SEV_getPromptResultDump
+  title: SE Visible Raw LLM Response
+  description: 'SE Visible Tool: Download the raw, unmodified LLM response for a result, exactly as the provider returned it. The body
+    is text/html (not JSON) — returned here as a text/html resource plus a short note. Use it to compare the original response against
+    the parsed result from SEV_getPromptResult.'
+  input_params: 3
+  required:
+  - project_id
+  - prompt_id
+  - result_id
+- name: SEV_getSources
+  title: SE Visible Sources
+  description: 'SE Visible Tool: The domains and URLs that AI models cited across a project — the citation layer of SE Visible. source_type=''domain''
+    (default) returns one row per cited domain; source_type=''url'' returns one row per cited page (and changes which source_sort_field
+    values are valid). Most numeric field'
+  input_params: 24
+  required:
+  - project_id
+  - date_from
+  - date_to
+- name: SEV_getSubscription
+  title: SE Visible Subscription
+  description: 'SE Visible Tool: Get the organisation SE Visible plan and its current usage limits — plan key, status, billing period,
+    renewal, and the max/used/available counts for projects, prompts, and user seats. SE Visible usage is governed by these plan limits,
+    not per-request credits.'
+  input_params: 0
+- name: SEV_listBrands
+  title: List SE Visible Brands
+  description: 'SE Visible Tool: List a project''s tracked brands — the primary brand (is_primary: true, listed first) and competitors
+    — each with its domain and aliases. Use SEV_listMentionedBrands to discover brands the AI models mentioned but that you do not yet
+    track.'
+  input_params: 1
+  required:
+  - project_id
+- name: SEV_listMentionedBrands
+  title: List SE Visible Mentioned Brands
+  description: 'SE Visible Tool: List every brand the AI models mentioned in a project''s check results. These are distinct from the
+    brands you manually track (SEV_listBrands) and are useful for discovering competitors to add via SEV_createBrand.'
+  input_params: 1
+  required:
+  - project_id
+- name: SEV_listProjects
+  title: List SE Visible Projects
+  description: 'SE Visible Tool: List every SE Visible project in the authenticated user''s organisation. Each project includes its
+    UUID, domain, tracked brand names, status (queued/processing/success/error), creation and last-checked timestamps, and the AI models
+    it runs against.'
+  input_params: 0
+- name: SEV_listPromptResults
+  title: List SE Visible Prompt Results
+  description: 'SE Visible Tool: List the results for a prompt — one item per model run, with the model''s text, the top brands it mentioned,
+    sentiment, average position, and flags for URLs/mentions. Use SEV_getPromptResult for the full text, source URLs, and brand list
+    of a single result. A base date range is requi'
+  input_params: 12
+  required:
+  - project_id
+  - prompt_id
+  - date_from
+  - date_to
+- name: SEV_listPrompts
+  title: List SE Visible Prompts
+  description: 'SE Visible Tool: List a project''s prompts with their visibility metrics (group_mode=''prompt'', default), or topics
+    with metrics aggregated across their prompts (group_mode=''topic''). The response schema differs between the two modes. A base date
+    range is required.'
+  input_params: 16
+  required:
+  - project_id
+  - date_from
+  - date_to
+- name: SEV_movePrompts
+  title: Move SE Visible Prompts
+  description: 'SE Visible Tool: Move prompts to a target topic. Select the prompts by their IDs (prompt_ids), by their source topics
+    (topic_ids — ALL prompts in those topics are moved), or both (the set is deduplicated). At least one of prompt_ids or topic_ids
+    is required. Atomic; the target topic must belong to t'
+  input_params: 4
+  required:
+  - project_id
+  - topic_id
+- name: SEV_updateBrand
+  title: Update SE Visible Brand
+  description: 'SE Visible Tool: Update a brand''s domain and/or sync its aliases. When aliases is provided it REPLACES all existing
+    aliases (new added, existing kept, absent removed); pass an empty array to clear all aliases; omit it to leave aliases untouched.
+    Both fields are optional.'
+  input_params: 4
+  required:
+  - project_id
+  - brand_id
+- name: SEV_updateTopic
+  title: Rename SE Visible Topic
+  description: 'SE Visible Tool: Rename a topic. The project''s default topic cannot be updated. Returns the updated topic.'
+  input_params: 3
+  required:
+  - project_id
+  - topic_id
+  - title
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://api.seranking.com/mcp
+  method: POST tools/list (anonymous)
+  http_status: 200
+  content_type: text/event-stream
+  tools_returned: 217

@@ -1,0 +1,5749 @@
+{
+  "item": [
+    {
+      "id": "0d863dc5-28dd-40d9-ad4a-948773ef9425",
+      "name": "backlinks",
+      "description": {
+        "content": "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis of the backlink profile for any given target, whether it's a root domain, a specific host (subdomain), or a particular URL.\n\nYou can use these endpoints to retrieve high-level statistics, fetch detailed backlink lists, analyze historical trends, and check authority scores.\n\n### Summary & Core Metrics\n\nUse these endpoints to get a quick overview of a target's backlink profile. These requests support batching for up to 100 targets.\n\n- **`summary`**: Returns extended statistics, including the number of referring domains, IPs, top anchors, TLDs, and more.\n    \n- **`metrics`**: Retrieves a set of key metrics, such as the total number of backlinks, referring domains, and dofollow/nofollow link counts.\n    \n- **`count`**: Provides a simple count of the total number of live backlinks for a target.\n    \n\n### Detailed Backlink Retrieval\n\nUse these endpoints to get lists of the actual backlinks pointing to a target.\n\n- **`all`**: Fetches a detailed list of backlinks with powerful filtering and sorting options. This is ideal for getting the \"top\" backlinks based on criteria like InLink Rank.\n    \n- **`raw`**: Retrieves a complete, unfiltered list of all backlinks using efficient cursor-based pagination. This is best for fetching an entire dataset in batches.\n    \n- **`export`**: Exports all backlinks for a target into a downloadable `.csv.gz` file. This process is asynchronous and designed for very large-scale data retrieval.\n    \n\n### Historical Data & Trends\n\nTrack changes in a backlink profile over time.\n\n- **`history`**: Get a list of new and lost backlinks within a specified date range.\n    \n- **`history/count`**: Returns the number of new or lost backlinks for each day in a given period.\n    \n- **`history/cumulative`**: Provides the total number of live backlinks for each day in a given period.\n    \n\n### Analyze Specific Backlink Aspects\n\nDive deeper into specific components of the backlink profile.\n\n- **`anchors`**: Returns information about the anchor texts used in links pointing to a target.\n    \n- **`refdomains`**: Provides details on the unique referring domains, including their authority and the number of links from each.\n    \n- **`referring-ips`** **&** **`subnets`**: Analyzes the network distribution of backlinks by IP address and C-class subnets.\n    \n- **`indexed-pages`**: Lists the pages on the target site that have received one or more backlinks.\n    \n\n### Authority Scores\n\nCheck the calculated authority of a target based on its backlink profile.\n\n- **`authority`**: Retrieves both the InLink Rank (Page Authority) and Domain InLink Rank (Domain Authority).\n    \n- **`authority/domain`**: Focuses specifically on Domain Authority, including its distribution and historical values.\n    \n- **`authority/page`**: Focuses specifically on Page Authority and its historical values.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64d34bc5-d5c2-4d1d-9496-e7461a15c4cc",
+          "name": "summary",
+          "request": {
+            "name": "summary",
+            "description": {
+              "content": "Retrieves a comprehensive summary of backlink statistics for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "460f839b-084b-49c2-a922-d62eeeec2bfd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "rubyonrails.org"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "host"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50366394-f389-475a-9a74-ea1c8b0809c4",
+          "name": "summary",
+          "request": {
+            "name": "summary",
+            "description": {
+              "content": "Retrieves a comprehensive summary of backlink statistics for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "039dff76-360c-4a1d-8ab7-e04e9b8d2999",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.google.com/\"\n  ],\n  \"mode\": \"host\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5dcfd593-79bc-4fe7-bd22-387a8169d758",
+          "name": "metrics",
+          "request": {
+            "name": "metrics",
+            "description": {
+              "content": "Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "30545a27-7a65-4a29-b964-17a28fe5aa15",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "target-rfunqmac.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62586493-861d-4db5-a984-cab8c2910667",
+          "name": "metrics",
+          "request": {
+            "name": "metrics",
+            "description": {
+              "content": "Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98dd9ce4-4269-46ad-a9a0-11c8ad03e440",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.seranking.com/\"\n  ],\n  \"mode\": \"url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71165480-d7a8-40f2-a7e8-c3c8452c7314",
+          "name": "all",
+          "request": {
+            "name": "all",
+            "description": {
+              "content": "Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_domain",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_from_filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_to_filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_to_filter_mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_from_filter_mode",
+                  "value": "contains"
+                },
+                {
+                  "disabled": false,
+                  "key": "anchor_filter",
+                  "value": "<string>",
+                  "description": "Filter by anchor text. Max 2063 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "anchor_filter_mode",
+                  "value": "contains"
+                },
+                {
+                  "disabled": false,
+                  "key": "nofollow_filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "inlink_rank_from",
+                  "value": "<integer>",
+                  "description": "Minimum InLink Rank (0-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "inlink_rank_to",
+                  "value": "<integer>",
+                  "description": "Maximum InLink Rank (0-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_inlink_rank_from",
+                  "value": "<integer>",
+                  "description": "Minimum Domain InLink Rank (0-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_inlink_rank_to",
+                  "value": "<integer>",
+                  "description": "Maximum Domain InLink Rank (0-100)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7c85a49-6dc9-4970-bb3f-7a05ace5e698",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "http://accordconsultants.in/"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "url"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10000"
+                    },
+                    {
+                      "key": "per_domain",
+                      "value": "1"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "inlink_rank"
+                    },
+                    {
+                      "key": "url_from_filter",
+                      "value": "unsam.edu.ar"
+                    },
+                    {
+                      "key": "url_to_filter",
+                      "value": ".jpg"
+                    },
+                    {
+                      "key": "url_to_filter_mode",
+                      "value": "does_not_contain"
+                    },
+                    {
+                      "key": "url_from_filter_mode",
+                      "value": "contains"
+                    },
+                    {
+                      "key": "anchor_filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "anchor_filter_mode",
+                      "value": "contains"
+                    },
+                    {
+                      "key": "nofollow_filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inlink_rank_from",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "inlink_rank_to",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_inlink_rank_from",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "domain_inlink_rank_to",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06ec5d3c-069b-49ba-8b9b-b550c74d446b",
+          "name": "all",
+          "request": {
+            "name": "all",
+            "description": {
+              "content": "Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f3f0e89-387a-485c-bdbc-4bbf9647ad51",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com/\",\n  \"mode\": \"domain\",\n  \"limit\": 10,\n  \"per_domain\": 1,\n  \"order_by\": \"date_found\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e65ce522-9a89-40f1-9c35-127c1286bc0b",
+          "name": "raw",
+          "request": {
+            "name": "raw",
+            "description": {
+              "content": "Fetches the complete list of backlinks for a target in batches using cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_domain",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "date_found"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42988224-653c-47f4-bf3d-feeffafffa8c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "teilon.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "host"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "next",
+                      "value": "Pju9uZR4A2dylhvnUQ1UAu1NWfBjWoutYn_z2MHcVcZqH2eGVtT6Z6j2DjgyJKqyLem4yIj_it6xfHqasMXnj7/_zbLyBX93MmSekLiLxHa_gA9MRIrnPC2sxL4mDNzCzAsbK54U4UCScqvMexsrDx2obPcxHWZMl_yU7hQDa/9GJwcutpU0_v7TbtefRP9EVw/5eFZjvsNERYxl8jORIyNxL4N5t5LK75BaM51pYQ5q8bfuw/F42rIB8xKM0vD0i090_65JHrZPsDoAkKce/XELUwhGcoDqyRgG2P3AXAbZOe5RDFV/vz0YFTyI9tqynHJtP2olEKQ079f3hwroR6YML5AgTsVPwIynxNILAd_OHU5aFTReKIy686fBoIFZWR2dsyeGgN3r/n0jolcHNg=="
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "per_domain",
+                      "value": "1"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "date_found"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d445c474-f449-4471-a02e-c6f3e6b92faf",
+          "name": "count",
+          "request": {
+            "name": "count",
+            "description": {
+              "content": "Returns the total number of live backlinks for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6a30d25-d88e-4e4e-969f-924f3c47c039",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "anandaioga.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "url"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6b2aa20-3574-4539-b794-72e56468554c",
+          "name": "count",
+          "request": {
+            "name": "count",
+            "description": {
+              "content": "Returns the total number of live backlinks for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3c3b639-81e6-4fc2-aa3c-eb9da2c2efad",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.google.com/\"\n  ],\n  \"mode\": \"host\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c7c9499-3983-4160-a101-ab9e88a0f8db",
+          "name": "export",
+          "request": {
+            "name": "export",
+            "description": {
+              "content": "Initiates an asynchronous task to export all backlinks for a target to a downloadable CSV file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8032a0bb-7729-4000-9647-7651b7f24d15",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e272dc8e-01ba-4f75-bd36-3ba30668930e",
+          "name": "export/status",
+          "request": {
+            "name": "export/status",
+            "description": {
+              "content": "Status of the asynchronous task to export all backlinks for a target to a downloadable CSV file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "export",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "task_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d663c8b3-7517-4cae-aa6f-908c781a0bd1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "export",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "task_id",
+                      "value": "1_878619"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58627a68-c4d1-4a90-9159-85847f4891ea",
+          "name": "history",
+          "request": {
+            "name": "history",
+            "description": {
+              "content": "Returns a list of new or lost backlinks for a single target within a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "new_lost_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "link_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "anchor_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dofollow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_from",
+                  "value": "<string>",
+                  "description": "Filter by referring page URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "new_lost_date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "556eb9d3-1c2b-499c-bf83-3c659e8d7dcd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://www.seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "new_lost_type",
+                      "value": "new"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2024-01-14"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2025-08-28"
+                    },
+                    {
+                      "key": "link_type",
+                      "value": "href"
+                    },
+                    {
+                      "key": "anchor_type",
+                      "value": "text"
+                    },
+                    {
+                      "key": "dofollow",
+                      "value": "dofollow"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "url_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "new_lost_date"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f66fe69-45c8-4dc3-a258-5605156dd74f",
+          "name": "history",
+          "request": {
+            "name": "history",
+            "description": {
+              "content": "Returns a list of new or lost backlinks for a single target within a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e070b78-8ced-4e55-8262-41f768a16300",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com\",\n  \"mode\": \"domain\",\n  \"date_from\": \"2025-09-15\",\n  \"date_to\": \"2025-10-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aa2866f-64a5-435f-9144-889b2a3026eb",
+          "name": "history/count",
+          "request": {
+            "name": "history/count",
+            "description": {
+              "content": "Returns the daily count of new and lost backlinks for a target over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "new_lost_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "link_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "anchor_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dofollow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "disabled": false,
+                  "key": "url_from",
+                  "value": "<string>",
+                  "description": "Filter by referring page URL."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82263dec-519e-428e-aa83-aad1ac3a3cad",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://www.seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "new_lost_type",
+                      "value": "new"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2025-09-14"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2025-10-28"
+                    },
+                    {
+                      "key": "link_type",
+                      "value": "href"
+                    },
+                    {
+                      "key": "anchor_type",
+                      "value": "text"
+                    },
+                    {
+                      "key": "dofollow",
+                      "value": "dofollow"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "url_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e71b98c-7d3f-4a1b-bf69-b0754dd3648d",
+          "name": "history/count",
+          "request": {
+            "name": "history/count",
+            "description": {
+              "content": "Returns the daily count of new and lost backlinks for a target over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d843e737-3fc3-41e5-b9a8-608025433838",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com\",\n  \"mode\": \"domain\",\n  \"date_from\": \"2025-09-15\",\n  \"date_to\": \"2025-10-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e66ad698-0906-4989-aebe-fded05390ee5",
+          "name": "history/cumulative",
+          "request": {
+            "name": "history/cumulative",
+            "description": {
+              "content": "Returns the total number of live backlinks for a target for each day in a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history",
+                "cumulative"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0943b083-7817-4591-bcc2-387838048857",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history",
+                    "cumulative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://www.seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2024-01-14"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2024-08-28"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfef2d6d-bea8-481c-816e-6aa113c43796",
+          "name": "history/cumulative",
+          "request": {
+            "name": "history/cumulative",
+            "description": {
+              "content": "Returns the total number of live backlinks for a target for each day in a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "history",
+                "cumulative"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e124c16f-42f6-427f-8fe3-6a58cd7a62d4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "history",
+                    "cumulative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com\",\n  \"mode\": \"domain\",\n  \"date_from\": \"2024-01-14\",\n  \"date_to\": \"2024-08-28\",\n  \"output\": \"json\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "331469eb-bc24-407c-9e2b-66601f4dd72f",
+          "name": "anchors",
+          "request": {
+            "name": "anchors",
+            "description": {
+              "content": "Returns information about the anchor texts used in backlinks that point to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "anchors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68ef6b99-5ea4-476b-bc74-1cefa2eb3326",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "anchors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "backlinks"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad69ef6a-3f7b-406e-9175-04633652d18b",
+          "name": "anchors",
+          "request": {
+            "name": "anchors",
+            "description": {
+              "content": "Returns information about the anchor texts used in backlinks that point to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "anchors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a68d037f-4708-4a34-b804-a92ba05cc3fd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "anchors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com/\",\n  \"order_by\": \"backlinks\",\n  \"mode\": \"domain\",\n  \"limit\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40e6a847-3fee-451e-b1fc-c94801d22a99",
+          "name": "refdomains",
+          "request": {
+            "name": "refdomains",
+            "description": {
+              "content": "Retrieves a list of referring domains pointing to a single target, with sorting options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "date_found"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c88af32-3217-4188-aa95-ed2792fcfd64",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "date_found"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba777ae3-6420-4755-b827-9e7f761dbc95",
+          "name": "refdomains",
+          "request": {
+            "name": "refdomains",
+            "description": {
+              "content": "Retrieves a list of referring domains pointing to a single target, with sorting options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8660d091-25bc-4ee4-9207-4f0b59ef01d3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com/\",\n  \"order_by\": \"date_found\",\n  \"mode\": \"domain\",\n  \"limit\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2ba893f-1aa9-4009-81ab-671861d3df3a",
+          "name": "refdomains/count",
+          "request": {
+            "name": "refdomains/count",
+            "description": {
+              "content": "Returns the total number of unique referring domains for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74324915-3a1b-45fd-8d3c-f55b400429a5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cc12b13-d985-405e-b2ec-2e50c32f3617",
+          "name": "refdomains/count",
+          "request": {
+            "name": "refdomains/count",
+            "description": {
+              "content": "Returns the total number of unique referring domains for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b18366dd-a5e1-49da-98cc-f5704283621d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.anandaioga.com/\"\n  ],\n  \"order_by\": \"date_found\",\n  \"mode\": \"domain\",\n  \"limit\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f3706c6-42f7-4c5c-a2bd-0e0ea1b38c11",
+          "name": "refdomains/history",
+          "request": {
+            "name": "refdomains/history",
+            "description": {
+              "content": "Retrieves a list of new and lost referring domains for a target within a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "new_lost_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e352063-86e8-4561-9097-ccb801ddf8a6",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "new_lost_type",
+                      "value": "new"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2025-06-01"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "new_lost_date"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d77aabca-01ec-44ae-b4dc-691d08fef622",
+          "name": "refdomains/history",
+          "request": {
+            "name": "refdomains/history",
+            "description": {
+              "content": "Retrieves a list of new and lost referring domains for a target within a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df61309c-4969-467c-bbba-01ad85aa1012",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com\",\n  \"mode\": \"domain\",\n  \"new_lost_type\": \"new\",\n  \"date_from\": \"2025-01-15\",\n  \"date_to\": \"2025-04-16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a688a7c-f933-4d9d-a320-7d74149a199c",
+          "name": "refdomains/history/count",
+          "request": {
+            "name": "refdomains/history/count",
+            "description": {
+              "content": "Returns the daily count of new and lost referring domains for a target over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "history",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "new_lost_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2fe86b4-385e-47fc-a18d-33ba574ffbf0",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "new_lost_type",
+                      "value": "new"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2025-06-01"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0714f44c-1be8-4e75-9ef4-0f6fbf3abd53",
+          "name": "refdomains/history/count",
+          "request": {
+            "name": "refdomains/history/count",
+            "description": {
+              "content": "Returns the daily count of new and lost referring domains for a target over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "refdomains",
+                "history",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85adc053-cce8-4e3a-91d7-f700e80c7113",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "refdomains",
+                    "history",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com\",\n  \"mode\": \"domain\",\n  \"new_lost_type\": \"new\",\n  \"date_from\": \"2025-01-15\",\n  \"date_to\": \"2025-04-16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95d4764c-0745-48f4-a13e-fba435ceb621",
+          "name": "referring-ips",
+          "request": {
+            "name": "referring-ips",
+            "description": {
+              "content": "Returns information about the IPv4 addresses that host backlinks pointing to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a540ab0-b875-479c-9e67-923d6b8e7e51",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "backlinks"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be51763b-acff-483c-a40f-d6b5ec94acfa",
+          "name": "referring-ips",
+          "request": {
+            "name": "referring-ips",
+            "description": {
+              "content": "Returns information about the IPv4 addresses that host backlinks pointing to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "546b9a9a-4983-4aa1-9597-d492082b5ecf",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com/\",\n  \"order_by\": \"refdomains\",\n  \"mode\": \"domain\",\n  \"limit\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03083c22-f862-4b01-9690-a7786b86fa39",
+          "name": "referring-ips/count",
+          "request": {
+            "name": "referring-ips/count",
+            "description": {
+              "content": "Returns the total number of unique referring IPs for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-ips",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee04d0bd-36df-4d94-afde-4e6f99cb80e0",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-ips",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6f4d580-748a-4513-977f-cce4ed9e77b3",
+          "name": "referring-ips/count",
+          "request": {
+            "name": "referring-ips/count",
+            "description": {
+              "content": "Returns the total number of unique referring IPs for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-ips",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96cf9f88-30b9-4d3c-a6dd-318cebd5e4f2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-ips",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.us-seranking.com/\"\n  ],\n  \"mode\": \"host\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cde61f8-d64e-46d8-895b-8e2c2da9ce0f",
+          "name": "referring-subnets/count",
+          "request": {
+            "name": "referring-subnets/count",
+            "description": {
+              "content": "Returns the total number of unique referring subnets (C-blocks) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-subnets",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bf9bc61-7cb1-48fe-8278-dd3b4c9a84f2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-subnets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbc63835-417c-4127-924a-b2ca9e31cd30",
+          "name": "referring-subnets/count",
+          "request": {
+            "name": "referring-subnets/count",
+            "description": {
+              "content": "Returns the total number of unique referring subnets (C-blocks) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "referring-subnets",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ec08e27-b831-41c8-b71e-0bd47da8ed9e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "referring-subnets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.us-seranking.com/\"\n  ],\n  \"mode\": \"host\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd663cc7-0e2c-41d4-8f47-4cf57b83a07e",
+          "name": "indexed-pages",
+          "request": {
+            "name": "indexed-pages",
+            "description": {
+              "content": "Retrieves a list of pages on a target site that have received at least one backlink.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "indexed-pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22eacc85-0d1c-4e11-be41-dc90b0c8c38d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "indexed-pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "backlinks"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "495dfc7c-6618-4147-b649-e89562e1f8a2",
+          "name": "indexed-pages",
+          "request": {
+            "name": "indexed-pages",
+            "description": {
+              "content": "Retrieves a list of pages on a target site that have received at least one backlink.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "indexed-pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5620146-977a-469d-930a-4301db4954b2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "indexed-pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"https://www.seranking.com/\",\n  \"order_by\": \"backlinks\",\n  \"mode\": \"domain\",\n  \"limit\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3ab8901-146a-4ada-b14c-3269a330b213",
+          "name": "authority",
+          "request": {
+            "name": "authority",
+            "description": {
+              "content": "Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "865fe2cb-4718-415f-8144-f1c690d737d3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e71343ac-173b-4cd0-a017-5de779795771",
+          "name": "authority",
+          "request": {
+            "name": "authority",
+            "description": {
+              "content": "Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0e4afd0-77d3-4cb3-aaf2-c4b2d96f5f9d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.seranking.com/rank-tracker/\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2045d84-1961-4761-9775-33d03c9eeda3",
+          "name": "authority/domain",
+          "request": {
+            "name": "authority/domain",
+            "description": {
+              "content": "Returns the Domain Authority (Domain InLink Rank) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0913f5b2-5a5b-4867-8092-f76b66f6fc35",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f27951b0-43c8-4d7c-90b3-7d487c3c611f",
+          "name": "authority/domain",
+          "request": {
+            "name": "authority/domain",
+            "description": {
+              "content": "Returns the Domain Authority (Domain InLink Rank) for one or more targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fb25ae7-23a8-43d1-9a19-e80321f824a3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.seranking.com/rank-tracker/\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10d174af-ce18-4369-afcb-4c5c20c2e511",
+          "name": "authority/domain/distribution",
+          "request": {
+            "name": "authority/domain/distribution",
+            "description": {
+              "content": "Returns the distribution of Domain Authority scores for all domains linking to a single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "domain",
+                "distribution"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "histogramMode",
+                  "value": "host"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a39057cd-466a-4804-96e8-204b9c699567",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "domain",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "host"
+                    },
+                    {
+                      "key": "histogramMode",
+                      "value": "host"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9ddd16c-2a1d-4db0-91c6-256aa48e27b7",
+          "name": "authority/page",
+          "request": {
+            "name": "authority/page",
+            "description": {
+              "content": "Returns the Page Authority (InLink Rank) for one or more target URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1ee5ff6-62ec-4050-ab32-3cf853c8c043",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc899dd2-cc5b-48bf-a5a3-8257395987bc",
+          "name": "authority/page",
+          "request": {
+            "name": "authority/page",
+            "description": {
+              "content": "Returns the Page Authority (InLink Rank) for one or more target URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bad83989-9510-4451-b01d-c8995e07726b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": [\n    \"https://www.seranking.com/\",\n    \"https://www.seranking.com/rank-tracker/\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "feb2e30d-518a-4ee0-8477-6ed1775faa66",
+          "name": "authority/page/history",
+          "request": {
+            "name": "authority/page/history",
+            "description": {
+              "content": "Returns the historical Page Authority (InLink Rank) values for a single target URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "page",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03401eeb-218c-4e83-b449-f564eba904a0",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "page",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "https://seranking.com"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2025-05-30"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "by_week"
+                    },
+                    {
+                      "key": "output",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e480bc2-cdda-4425-a4fb-dc9446173b48",
+          "name": "authority/domain/history",
+          "request": {
+            "name": "authority/domain/history",
+            "description": {
+              "content": "Returns historical Domain InLink Rank (Domain Authority) values for a target domain. GET only, single target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "backlinks",
+                "authority",
+                "domain",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bfc3602-45f3-4001-8868-7da0600a029c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "backlinks",
+                    "authority",
+                    "domain",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "by_day"
+                    },
+                    {
+                      "key": "output",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.seranking.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c72744bd-ffe3-4b88-902d-129228ceb3ed",
+    "name": "SE Ranking Data Account & system backlinks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.\n\nContact Support:\n Name: SE Ranking API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml and OpenAPI servers[] host, 2026-08-13
+hosts:
+- https://seranking.com
+- https://api.seranking.com
+note: 'Two real documents are served, both by the SE Ranking MCP OAuth provider: RFC 8414 authorization-server metadata and RFC 9728
+  protected-resource metadata. Everything else is absent. On seranking.com the remaining /.well-known/* paths return 403 from nginx
+  (the edge blocks the prefix outright — not a 404, and not a document); on api.seranking.com they return a clean 404. NO security.txt,
+  NO api-catalog, NO ai-plugin.json and NO agent card is published on either host.'
+documents:
+- host: seranking.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: se-ranking-oauth-authorization-server.json
+  spec: RFC 8414
+- host: seranking.com
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  file: se-ranking-oauth-protected-resource.json
+  spec: RFC 9728
+- host: seranking.com
+  path: /wp-json/seranking-mcp-oauth/v1/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  spec: RFC 9728
+  note: The resource_metadata URL advertised in the WWW-Authenticate header of a 401 from the OAuth-gated MCP route. Same body as the
+    /.well-known/ copy.
+- host: seranking.com
+  path: /.well-known/security.txt
+  status: 403
+- host: seranking.com
+  path: /.well-known/openid-configuration
+  status: 403
+  note: SE Ranking's own published skill reference (seo-skills/skills/seo-api/references/auth-and-keys.md) lists this path as an OIDC-compatibility
+    discovery endpoint; the edge does not serve it.
+- host: seranking.com
+  path: /.well-known/api-catalog
+  status: 403
+- host: seranking.com
+  path: /.well-known/ai-plugin.json
+  status: 403
+- host: seranking.com
+  path: /.well-known/agent-card.json
+  status: 403
+- host: seranking.com
+  path: /.well-known/agent.json
+  status: 403
+- host: seranking.com
+  path: /.well-known/mcp.json
+  status: 403
+- host: api.seranking.com
+  path: /.well-known/security.txt
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/oauth-protected-resource
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/api-catalog
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/agent-card.json
+  status: 404
+- host: api.seranking.com
+  path: /.well-known/agent.json
+  status: 404
+summary:
+  documents_served: 2
+  security_txt: false
+  openid_configuration: false
+  api_catalog: false
+  agent_card: false

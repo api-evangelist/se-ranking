@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: searched
+source: registry.npmjs.org, pypi.org, rubygems.org, crates.io, api.nuget.org, packagist.org, proxy.golang.org + https://github.com/orgs/seranking/repositories
+note: 'SE Ranking publishes NO conventional first-party client SDK in any language — no npm client, no PyPI package, no gem, no NuGet,
+  no Maven artifact. The one first-party registry artifact is an n8n community node. Everything else SE Ranking ships for developers
+  is distributed from GitHub as Agent Skills / Claude+Cursor plugins, or is the hosted MCP server itself — which is the substitute they
+  have chosen for SDKs. Two third-party PHP SDKs exist and are marked official: false.'
+official_count: 1
+packages:
+- language: javascript
+  registry: npm
+  name: '@seranking/n8n-nodes-seranking'
+  url: https://www.npmjs.com/package/@seranking/n8n-nodes-seranking
+  install: npm install @seranking/n8n-nodes-seranking
+  official: true
+  kind: workflow-node
+  version: 2.1.0
+  published: '2026-07-14'
+  first_published: '2025-11-04'
+  releases: 24
+  license: MIT
+  author: SE Ranking <api@seranking.com>
+  repository: https://github.com/seranking/n8n-nodes-seranking
+  note: n8n community node covering 225 operations across 22 resources. Current against the API — published 2026-07-14, four months
+    after the OpenAPI repo went up.
+- language: markdown
+  registry: github
+  name: seranking/seo-skills
+  url: https://github.com/seranking/seo-skills
+  install: /plugin marketplace add seranking/seo-skills
+  official: true
+  kind: agent-skills-plugin
+  version: 2.10.4
+  published: '2026-06-17'
+  license: MIT
+  note: 32 Agent Skills for the SE Ranking MCP server, packaged for the Claude Code and Cursor plugin marketplaces. Not on any language
+    registry — GitHub-distributed, version read from .claude-plugin/plugin.json and the dated CHANGELOG entry for 2.10.4. Saved verbatim
+    in skills/.
+- language: markdown
+  registry: github
+  name: seranking/marketing-automation-plugins
+  url: https://github.com/seranking/marketing-automation-plugins
+  official: true
+  kind: agent-skills-plugin
+  version: null
+  published: '2026-08-04'
+  note: 'Content-skills and marketing-skills plugin bundles. version: null — the repo carries per-plugin plugin.json versions rather
+    than one bundle version, and there is no registry metadata endpoint to read; published is the last push date from the GitHub API.'
+- language: yaml
+  registry: github
+  name: seranking/openapi
+  url: https://github.com/seranking/openapi
+  official: true
+  kind: specification
+  version: 1.0.0
+  published: '2026-04-08'
+  releases: 0
+  note: The Data API OpenAPI 3.0.0 (data-api.yaml + data-api.json). version is info.version; published is the single commit date. Zero
+    GitHub Releases despite the README pointing at Releases for spec history — so consumers have no way to detect a spec change.
+- language: php
+  registry: packagist
+  name: futuralight/php-seranking-api-sdk
+  url: https://packagist.org/packages/futuralight/php-seranking-api-sdk
+  install: composer require futuralight/php-seranking-api-sdk
+  official: false
+  version: null
+  published: null
+  note: Third-party. version/published null — not read from the registry metadata endpoint because the package is not first-party and
+    its currency is not evidence about SE Ranking.
+- language: php
+  registry: packagist
+  name: pioniro/seranking-api-php
+  url: https://packagist.org/packages/pioniro/seranking-api-php
+  official: false
+  version: null
+  published: null
+  note: Third-party, 4 total downloads.
+registries_checked:
+- registry: npm
+  result: 1 first-party package (@seranking/n8n-nodes-seranking)
+- registry: pypi
+  result: 404 for seranking, se-ranking, seranking-api
+- registry: rubygems
+  result: 404 for seranking
+- registry: crates.io
+  result: no package
+- registry: nuget
+  result: 404 for seranking
+- registry: packagist
+  result: 2 third-party PHP SDKs, no first-party package
+- registry: pkg.go.dev / proxy.golang.org
+  result: only git tags proxied from the n8n TypeScript repo; no Go module

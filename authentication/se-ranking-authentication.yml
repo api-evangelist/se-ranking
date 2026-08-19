@@ -1,15 +1,81 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/se-ranking-data-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/se-ranking-data-api-openapi.yml + https://seranking.com/api/data/getting-started/ + https://seranking.com/api/mcp/
+  + https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+docs: https://seranking.com/api/data/getting-started/
 summary:
   types:
   - apiKey
+  - oauth2
   api_key_in:
+  - header
   - query
+  oauth2_flows:
+  - authorizationCode
+  note: 'One API key authenticates every surface as of 2026 — the legacy split into separate Data and Project keys is retired (source:
+    SE Ranking seo-api skill reference auth-and-keys.md). Keys are UUID-shaped and minted in the API Dashboard.'
 schemes:
 - name: apikeyAuth
   type: apiKey
   in: query
   parameter: apikey
+  surface: REST (Data API + Project API)
   sources:
-  - openapi/se-ranking-data-api-openapi.yml
+  - openapi/_original/se-ranking-data-api-openapi.yml
+  note: The only scheme the published OpenAPI declares. SE Ranking's own docs discourage it in production because the key leaks into
+    access logs, browser history and referrers.
+- name: authorizationTokenHeader
+  type: apiKey
+  in: header
+  parameter: Authorization
+  surface: REST (Data API + Project API)
+  value_prefix: 'Token '
+  recommended: true
+  sources:
+  - https://seranking.com/api/data/getting-started/
+  - https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+  note: 'Recommended REST form: `Authorization: Token YOUR_API_KEY`. The scheme prefix is `Token`, NOT `Bearer` — a Bearer prefix on
+    the REST API is a 401. Not declared in the OpenAPI, which is a spec/docs gap.'
+- name: mcpApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  surface: MCP (https://api.seranking.com/mcp)
+  aliases:
+  - X-Data-Api-Key
+  sources:
+  - https://seranking.com/api/mcp/
+  - https://github.com/seranking/seo-skills/blob/main/skills/seo-api/references/auth-and-keys.md
+  note: Non-interactive/CI auth for the MCP server. Header auth takes precedence over an existing OAuth Bearer token.
+- name: mcpOAuth
+  type: oauth2
+  surface: MCP (https://api.seranking.com/mcp)
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/authorize
+    tokenUrl: https://seranking.com/wp-json/seranking-mcp-oauth/v1/token
+    scopes:
+    - mcp
+    pkce: S256
+    dynamic_client_registration: https://seranking.com/wp-json/seranking-mcp-oauth/v1/register
+  sources:
+  - https://seranking.com/.well-known/oauth-authorization-server
+  - https://seranking.com/.well-known/oauth-protected-resource
+  note: OAuth 2.1 + PKCE + RFC 7591 dynamic client registration. Refresh token is a 30-day sliding window per SE Ranking's published
+    skill reference. See scopes/se-ranking-scopes.yml.
+anonymous_surface:
+  endpoint: https://api.seranking.com/mcp
+  methods:
+  - tools/list
+  - prompts/list
+  note: 'Probed 2026-08-13: tools/list and prompts/list return HTTP 200 with the full manifest WITHOUT credentials. initialize and every
+    tools/call require a token. Discovery is open; execution is not.'
+key_management:
+  dashboard: https://online.seranking.com/admin.api.dashboard.html
+  multiple_keys: true
+  rotation_note: Keys are cached server-side; allow up to 60 seconds after revocation before treating an old key as dead (SE Ranking
+    published guidance).
+  liveness_check: GET https://api.seranking.com/v1/account/subscription (0 credits)
+plan_gating:
+  data_api: Any plan carrying API credits.
+  project_api: Business or Enterprise only — otherwise 403 Subscription required.

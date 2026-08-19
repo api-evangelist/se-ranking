@@ -1,0 +1,119 @@
+{
+  "_note": "Verbatim JSON-RPC prompts/list result from https://api.seranking.com/mcp, fetched anonymously 2026-08-13.",
+  "fetched": "2026-08-13",
+  "source": "https://api.seranking.com/mcp",
+  "result": {
+    "prompts": [
+      {
+        "name": "serp-analysis",
+        "title": "SERP Analysis",
+        "description": "Compare SERP results across two locations",
+        "arguments": [
+          {
+            "name": "keyword",
+            "description": "The search query (e.g., \"yoga studio\")",
+            "required": true
+          },
+          {
+            "name": "location1",
+            "description": "First location (e.g., \"Barcelona\")",
+            "required": true
+          },
+          {
+            "name": "location2",
+            "description": "Second location (e.g., \"Sant Cugat del Valles\")",
+            "required": true
+          },
+          {
+            "name": "language",
+            "description": "Language code (default: es)",
+            "required": false
+          },
+          {
+            "name": "device",
+            "description": "Device type (default: desktop)",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "backlink-gap",
+        "title": "Backlink Gap Analysis",
+        "description": "Find backlink opportunities by analyzing competitor referring domains",
+        "arguments": [
+          {
+            "name": "my_domain",
+            "description": "Your domain (e.g., jivamuktiyogabarcelona.com)",
+            "required": true
+          },
+          {
+            "name": "competitors",
+            "description": "Comma-separated list of top 3 competitors",
+            "required": true
+          },
+          {
+            "name": "min_domain_trust",
+            "description": "Minimum Domain Trust (default: 25)",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "domain-traffic-competitors",
+        "title": "Domain Traffic & Competitors",
+        "description": "Analyze domain organic traffic and identify top competitors",
+        "arguments": [
+          {
+            "name": "domain",
+            "description": "The domain to analyze (e.g., wix.com)",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "keyword-clusters",
+        "title": "Keyword Clustering",
+        "description": "Generate keyword clusters with search volume and content recommendations",
+        "arguments": [
+          {
+            "name": "market",
+            "description": "Target market (e.g., US)",
+            "required": true
+          },
+          {
+            "name": "seed_keywords",
+            "description": "Comma-separated list of seed keywords",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "ai-share-of-voice",
+        "title": "AI Share of Voice",
+        "description": "Analyze AI share of voice across LLM engines for your domain versus competitors",
+        "arguments": [
+          {
+            "name": "domain",
+            "description": "Your domain (e.g., wix.com)",
+            "required": true
+          },
+          {
+            "name": "competitors",
+            "description": "Comma-separated list of competitors (e.g., weebly.com, hostinger.com)",
+            "required": true
+          },
+          {
+            "name": "country",
+            "description": "Target country code (default: us)",
+            "required": false
+          },
+          {
+            "name": "llm_engines",
+            "description": "Comma-separated list of AI engines to analyze (e.g., ai-overview, chatgpt, gemini). Options: ai-overview, chatgpt, perplexity, gemini, ai-mode",
+            "required": true
+          }
+        ]
+      }
+    ]
+  }
+}

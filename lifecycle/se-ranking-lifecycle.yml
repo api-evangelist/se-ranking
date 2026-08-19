@@ -1,0 +1,32 @@
+generated: '2026-08-13'
+method: searched
+source: https://seranking.com/api/data/getting-started/ + https://seranking.com/whats-new.html + https://status.seranking.com + https://github.com/seranking/openapi
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://seranking.com/api/data/getting-started/
+  spec_version: 1.0.0 (info.version of the published OpenAPI)
+  note: Every published operation sits under /v1/. No version negotiation header, no date-pinned versions, no v2 announced.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: 'No deprecation or sunset policy is published, and no operation in the OpenAPI carries deprecated: true. Observed drift is unannounced:
+    DATA_getCreditBalance, DATA_getAiOverview, DATA_getAiOverviewLeaderboard, DATA_getAiPromptsByBrand and DATA_getAiPromptsByTarget
+    are cited by SE Ranking''s own published skills but are absent from the live MCP tools/list captured 2026-08-13 — renamed or removed
+    with no notice surface. No Deprecation pointer is emitted because no policy exists.'
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.seranking.com
+changelog:
+  url: https://seranking.com/whats-new.html
+  artifact: changelog/se-ranking-changelog.yml
+  note: Release notes are grouped by year with no per-entry publication dates.
+spec_repository:
+  url: https://github.com/seranking/openapi
+  first_published: '2026-04-08'
+  releases: 0
+  note: The repo README points at GitHub Releases for spec history; the repo has zero releases and a single commit, so there is no spec
+    changelog in practice.
+deprecated_operations: []

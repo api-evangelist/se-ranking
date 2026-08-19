@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system AI search API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "overview (aggregated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/ai-search/overview/aggregated/time-series",
+            "params": [
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "brand",
+                "value": "SE Ranking",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "base_domain",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a high-level aggregated summary of a domain's key performance metrics and historical trends across all LLM engines."
+        },
+        {
+          "info": {
+            "name": "overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/ai-search/overview/by-engine/time-series",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "engine",
+                "value": "ai-overview",
+                "type": "query"
+              },
+              {
+                "name": "brand",
+                "value": "SE Ranking",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "base_domain",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM."
+        },
+        {
+          "info": {
+            "name": "leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/ai-search/overview/leaderboard",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "brand",
+                "value": "SE Ranking",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "base_domain",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM."
+        },
+        {
+          "info": {
+            "name": "discover brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/ai-search/discover-brand",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "domain",
+                "type": "query",
+                "description": "base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Identifies and returns the brand name associated with a given target domain, subdomain, or URL."
+        },
+        {
+          "info": {
+            "name": "prompts by target",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/ai-search/prompts-by-target",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "domain",
+                "type": "query",
+                "description": "base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "engine",
+                "value": "ai-mode",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "volume",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "100000",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "5",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "8",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "15",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "50",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetches a list of prompts where a specified domain, subdomain, or URL appears in the results of a chosen LLM."
+        },
+        {
+          "info": {
+            "name": "prompts by brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/ai-search/prompts-by-brand",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "brand",
+                "value": "SE Ranking",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "us",
+                "type": "query"
+              },
+              {
+                "name": "engine",
+                "value": "perplexity",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "volume",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "desc",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_included]",
+                "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[multi_keyword_excluded]",
+                "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][from]",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "filter[volume][to]",
+                "value": "100000",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][from]",
+                "value": "5",
+                "type": "query"
+              },
+              {
+                "name": "filter[keyword_count][to]",
+                "value": "8",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][from]",
+                "value": "15",
+                "type": "query"
+              },
+              {
+                "name": "filter[characters_count][to]",
+                "value": "50",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of prompts where a specified brand name is mentioned in the results of a chosen LLM."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

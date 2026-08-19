@@ -1,0 +1,1014 @@
+{
+  "item": [
+    {
+      "id": "dfb93d8f-bb50-4eba-b405-df5b16141c58",
+      "name": "AI search",
+      "description": {
+        "content": "This collection of endpoints allows you to analyze a domain or brand's visibility and performance within various Large Language Model (LLM) results, such as ChatGPT, Gemini, and Perplexity. Use these tools to track your presence in AI-generated answers, discover the prompts that feature your brand or domain, and understand your overall AI search footprint.\n\n### Overview & Discovery\n\n- **Overview**: Get a high-level summary of a domain's performance and historical trends within a specific LLM, including metrics like link presence, average position, and AI-driven traffic.\n    \n- **Discover Brand by URL**: A utility endpoint to identify the primary brand name associated with a target domain, useful for subsequent brand-based queries.\n    \n\n### Prompt Analysis\n\n- **Get Prompts by Target**: Retrieve a list of all prompts where a specific domain, subdomain, or URL is featured as a link or mention in an LLM's answer.\n    \n- **Get Prompts by Brand**: Find all prompts where a specific brand name is mentioned in an LLM's answer, allowing you to track brand visibility and context.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "038c286e-38c6-48bf-92b9-c2642c3f34ce",
+          "name": "overview (aggregated)",
+          "request": {
+            "name": "overview (aggregated)",
+            "description": {
+              "content": "Retrieves a high-level aggregated summary of a domain's key performance metrics and historical trends across all LLM engines.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "overview",
+                "aggregated",
+                "time-series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "base_domain"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "745cf5af-31aa-4390-a7a2-9760b9a5f19e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "overview",
+                    "aggregated",
+                    "time-series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "SE Ranking"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "base_domain"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ed53bde-08be-4fe8-b8dc-f69d85764ef5",
+          "name": "overview",
+          "request": {
+            "name": "overview",
+            "description": {
+              "content": "Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "overview",
+                "by-engine",
+                "time-series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "engine",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "base_domain"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfe60b5f-fc27-4324-8c0e-e33e1a360d4a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "overview",
+                    "by-engine",
+                    "time-series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "engine",
+                      "value": "ai-overview"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "SE Ranking"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "base_domain"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e23e53-9a66-433c-a2a7-087e2036eb7d",
+          "name": "leaderboard",
+          "request": {
+            "name": "leaderboard",
+            "description": {
+              "content": "Retrieves a high-level summary of a domain’s key performance metrics and historical trends within a specified LLM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "overview",
+                "leaderboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b91641e9-e0ab-4d9c-abde-9af540ba4cc9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "overview",
+                    "leaderboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "SE Ranking"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "base_domain"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primary\": {\n    \"target\": \"seranking.com\",\n    \"brand\": \"SE Ranking\"\n  },\n  \"competitors\": [\n    {\n      \"target\": \"semrush.com\",\n      \"brand\": \"Semrush\"\n    },\n    {\n      \"target\": \"ahrefs.com\",\n      \"brand\": \"Ahrefs\"\n    }\n  ],\n  \"scope\": \"base_domain\",\n  \"source\": \"us\",\n  \"engines\": [\n    \"ai-overview\",\n    \"chatgpt\",\n    \"perplexity\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee535137-eab3-45b6-92cd-75b48e004b17",
+          "name": "discover brand",
+          "request": {
+            "name": "discover brand",
+            "description": {
+              "content": "Identifies and returns the brand name associated with a given target domain, subdomain, or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "discover-brand"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "domain",
+                  "description": "base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "892312fc-e5f4-497a-819d-1677f210a685",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "discover-brand"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9563070d-32de-4e5f-8253-d059a1a283b0",
+          "name": "prompts by target",
+          "request": {
+            "name": "prompts by target",
+            "description": {
+              "content": "Fetches a list of prompts where a specified domain, subdomain, or URL appears in the results of a chosen LLM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "prompts-by-target"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "base_domain (aggregate by registrable domain, includes all subdomains), domain (exact host only, no subdomain aggregation), url (exact URL including path and query)"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "engine",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "volume"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3459c5db-78c0-40de-b1af-81ff667c070a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "prompts-by-target"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "domain"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "engine",
+                      "value": "ai-mode"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "volume"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "5"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "8"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "15"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "50"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7be4460f-c27d-41e8-819d-6ffaf455aab9",
+          "name": "prompts by brand",
+          "request": {
+            "name": "prompts by brand",
+            "description": {
+              "content": "Retrieves a list of prompts where a specified brand name is mentioned in the results of a chosen LLM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai-search",
+                "prompts-by-brand"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "engine",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "volume"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e073cd8d-5c7b-4810-ba80-58c5f6ebaa4e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai-search",
+                    "prompts-by-brand"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "SE Ranking"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "engine",
+                      "value": "perplexity"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "volume"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"seo\"\n }\n ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlinks\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "5"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "8"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "15"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "50"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.seranking.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "55209e5a-470a-4b19-b836-f69b2b12013b",
+    "name": "SE Ranking Data Account & system AI search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.\n\nContact Support:\n Name: SE Ranking API Support",
+      "type": "text/plain"
+    }
+  }
+}

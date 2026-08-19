@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system SERP Results > classic API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SERP Results > classic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tasks / Get task results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/serp/classic/tasks",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{vault:api_key_project}}",
+                "type": "query"
+              },
+              {
+                "name": "task_id",
+                "value": "62458525",
+                "type": "query",
+                "description": "Task ID returned by the POST endpoint. When provided, returns status or results for that specific task."
+              }
+            ]
+          },
+          "docs": "Without task_id: returns a list of all SERP tasks submitted within the last 24 hours. With task_id: returns the status or results for a specific task."
+        },
+        {
+          "info": {
+            "name": "Add task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/serp/classic/tasks",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues one or more keywords for SERP data collection and returns a unique task ID for each."
+        },
+        {
+          "info": {
+            "name": "Get advanced results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/serp/classic/tasks/results_advanced",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "32",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific task and retrieves the top 100 SERP results once the task is complete."
+        },
+        {
+          "info": {
+            "name": "Get HTML dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/serp/classic/tasks/html",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "743834",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific task and retrieves the top 100 SERP results once the task is complete."
+        },
+        {
+          "info": {
+            "name": "Get locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/serp/classic/locations",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "ES",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "Barcelona",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "google_ads_location_id",
+                "type": "query",
+                "description": "Include additional fields in the response."
+              }
+            ]
+          },
+          "docs": "Returns a list of all SERP tasks submitted by the user within the last 24 hours."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

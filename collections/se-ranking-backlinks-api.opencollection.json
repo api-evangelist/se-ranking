@@ -1,0 +1,1636 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SE Ranking Data Account & system backlinks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "backlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/summary",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "rubyonrails.org",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "host",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a comprehensive summary of backlink statistics for one or more targets."
+        },
+        {
+          "info": {
+            "name": "summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/summary",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a comprehensive summary of backlink statistics for one or more targets."
+        },
+        {
+          "info": {
+            "name": "metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/metrics",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "target-rfunqmac.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/metrics",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "all",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/all",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "http://accordconsultants.in/",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "url",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10000",
+                "type": "query"
+              },
+              {
+                "name": "per_domain",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "inlink_rank",
+                "type": "query"
+              },
+              {
+                "name": "url_from_filter",
+                "value": "unsam.edu.ar",
+                "type": "query"
+              },
+              {
+                "name": "url_to_filter",
+                "value": ".jpg",
+                "type": "query"
+              },
+              {
+                "name": "url_to_filter_mode",
+                "value": "does_not_contain",
+                "type": "query"
+              },
+              {
+                "name": "url_from_filter_mode",
+                "value": "contains",
+                "type": "query"
+              },
+              {
+                "name": "anchor_filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by anchor text. Max 2063 characters."
+              },
+              {
+                "name": "anchor_filter_mode",
+                "value": "contains",
+                "type": "query"
+              },
+              {
+                "name": "nofollow_filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "inlink_rank_from",
+                "value": "",
+                "type": "query",
+                "description": "Minimum InLink Rank (0-100)."
+              },
+              {
+                "name": "inlink_rank_to",
+                "value": "",
+                "type": "query",
+                "description": "Maximum InLink Rank (0-100)."
+              },
+              {
+                "name": "domain_inlink_rank_from",
+                "value": "",
+                "type": "query",
+                "description": "Minimum Domain InLink Rank (0-100)."
+              },
+              {
+                "name": "domain_inlink_rank_to",
+                "value": "",
+                "type": "query",
+                "description": "Maximum Domain InLink Rank (0-100)."
+              }
+            ]
+          },
+          "docs": "Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target."
+        },
+        {
+          "info": {
+            "name": "all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/all",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target."
+        },
+        {
+          "info": {
+            "name": "raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/raw",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "teilon.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "host",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "next",
+                "value": "Pju9uZR4A2dylhvnUQ1UAu1NWfBjWoutYn_z2MHcVcZqH2eGVtT6Z6j2DjgyJKqyLem4yIj_it6xfHqasMXnj7/_zbLyBX93MmSekLiLxHa_gA9MRIrnPC2sxL4mDNzCzAsbK54U4UCScqvMexsrDx2obPcxHWZMl_yU7hQDa/9GJwcutpU0_v7TbtefRP9EVw/5eFZjvsNERYxl8jORIyNxL4N5t5LK75BaM51pYQ5q8bfuw/F42rIB8xKM0vD0i090_65JHrZPsDoAkKce/XELUwhGcoDqyRgG2P3AXAbZOe5RDFV/vz0YFTyI9tqynHJtP2olEKQ079f3hwroR6YML5AgTsVPwIynxNILAd_OHU5aFTReKIy686fBoIFZWR2dsyeGgN3r/n0jolcHNg==",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              },
+              {
+                "name": "per_domain",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "date_found",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetches the complete list of backlinks for a target in batches using cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "anandaioga.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "url",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of live backlinks for one or more targets."
+        },
+        {
+          "info": {
+            "name": "count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the total number of live backlinks for one or more targets."
+        },
+        {
+          "info": {
+            "name": "export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/export",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous task to export all backlinks for a target to a downloadable CSV file."
+        },
+        {
+          "info": {
+            "name": "export/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/export/status",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "task_id",
+                "value": "1_878619",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Status of the asynchronous task to export all backlinks for a target to a downloadable CSV file."
+        },
+        {
+          "info": {
+            "name": "history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://www.seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "new_lost_type",
+                "value": "new",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2024-01-14",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2025-08-28",
+                "type": "query"
+              },
+              {
+                "name": "link_type",
+                "value": "href",
+                "type": "query"
+              },
+              {
+                "name": "anchor_type",
+                "value": "text",
+                "type": "query"
+              },
+              {
+                "name": "dofollow",
+                "value": "dofollow",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              },
+              {
+                "name": "url_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by referring page URL."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "new_lost_date",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of new or lost backlinks for a single target within a specified date range."
+        },
+        {
+          "info": {
+            "name": "history",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of new or lost backlinks for a single target within a specified date range."
+        },
+        {
+          "info": {
+            "name": "history/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/history/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://www.seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "new_lost_type",
+                "value": "new",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2025-09-14",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2025-10-28",
+                "type": "query"
+              },
+              {
+                "name": "link_type",
+                "value": "href",
+                "type": "query"
+              },
+              {
+                "name": "anchor_type",
+                "value": "text",
+                "type": "query"
+              },
+              {
+                "name": "dofollow",
+                "value": "dofollow",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              },
+              {
+                "name": "url_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by referring page URL."
+              }
+            ]
+          },
+          "docs": "Returns the daily count of new and lost backlinks for a target over a specified period."
+        },
+        {
+          "info": {
+            "name": "history/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/history/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the daily count of new and lost backlinks for a target over a specified period."
+        },
+        {
+          "info": {
+            "name": "history/cumulative",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/history/cumulative",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://www.seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2024-01-14",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2024-08-28",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of live backlinks for a target for each day in a specified date range."
+        },
+        {
+          "info": {
+            "name": "history/cumulative",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/history/cumulative",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the total number of live backlinks for a target for each day in a specified date range."
+        },
+        {
+          "info": {
+            "name": "anchors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/anchors",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "backlinks",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns information about the anchor texts used in backlinks that point to a single target."
+        },
+        {
+          "info": {
+            "name": "anchors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/anchors",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about the anchor texts used in backlinks that point to a single target."
+        },
+        {
+          "info": {
+            "name": "refdomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "date_found",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of referring domains pointing to a single target, with sorting options."
+        },
+        {
+          "info": {
+            "name": "refdomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of referring domains pointing to a single target, with sorting options."
+        },
+        {
+          "info": {
+            "name": "refdomains/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of unique referring domains for one or more targets."
+        },
+        {
+          "info": {
+            "name": "refdomains/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the total number of unique referring domains for one or more targets."
+        },
+        {
+          "info": {
+            "name": "refdomains/history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "new_lost_type",
+                "value": "new",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2025-03-01",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2025-06-01",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "new_lost_date",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of new and lost referring domains for a target within a specified date range."
+        },
+        {
+          "info": {
+            "name": "refdomains/history",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of new and lost referring domains for a target within a specified date range."
+        },
+        {
+          "info": {
+            "name": "refdomains/history/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/history/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "new_lost_type",
+                "value": "new",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2025-03-01",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2025-06-01",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the daily count of new and lost referring domains for a target over a specified period."
+        },
+        {
+          "info": {
+            "name": "refdomains/history/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/refdomains/history/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the daily count of new and lost referring domains for a target over a specified period."
+        },
+        {
+          "info": {
+            "name": "referring-ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/referring-ips",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "backlinks",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns information about the IPv4 addresses that host backlinks pointing to a single target."
+        },
+        {
+          "info": {
+            "name": "referring-ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/referring-ips",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about the IPv4 addresses that host backlinks pointing to a single target."
+        },
+        {
+          "info": {
+            "name": "referring-ips/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/referring-ips/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of unique referring IPs for one or more targets."
+        },
+        {
+          "info": {
+            "name": "referring-ips/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/referring-ips/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the total number of unique referring IPs for one or more targets."
+        },
+        {
+          "info": {
+            "name": "referring-subnets/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/referring-subnets/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of unique referring subnets (C-blocks) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "referring-subnets/count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/referring-subnets/count",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the total number of unique referring subnets (C-blocks) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "indexed-pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/indexed-pages",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "domain",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "backlinks",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of pages on a target site that have received at least one backlink."
+        },
+        {
+          "info": {
+            "name": "indexed-pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/indexed-pages",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of pages on a target site that have received at least one backlink."
+        },
+        {
+          "info": {
+            "name": "authority",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "authority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/authority",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "authority/domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority/domain",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the Domain Authority (Domain InLink Rank) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "authority/domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/authority/domain",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the Domain Authority (Domain InLink Rank) for one or more targets."
+        },
+        {
+          "info": {
+            "name": "authority/domain/distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority/domain/distribution",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "host",
+                "type": "query"
+              },
+              {
+                "name": "histogramMode",
+                "value": "host",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the distribution of Domain Authority scores for all domains linking to a single target."
+        },
+        {
+          "info": {
+            "name": "authority/page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority/page",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the Page Authority (InLink Rank) for one or more target URLs."
+        },
+        {
+          "info": {
+            "name": "authority/page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.seranking.com/v1/backlinks/authority/page",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the Page Authority (InLink Rank) for one or more target URLs."
+        },
+        {
+          "info": {
+            "name": "authority/page/history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority/page/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "https://seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "2025-01-01",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "2025-05-30",
+                "type": "query"
+              },
+              {
+                "name": "granularity",
+                "value": "by_week",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "json",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the historical Page Authority (InLink Rank) values for a single target URL."
+        },
+        {
+          "info": {
+            "name": "authority/domain/history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.seranking.com/v1/backlinks/authority/domain/history",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "{{secret_key_data}}",
+                "type": "query"
+              },
+              {
+                "name": "target",
+                "value": "seranking.com",
+                "type": "query"
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "granularity",
+                "value": "by_day",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns historical Domain InLink Rank (Domain Authority) values for a target domain. GET only, single target."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

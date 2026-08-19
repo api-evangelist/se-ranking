@@ -1,0 +1,1968 @@
+{
+  "item": [
+    {
+      "id": "180f270d-6bd5-470f-ae6f-084c8be67468",
+      "name": "Domain Analysis",
+      "description": {
+        "content": "This collection of endpoints allows you to perform in-depth competitive analysis on any domain. Use these requests to uncover keyword strategies, traffic trends, and competitor performance in both organic and paid search.\n\n### Performance Overviews\n\nGet high-level statistics about a domain's search performance.\n\n- **Regional database**: Get detailed organic and paid stats for a domain within a single, selected regional database.\n    \n- **Worldwide aggregate**: Aggregate a domain's global search performance metrics for the current month.\n    \n- **History trends**: Track historical trends for keywords, traffic, and cost for organic or paid search within a specific region.\n    \n\n### Keyword Analysis\n\nDive deep into the specific keywords a domain ranks for.\n\n- **Domain keywords**: Fetch a filterable and sortable list of all organic or paid keywords for a domain.\n    \n- **Domain keywords comparison**: Compare two domains to find common keywords (overlap) or identify keyword gaps.\n    \n\n### Competitor & Ad Analysis\n\nAnalyze the competitive landscape and paid advertising strategies.\n\n- **Competitors**: Discover a domain's top organic or paid competitors and see the number of keywords you have in common.\n    \n- **Paid ads**: Analyze paid ads either by keyword (to see who is bidding) or by domain (to see what a specific domain is bidding on).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca5b0ba7-df38-4480-9583-3e27df27df77",
+          "name": "Regional database",
+          "request": {
+            "name": "Regional database",
+            "description": {
+              "content": "Provides a detailed breakdown of a domain's organic and paid keyword performance within a single specified regional database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "overview",
+                "db"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_subdomains",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb419ddb-f9d5-4209-8a74-7dc7f335ebb4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "overview",
+                    "db"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://seranking.com/api.html"
+                    },
+                    {
+                      "key": "with_subdomains",
+                      "value": "false"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cef1cb35-f7ea-4da4-ba62-38d3f54687c9",
+          "name": "Worldwide aggregate",
+          "request": {
+            "name": "Worldwide aggregate",
+            "description": {
+              "content": "Aggregates a domain’s current global search performance statistics for both organic and paid traffic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "overview",
+                "worldwide"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_zones_list",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "USD",
+                  "description": "ISO 4217 currency code."
+                },
+                {
+                  "disabled": false,
+                  "key": "with_subdomains",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9002c71d-5102-4afb-bd52-0b9c760aa779",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "overview",
+                    "worldwide"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "price,traffic,keywords,positions_diff,positions_tops"
+                    },
+                    {
+                      "key": "show_zones_list",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "with_subdomains",
+                      "value": "true"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60acf692-426f-4135-a59a-eb18d29c0d0d",
+          "name": "Worldwide aggregate for URL",
+          "request": {
+            "name": "Worldwide aggregate for URL",
+            "description": {
+              "content": "Aggregates a domain’s current global search performance statistics for both organic and paid traffic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "overview",
+                "worldwide",
+                "url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04c5a3a5-f354-4089-a8d3-89b402073886",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "overview",
+                    "worldwide",
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "price,traffic,keywords"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://seranking.com/api.html"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "299137c9-53fc-4ec5-abd8-d5fa6a28b760",
+          "name": "History Trends",
+          "request": {
+            "name": "History Trends",
+            "description": {
+              "content": "Fetches historical data, including keyword counts and traffic trends, for a domain's organic or paid performance in a specific region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "overview",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "organic"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_subdomains",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Specific URL to get history for instead of domain."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9c8bb16-cccd-4fb8-8f72-de3af1612564",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "overview",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "with_subdomains",
+                      "value": "true"
+                    },
+                    {
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be3b85f3-5a51-4544-b8a1-66e2391810c9",
+          "name": "Domain keywords",
+          "request": {
+            "name": "Domain keywords",
+            "description": {
+              "content": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "keywords"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_subdomains",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cols",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pos_change",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][from]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[volume][to]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[difficulty][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[url]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_excluded]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[multi_keyword_included]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[intents]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[characters_count][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keyword_count][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[position][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[position][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[competition][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[cpc][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_percent][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_percent][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features_2][mode]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[serp_features_2][value][0]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e01b08c-b4b6-4020-9bf4-c5436f910fe2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "keywords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "wix.com"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.mywage.de/blog/baufinanzierung-trotz-schufa"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "with_subdomains",
+                      "value": "true"
+                    },
+                    {
+                      "key": "order_field",
+                      "value": "traffic"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_change",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[volume][from]",
+                      "value": "500"
+                    },
+                    {
+                      "key": "filter[volume][to]",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "filter[difficulty][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[difficulty][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[url]",
+                      "value": "[\n [\n {\n \"type\": \"contains\",\n \"value\": \"/blog/\"\n }\n ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_excluded]",
+                      "value": "[\n  [\n    { \"type\": \"contains\", \"value\": \"seo\"   },\n    { \"type\": \"contains\", \"value\": \"tools\" }\n  ],\n  [\n    { \"type\": \"begins\",   \"value\": \"find\"  },\n    { \"type\": \"contains\", \"value\": \"link\"  }\n  ],\n  [\n    { \"type\": \"contains\", \"value\": \"backlink\" },\n    { \"type\": \"ends\",     \"value\": \"checker\" }\n  ],\n  [\n    { \"type\": \"exact\",    \"value\": \"serankings\" }\n  ]\n]"
+                    },
+                    {
+                      "key": "filter[multi_keyword_included]",
+                      "value": "[[{\"type\":\"contains\", \"value\":\"seo\"}]]"
+                    },
+                    {
+                      "key": "filter[serp_features]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[intents]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keyword]",
+                      "value": "scholar"
+                    },
+                    {
+                      "key": "filter[characters_count][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[characters_count][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keyword_count][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keyword_count][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[position][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[position][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[competition][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[competition][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[cpc][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[cpc][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_percent][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_percent][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[serp_features_2][mode]",
+                      "value": "with_link"
+                    },
+                    {
+                      "key": "filter[serp_features_2][value][0]",
+                      "value": "sge"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99d26ed3-2269-4174-bbf0-e8aadc7646dc",
+          "name": "Domain pages",
+          "request": {
+            "name": "Domain pages",
+            "description": {
+              "content": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_url]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_traffic_percent][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_traffic_percent][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keywords_count][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keywords_count][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_sum][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_sum][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price_sum][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price_sum][to]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d6e372a-0168-464f-bbd2-592eeb5aa5f3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "base_domain"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "order_field",
+                      "value": "keywords_count"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "filter[domain_url]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[domain_traffic_percent][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[domain_traffic_percent][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keywords_count][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keywords_count][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_sum][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_sum][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price_sum][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price_sum][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d7e7fbb-3ad9-46be-b5c5-e4b7d19bc5a8",
+          "name": "Domain subdomains",
+          "request": {
+            "name": "Domain subdomains",
+            "description": {
+              "content": "Returns a filterable and sortable list of organic or paid keywords for which a specific domain ranks in a given database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "subdomains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_url]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_traffic_percent][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[domain_traffic_percent][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keywords_count][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[keywords_count][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_sum][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[traffic_sum][to]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price_sum][from]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[price_sum][to]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "514e3c54-612d-4a30-91ab-bb4071901876",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "subdomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "target",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "base_domain"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "order_field",
+                      "value": "keywords_count"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "filter[domain_url]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[domain_traffic_percent][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[domain_traffic_percent][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keywords_count][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[keywords_count][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_sum][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[traffic_sum][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price_sum][from]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[price_sum][to]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb623644-cc89-438b-abef-43acfc11da94",
+          "name": "Paid ads for domain",
+          "request": {
+            "name": "Paid ads for domain",
+            "description": {
+              "content": "Returns a list of keywords a specific domain is bidding on, along with the ad creatives used for those keywords.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>",
+                  "description": "Search by keyword instead of domain. Mutually exclusive with domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e350199e-aa51-447c-baa7-08b93bf357e6",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "booking.com"
+                    },
+                    {
+                      "key": "from",
+                      "value": "2023-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-12"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd19648a-9f54-4e39-81c9-00ccca61bfcf",
+          "name": "Competitors",
+          "request": {
+            "name": "Competitors",
+            "description": {
+              "content": "Identifies a list of top organic or paid competitors for a specified domain and shows the number of keywords they have in common.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "competitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Specific URL to analyze instead of the full domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "stats",
+                  "value": "0",
+                  "description": "Include additional statistics (0 or 1)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29658dec-9ba3-4b89-af31-5247bc8a1080",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "seranking.com"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://seranking.com/api.html"
+                    },
+                    {
+                      "key": "stats",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9302312-76fa-468f-ade9-6c53cf2f1b8a",
+          "name": "Domain keyword comparison",
+          "request": {
+            "name": "Domain keyword comparison",
+            "description": {
+              "content": "Compares two domains to find either their common keywords or the keywords for which one ranks and the other does not.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domain",
+                "keywords",
+                "comparison"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "compare",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Specific URL to compare instead of full domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "diff",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of columns to include in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26658008-4c30-4a38-bbec-40d78e0f863e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domain",
+                    "keywords",
+                    "comparison"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "{{secret_key_data}}"
+                    },
+                    {
+                      "key": "source",
+                      "value": "us"
+                    },
+                    {
+                      "key": "compare",
+                      "value": "samsung.com"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "apple.com"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.apple.com"
+                    },
+                    {
+                      "key": "type",
+                      "value": "organic"
+                    },
+                    {
+                      "key": "diff",
+                      "value": "1"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "order_field",
+                      "value": "volume"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "cols",
+                      "value": "keyword,position,volume,traffic,cpc,competition"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.seranking.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "52c6e524-6022-4c63-bba3-2ec67083c632",
+    "name": "SE Ranking Data Account & system Domain Analysis API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.\n\nContact Support:\n Name: SE Ranking API Support",
+      "type": "text/plain"
+    }
+  }
+}

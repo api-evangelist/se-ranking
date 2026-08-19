@@ -1,0 +1,199 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/se-ranking-mcp-tools.json (217 tool inputSchemas) + openapi/_original/se-ranking-data-api-openapi.yml (86 operations) +
+  json-schema/
+note: 'Derived from identifier fields, not from $ref links: the published OpenAPI carries ZERO components.schemas and declares no response
+  schema on any of its 86 operations, so there is no $ref graph to walk. The MCP tool inputSchemas are the richest machine-readable
+  model SE Ranking ships, and the id-reference fields in them (site_id x82, audit_id x29, project_id x21, group_id x18, llm_id x13,
+  task_id x7) are what the relationships below are read from. Cardinalities are inferred from tool naming (list*/add*/delete*), not
+  asserted by the provider.'
+domains:
+- name: Data API
+  entities:
+  - Target
+  - Backlink
+  - ReferringDomain
+  - Keyword
+  - SerpTask
+  - Audit
+  - AiSearchPrompt
+  billing: credits
+- name: Project API
+  entities:
+  - Project
+  - ProjectGroup
+  - Keyword
+  - KeywordGroup
+  - Competitor
+  - SearchEngine
+  - ProjectAudit
+  - ProjectBacklink
+  - BacklinkGroup
+  - Tag
+  - Prompt
+  - PromptGroup
+  - LlmEngine
+  - SubAccount
+  - MarketingPlanTask
+  billing: plan limits
+- name: SE Visible
+  entities:
+  - SeVisibleProject
+  - Brand
+  - SeVisiblePrompt
+  - Topic
+  - PromptResult
+  - Source
+  billing: plan limits
+entities:
+- name: Target
+  id_field: target
+  domain: Data API
+  note: A domain, host (subdomain) or URL, selected by the `mode` parameter (domain|host|url). The root addressing unit of every Data
+    API read.
+- name: SerpTask
+  id_field: task_id
+  domain: Data API
+  lifecycle: created -> processing -> complete
+  note: Async; results retrieved standard or advanced.
+- name: Audit
+  id_field: audit_id
+  domain: Data API + Project API
+  note: Both namespaces expose audit_id-keyed tools (DATA_* and PROJECT_*) against separate audit stores.
+- name: Project
+  id_field: site_id
+  domain: Project API
+  note: '`site_id` is the dominant identifier in the whole surface (82 of 217 tools). PROJECT tools use site_id where SE Visible tools
+    use project_id.'
+- name: SeVisibleProject
+  id_field: project_id
+  domain: SE Visible
+- name: Brand
+  id_field: brand_id
+  domain: SE Visible
+- name: Prompt
+  id_field: prompt_ids
+  domain: Project API + SE Visible
+- name: LlmEngine
+  id_field: llm_id
+  domain: Project API
+- name: SubAccount
+  id_field: user_id
+  domain: Project API
+relationships:
+- from: Project
+  to: Keyword
+  type: has_many
+  via: site_id
+  evidence: PROJECT_listKeywords / PROJECT_addKeywords / PROJECT_deleteKeywords
+- from: Project
+  to: Competitor
+  type: has_many
+  via: site_id
+  evidence: PROJECT_listCompetitors / PROJECT_addCompetitor
+- from: Project
+  to: SearchEngine
+  type: has_many
+  via: site_engine_id
+  evidence: PROJECT_getSearchEngines / PROJECT_addSearchEngine
+- from: Project
+  to: ProjectAudit
+  type: has_many
+  via: site_id
+  evidence: PROJECT_listAudits / PROJECT_createAudit
+- from: Project
+  to: ProjectBacklink
+  type: has_many
+  via: site_id
+  evidence: PROJECT_listProjectBacklinks / PROJECT_addProjectBacklink
+- from: Project
+  to: ProjectGroup
+  type: belongs_to
+  via: group_id
+  evidence: PROJECT_moveProjectsToGroup
+- from: Keyword
+  to: KeywordGroup
+  type: belongs_to
+  via: group_id
+  evidence: PROJECT_moveKeywordsToGroup / PROJECT_createKeywordGroup
+- from: ProjectBacklink
+  to: BacklinkGroup
+  type: belongs_to
+  via: group_id
+  evidence: PROJECT_moveBacklinksToGroup
+- from: Prompt
+  to: PromptGroup
+  type: belongs_to
+  via: group_id
+  evidence: PROJECT_movePromptsToGroup / PROJECT_transferPrompts
+- from: Project
+  to: LlmEngine
+  type: has_many
+  via: llm_id
+  evidence: PROJECT_listLlmEngines / PROJECT_createLlmEngine
+- from: Project
+  to: SubAccount
+  type: shared_with
+  via: user_id
+  evidence: PROJECT_shareProject / PROJECT_listSubAccounts
+- from: ProjectAudit
+  to: AuditPage
+  type: has_many
+  via: audit_id
+  evidence: PROJECT_getCrawledPages / PROJECT_getAuditPagesByIssue
+- from: Audit
+  to: AuditIssue
+  type: has_many
+  via: audit_id
+  evidence: DATA_getIssuesByUrl / DATA_getAuditPagesByIssue
+- from: Target
+  to: Backlink
+  type: has_many
+  via: target
+  evidence: getBacklinksAll / getBacklinksRaw
+- from: Target
+  to: ReferringDomain
+  type: has_many
+  via: target
+  evidence: getBacklinksRefdomains
+- from: SeVisibleProject
+  to: Brand
+  type: has_many
+  via: project_id
+  evidence: SEV_listBrands / SEV_createBrand
+- from: SeVisibleProject
+  to: SeVisiblePrompt
+  type: has_many
+  via: project_id
+  evidence: SEV_listPrompts / SEV_createPrompts
+- from: SeVisiblePrompt
+  to: PromptResult
+  type: has_many
+  via: prompt_ids
+  evidence: SEV_listPromptResults / SEV_getPromptResult
+- from: SeVisiblePrompt
+  to: Topic
+  type: belongs_to
+  via: topic
+  evidence: SEV_createTopics / SEV_movePrompts
+identifier_frequency:
+  site_id: 82
+  limit: 41
+  audit_id: 29
+  target: 29
+  offset: 28
+  date_from: 23
+  date_to: 23
+  mode: 21
+  project_id: 21
+  source: 19
+  group_id: 18
+  domain: 13
+response_schemas:
+  openapi: 0
+  json_schema_dir:
+  - json-schema/se-ranking-domain-overview.json
+  - json-schema/se-ranking-backlink-summary.json
+  - json-schema/se-ranking-keyword-research.json
+  - json-schema/se-ranking-ai-search.json
+  gap: No response schema is published for any of the 86 REST operations. A consumer cannot generate a typed client from this spec.
