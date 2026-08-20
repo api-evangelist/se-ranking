@@ -28,6 +28,19 @@ tags:
   - Competitor Analysis
   - Website Audit
   - AI Search
+  - Geo
+  - Digital Marketing
+  - MCP
+  - AI Agents
+  - Agent Skills
+tags_raw:
+  - SEO
+  - Keyword Research
+  - Rank Tracking
+  - Backlinks
+  - Competitor Analysis
+  - Website Audit
+  - AI Search
   - GEO
   - Digital Marketing
   - MCP
@@ -125,6 +138,8 @@ apis:
   humanURL: https://seranking.com/api/data/reference/
   baseURL: https://api.seranking.com
   tags:
+  - AI Search
+  tags_raw:
   - AI search
   properties:
   - type: OpenAPI
@@ -167,6 +182,8 @@ apis:
   humanURL: https://seranking.com/api/data/reference/
   baseURL: https://api.seranking.com
   tags:
+  - Backlinks
+  tags_raw:
   - backlinks
   properties:
   - type: OpenAPI
