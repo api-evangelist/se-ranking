@@ -41,7 +41,7 @@ tags:
   - Competitor Analysis
   - Website Audit
   - AI Search
-  - GEO
+  - Geo
   - Digital Marketing
   - MCP
   - AI Agents
@@ -151,7 +151,7 @@ apis:
   humanURL: https://seranking.com/api/data/reference/
   baseURL: https://api.seranking.com
   tags:
-  - AI search
+  - AI Search
   tags_raw:
   - AI search
   properties:
@@ -195,7 +195,7 @@ apis:
   humanURL: https://seranking.com/api/data/reference/
   baseURL: https://api.seranking.com
   tags:
-  - backlinks
+  - Backlinks
   tags_raw:
   - backlinks
   properties:
@@ -330,6 +330,9 @@ apis:
     email: api@seranking.com
     url: https://seranking.com/api/mcp/
 common:
+  - type: License
+    name: MIT
+    url: https://github.com/seranking/openapi/blob/main/LICENSE
   - type: OpenAPI
     url: openapi/_original/se-ranking-data-api-openapi.yml
   - type: SourceCode
