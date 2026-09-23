@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: SE Ranking Data Account & system API
   description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
@@ -13,7 +13,7 @@ security:
 - apikeyAuth: []
 tags:
 - name: Account & system
-  description: "This collection contains endpoints for retrieving information about your account status, subscription details, and current credit and API unit balances. Use these requests to monitor your usage and plan details programmatically.\n\n### Endpoints\n\n- **Get Subscription Info**: Returns detailed information about your current API subscription plan, including its status (e.g., active, expired), validity dates, and the total and remaining API units available.\n    \n- **Get Credit Balance**: Returns the current account-wide credit balance, showing the total limit and the amount of credits that have been used."
+  description: This collection contains endpoints for retrieving information about your account status, subscription details, and current credit and API unit balances.
 paths:
   /v1/account/subscription:
     get:

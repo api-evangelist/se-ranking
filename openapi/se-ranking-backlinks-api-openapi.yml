@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: SE Ranking Data Account & system backlinks API
+  title: SE Ranking Data Backlinks API
   description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
   version: 1.0.0
   contact:
@@ -12,14 +12,17 @@ servers:
 security:
 - apikeyAuth: []
 tags:
-- name: backlinks
-  description: "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis of the backlink profile for any given target, whether it's a root domain, a specific host (subdomain), or a particular URL.\n\nYou can use these endpoints to retrieve high-level statistics, fetch detailed backlink lists, analyze historical trends, and check authority scores.\n\n### Summary & Core Metrics\n\nUse these endpoints to get a quick overview of a target's backlink profile. These requests support batching for up to 100 targets.\n\n- **`summary`**: Returns extended statistics, including the number of referring domains, IPs, top anchors, TLDs, and more.\n    \n- **`metrics`**: Retrieves a set of key metrics, such as the total number of backlinks, referring domains, and dofollow/nofollow link counts.\n    \n- **`count`**: Provides a simple count of the total number of live backlinks for a target.\n    \n\n### Detailed Backlink Retrieval\n\nUse these endpoints to get lists of the actual backlinks pointing to a target.\n\n- **`all`**: Fetches a detailed list of backlinks with powerful filtering and sorting options. This is ideal for getting the \"top\" backlinks based on criteria like InLink Rank.\n    \n- **`raw`**: Retrieves a complete, unfiltered list of all backlinks using efficient cursor-based pagination. This is best for fetching an entire dataset in batches.\n    \n- **`export`**: Exports all backlinks for a target into a downloadable `.csv.gz` file. This process is asynchronous and designed for very large-scale data retrieval.\n    \n\n### Historical Data & Trends\n\nTrack changes in a backlink profile over time.\n\n- **`history`**: Get a list of new and lost backlinks within a specified date range.\n    \n- **`history/count`**: Returns the number of new or lost backlinks for each day in a given period.\n    \n- **`history/cumulative`**: Provides the total number of live backlinks for each day in a given period.\n    \n\n### Analyze Specific Backlink Aspects\n\nDive deeper into specific components of the backlink profile.\n\n- **`anchors`**: Returns information about the anchor texts used in links pointing to a target.\n    \n- **`refdomains`**: Provides details on the unique referring domains, including their authority and the number of links from each.\n    \n- **`referring-ips`** **&** **`subnets`**: Analyzes the network distribution of backlinks by IP address and C-class subnets.\n    \n- **`indexed-pages`**: Lists the pages on the target site that have received one or more backlinks.\n    \n\n### Authority Scores\n\nCheck the calculated authority of a target based on its backlink profile.\n\n- **`authority`**: Retrieves both the InLink Rank (Page Authority) and Domain InLink Rank (Domain Authority).\n    \n- **`authority/domain`**: Focuses specifically on Domain Authority, including its distribution and historical values.\n    \n- **`authority/page`**: Focuses specifically on Page Authority and its historical values."
+- name: Backlinks
+  description: '# Backlinks API
+
+
+    This collection of requests allows you to conduct a comprehensive analysis of the backlink profile for any given target, whether it''s a root domain, a specific host (subdomain), or a particular URL.'
 paths:
   /v1/backlinks/summary:
     get:
       operationId: getBacklinksSummary
       tags:
-      - backlinks
+      - Backlinks
       summary: summary
       description: Retrieves a comprehensive summary of backlink statistics for one or more targets.
       parameters:
@@ -61,7 +64,7 @@ paths:
     post:
       operationId: createBacklinksSummary
       tags:
-      - backlinks
+      - Backlinks
       summary: summary
       description: Retrieves a comprehensive summary of backlink statistics for one or more targets.
       requestBody:
@@ -94,7 +97,7 @@ paths:
     get:
       operationId: getBacklinksMetrics
       tags:
-      - backlinks
+      - Backlinks
       summary: metrics
       description: Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.
       parameters:
@@ -135,7 +138,7 @@ paths:
     post:
       operationId: createBacklinksMetrics
       tags:
-      - backlinks
+      - Backlinks
       summary: metrics
       description: Retrieves key backlink statistics (e.g., backlink, referring domain, and IP counts) for one or more targets.
       requestBody:
@@ -168,7 +171,7 @@ paths:
     get:
       operationId: getBacklinksAll
       tags:
-      - backlinks
+      - Backlinks
       summary: all
       description: Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.
       parameters:
@@ -292,7 +295,7 @@ paths:
     post:
       operationId: createBacklinksAll
       tags:
-      - backlinks
+      - Backlinks
       summary: all
       description: Retrieves a detailed, filterable, and sortable list of backlinks pointing to a single target.
       requestBody:
@@ -326,7 +329,7 @@ paths:
     get:
       operationId: getBacklinksRaw
       tags:
-      - backlinks
+      - Backlinks
       summary: raw
       description: Fetches the complete list of backlinks for a target in batches using cursor-based pagination.
       parameters:
@@ -386,7 +389,7 @@ paths:
     get:
       operationId: getBacklinksCount
       tags:
-      - backlinks
+      - Backlinks
       summary: count
       description: Returns the total number of live backlinks for one or more targets.
       parameters:
@@ -428,7 +431,7 @@ paths:
     post:
       operationId: createBacklinksCount
       tags:
-      - backlinks
+      - Backlinks
       summary: count
       description: Returns the total number of live backlinks for one or more targets.
       requestBody:
@@ -461,7 +464,7 @@ paths:
     get:
       operationId: getBacklinksExport
       tags:
-      - backlinks
+      - Backlinks
       summary: export
       description: Initiates an asynchronous task to export all backlinks for a target to a downloadable CSV file.
       parameters:
@@ -503,7 +506,7 @@ paths:
     get:
       operationId: getBacklinksExportStatus
       tags:
-      - backlinks
+      - Backlinks
       summary: export/status
       description: Status of the asynchronous task to export all backlinks for a target to a downloadable CSV file.
       parameters:
@@ -536,7 +539,7 @@ paths:
     get:
       operationId: getBacklinksHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: history
       description: Returns a list of new or lost backlinks for a single target within a specified date range.
       parameters:
@@ -639,7 +642,7 @@ paths:
     post:
       operationId: createBacklinksHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: history
       description: Returns a list of new or lost backlinks for a single target within a specified date range.
       requestBody:
@@ -672,7 +675,7 @@ paths:
     get:
       operationId: getBacklinksHistoryCount
       tags:
-      - backlinks
+      - Backlinks
       summary: history/count
       description: Returns the daily count of new and lost backlinks for a target over a specified period.
       parameters:
@@ -743,7 +746,7 @@ paths:
     post:
       operationId: createBacklinksHistoryCount
       tags:
-      - backlinks
+      - Backlinks
       summary: history/count
       description: Returns the daily count of new and lost backlinks for a target over a specified period.
       requestBody:
@@ -776,7 +779,7 @@ paths:
     get:
       operationId: getBacklinksHistoryCumulative
       tags:
-      - backlinks
+      - Backlinks
       summary: history/cumulative
       description: Returns the total number of live backlinks for a target for each day in a specified date range.
       parameters:
@@ -827,7 +830,7 @@ paths:
     post:
       operationId: createBacklinksHistoryCumulative
       tags:
-      - backlinks
+      - Backlinks
       summary: history/cumulative
       description: Returns the total number of live backlinks for a target for each day in a specified date range.
       requestBody:
@@ -861,7 +864,7 @@ paths:
     get:
       operationId: getBacklinksAnchors
       tags:
-      - backlinks
+      - Backlinks
       summary: anchors
       description: Returns information about the anchor texts used in backlinks that point to a single target.
       parameters:
@@ -915,7 +918,7 @@ paths:
     post:
       operationId: createBacklinksAnchors
       tags:
-      - backlinks
+      - Backlinks
       summary: anchors
       description: Returns information about the anchor texts used in backlinks that point to a single target.
       requestBody:
@@ -948,7 +951,7 @@ paths:
     get:
       operationId: getBacklinksRefdomains
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains
       description: Retrieves a list of referring domains pointing to a single target, with sorting options.
       parameters:
@@ -1004,7 +1007,7 @@ paths:
     post:
       operationId: createBacklinksRefdomains
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains
       description: Retrieves a list of referring domains pointing to a single target, with sorting options.
       requestBody:
@@ -1037,7 +1040,7 @@ paths:
     get:
       operationId: getBacklinksRefdomainsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/count
       description: Returns the total number of unique referring domains for one or more targets.
       parameters:
@@ -1070,7 +1073,7 @@ paths:
     post:
       operationId: createBacklinksRefdomainsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/count
       description: Returns the total number of unique referring domains for one or more targets.
       requestBody:
@@ -1105,7 +1108,7 @@ paths:
     get:
       operationId: getBacklinksRefdomainsHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/history
       description: Retrieves a list of new and lost referring domains for a target within a specified date range.
       parameters:
@@ -1162,7 +1165,7 @@ paths:
     post:
       operationId: createBacklinksRefdomainsHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/history
       description: Retrieves a list of new and lost referring domains for a target within a specified date range.
       requestBody:
@@ -1196,7 +1199,7 @@ paths:
     get:
       operationId: getBacklinksRefdomainsHistoryCount
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/history/count
       description: Returns the daily count of new and lost referring domains for a target over a specified period.
       parameters:
@@ -1243,7 +1246,7 @@ paths:
     post:
       operationId: createBacklinksRefdomainsHistoryCount
       tags:
-      - backlinks
+      - Backlinks
       summary: refdomains/history/count
       description: Returns the daily count of new and lost referring domains for a target over a specified period.
       requestBody:
@@ -1277,7 +1280,7 @@ paths:
     get:
       operationId: getBacklinksReferringIps
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-ips
       description: Returns information about the IPv4 addresses that host backlinks pointing to a single target.
       parameters:
@@ -1323,7 +1326,7 @@ paths:
     post:
       operationId: createBacklinksReferringIps
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-ips
       description: Returns information about the IPv4 addresses that host backlinks pointing to a single target.
       requestBody:
@@ -1356,7 +1359,7 @@ paths:
     get:
       operationId: getBacklinksReferringIpsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-ips/count
       description: Returns the total number of unique referring IPs for one or more targets.
       parameters:
@@ -1389,7 +1392,7 @@ paths:
     post:
       operationId: createBacklinksReferringIpsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-ips/count
       description: Returns the total number of unique referring IPs for one or more targets.
       requestBody:
@@ -1422,7 +1425,7 @@ paths:
     get:
       operationId: getBacklinksReferringSubnetsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-subnets/count
       description: Returns the total number of unique referring subnets (C-blocks) for one or more targets.
       parameters:
@@ -1455,7 +1458,7 @@ paths:
     post:
       operationId: createBacklinksReferringSubnetsCount
       tags:
-      - backlinks
+      - Backlinks
       summary: referring-subnets/count
       description: Returns the total number of unique referring subnets (C-blocks) for one or more targets.
       requestBody:
@@ -1488,7 +1491,7 @@ paths:
     get:
       operationId: getBacklinksIndexedPages
       tags:
-      - backlinks
+      - Backlinks
       summary: indexed-pages
       description: Retrieves a list of pages on a target site that have received at least one backlink.
       parameters:
@@ -1539,7 +1542,7 @@ paths:
     post:
       operationId: createBacklinksIndexedPages
       tags:
-      - backlinks
+      - Backlinks
       summary: indexed-pages
       description: Retrieves a list of pages on a target site that have received at least one backlink.
       requestBody:
@@ -1572,7 +1575,7 @@ paths:
     get:
       operationId: getBacklinksAuthority
       tags:
-      - backlinks
+      - Backlinks
       summary: authority
       description: Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.
       parameters:
@@ -1599,7 +1602,7 @@ paths:
     post:
       operationId: createBacklinksAuthority
       tags:
-      - backlinks
+      - Backlinks
       summary: authority
       description: Returns the Page Authority (InLink Rank) and Domain Authority (Domain InLink Rank) for one or more targets.
       requestBody:
@@ -1631,7 +1634,7 @@ paths:
     get:
       operationId: getBacklinksAuthorityDomain
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/domain
       description: Returns the Domain Authority (Domain InLink Rank) for one or more targets.
       parameters:
@@ -1658,7 +1661,7 @@ paths:
     post:
       operationId: createBacklinksAuthorityDomain
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/domain
       description: Returns the Domain Authority (Domain InLink Rank) for one or more targets.
       requestBody:
@@ -1690,7 +1693,7 @@ paths:
     get:
       operationId: getBacklinksAuthorityDomainDistribution
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/domain/distribution
       description: Returns the distribution of Domain Authority scores for all domains linking to a single target.
       parameters:
@@ -1737,7 +1740,7 @@ paths:
     get:
       operationId: getBacklinksAuthorityPage
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/page
       description: Returns the Page Authority (InLink Rank) for one or more target URLs.
       parameters:
@@ -1764,7 +1767,7 @@ paths:
     post:
       operationId: createBacklinksAuthorityPage
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/page
       description: Returns the Page Authority (InLink Rank) for one or more target URLs.
       requestBody:
@@ -1796,7 +1799,7 @@ paths:
     get:
       operationId: getBacklinksAuthorityPageHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/page/history
       description: Returns the historical Page Authority (InLink Rank) values for a single target URL.
       parameters:
@@ -1839,7 +1842,7 @@ paths:
     get:
       operationId: getBacklinksAuthorityDomainHistory
       tags:
-      - backlinks
+      - Backlinks
       summary: authority/domain/history
       description: Returns historical Domain InLink Rank (Domain Authority) values for a target domain. GET only, single target.
       parameters:

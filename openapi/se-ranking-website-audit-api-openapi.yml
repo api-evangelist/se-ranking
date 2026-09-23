@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: SE Ranking Data Account & system Website Audit API
+  title: SE Ranking Data Website Audit API
   description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
   version: 1.0.0
   contact:
@@ -13,7 +13,7 @@ security:
 - apikeyAuth: []
 tags:
 - name: Website Audit
-  description: "This collection of endpoints provides a comprehensive suite of tools to programmatically manage the full lifecycle of your technical SEO audits. These requests allow you to launch new crawls, monitor their progress in real-time, and retrieve detailed reports and page-level data for in-depth analysis.\n\n**Note on Costs:** Audits are billed on a per-page basis.\n\n- **Standard Audits:** 2 credits per crawled page.\n    \n- **Advanced Audits (with JavaScript rendering):** 20 credits per crawled page.\n    \n\n### 1\\. Create & Manage Audits\n\nUse these endpoints to start new crawls, re-run previous ones, or manage your list of audits.\n\n- **Create Audits**: Launch a new **Standard** (HTML crawl) or **Advanced** (JavaScript rendering) audit with highly customizable settings.\n    \n- **List Audits**: Retrieve a paginated list of all audits associated with your account.\n    \n- **Update Audit Title**: Change the display title of an existing audit report.\n    \n- **Delete Audit**: Permanently remove an audit and all of its associated data.\n    \n- **Recheck Audit**: Initiate a new crawl for a completed audit using its original settings.\n    \n\n### 2\\. Monitor & Retrieve Data\n\nOnce an audit is running or complete, use these endpoints to check its progress and pull detailed results.\n\n- **Get Audit Status**: Check the real-time progress of an ongoing audit.\n    \n- **Get Audit Report**: Fetch the full, high-level report for a completed audit, including the overall health score and a summary of issues.\n    \n- **Get Audit History**: Retrieve a historical snapshot of a specific audit run from a particular date.\n    \n- **Get All Crawled Pages**: Return a complete, paginated list of every URL discovered during an audit.\n    \n- **Get Audit Pages by Issue**: Get a list of all URLs affected by a single, specific issue.\n    \n- **Get All Issues for a Specific URL**: Retrieve all errors, warnings, and notices found on a single page.\n    \n- **Get All Found Links**: Fetch a complete list of every internal and external link discovered across the entire site during the audit."
+  description: This collection of endpoints provides a comprehensive suite of tools to programmatically manage the full lifecycle of your technical SEO audits.
 paths:
   /v1/site-audit/audits/standard:
     post:

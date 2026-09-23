@@ -1,26 +1,32 @@
 {
   "provider": "se-ranking",
   "sources": [
-    "se-ranking-account-system-api-openapi.yml",
-    "se-ranking-ai-search-api-openapi.yml",
-    "se-ranking-backlinks-api-openapi.yml",
-    "se-ranking-domain-analysis-api-openapi.yml",
-    "se-ranking-keyword-research-api-openapi.yml",
-    "se-ranking-serp-results-classic-api-openapi.yml",
-    "se-ranking-website-audit-api-openapi.yml"
+    "_original/se-ranking-data-api-openapi.yml"
   ],
   "outputs": [
-    "se-ranking-account-system-api-openapi.yml",
     "se-ranking-ai-search-api-openapi.yml",
-    "se-ranking-backlinks-api-openapi.yml",
+    "se-ranking-account-system-api-openapi.yml",
     "se-ranking-domain-analysis-api-openapi.yml",
     "se-ranking-keyword-research-api-openapi.yml",
     "se-ranking-serp-results-classic-api-openapi.yml",
-    "se-ranking-website-audit-api-openapi.yml"
+    "se-ranking-website-audit-api-openapi.yml",
+    "se-ranking-backlinks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "se-ranking-data-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "se-ranking-account-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-ai-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-backlinks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-domain-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-keyword-research-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-serp-results-classic-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "se-ranking-website-audit-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

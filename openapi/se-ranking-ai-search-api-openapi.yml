@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: SE Ranking Data Account & system AI search API
+  title: SE Ranking Data AI search API
   description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
   version: 1.0.0
   contact:
@@ -13,7 +13,7 @@ security:
 - apikeyAuth: []
 tags:
 - name: AI search
-  description: "This collection of endpoints allows you to analyze a domain or brand's visibility and performance within various Large Language Model (LLM) results, such as ChatGPT, Gemini, and Perplexity. Use these tools to track your presence in AI-generated answers, discover the prompts that feature your brand or domain, and understand your overall AI search footprint.\n\n### Overview & Discovery\n\n- **Overview**: Get a high-level summary of a domain's performance and historical trends within a specific LLM, including metrics like link presence, average position, and AI-driven traffic.\n    \n- **Discover Brand by URL**: A utility endpoint to identify the primary brand name associated with a target domain, useful for subsequent brand-based queries.\n    \n\n### Prompt Analysis\n\n- **Get Prompts by Target**: Retrieve a list of all prompts where a specific domain, subdomain, or URL is featured as a link or mention in an LLM's answer.\n    \n- **Get Prompts by Brand**: Find all prompts where a specific brand name is mentioned in an LLM's answer, allowing you to track brand visibility and context."
+  description: This collection of endpoints allows you to analyze a domain or brand's visibility and performance within various Large Language Model (LLM) results, such as ChatGPT, Gemini, and Perplexity.
 paths:
   /v1/ai-search/overview/aggregated/time-series:
     get:

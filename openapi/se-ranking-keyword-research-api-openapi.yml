@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: SE Ranking Data Account & system Keyword Research API
+  title: SE Ranking Data Keyword Research API
   description: SEO data API for keywords, domains, backlinks, AI Search, SERP, and site audit.
   version: 1.0.0
   contact:
@@ -13,7 +13,7 @@ security:
 - apikeyAuth: []
 tags:
 - name: Keyword Research
-  description: "This collection of endpoints is designed for comprehensive keyword analysis and discovery. Use these requests to retrieve performance metrics for large lists of keywords or to generate new keyword ideas based on a seed term.\n\nThis folder is divided into two main categories:\n\n### Bulk Keyword Metrics\n\n- **Export Keywords Metrics**: Submit a list of up to 5,000 keywords to get detailed data points for each, including search volume, CPC, competition score, keyword difficulty, and historical search volume trends. This is ideal for bulk analysis and data enrichment.\n    \n\n### Keyword Discovery\n\nUse these endpoints to expand your keyword lists and uncover new ranking opportunities.\n\n- **Get Similar Keywords**: Find keywords that are semantically similar to your seed keyword, including synonyms and close variations.\n    \n- **Get Related Keywords**: Discover keywords that are topically related, based on having a high number of overlapping URLs in their search results.\n    \n- **Get Question Keywords**: Generate a list of keywords phrased as common user questions, perfect for content marketing and FAQ creation.\n    \n- **Get Longtail Keywords**: Find longer, more specific keyword phrases that often have lower competition and higher conversion rates."
+  description: This collection of endpoints is designed for comprehensive keyword analysis and discovery.
 paths:
   /v1/keywords/export:
     post:
