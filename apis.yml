@@ -160,7 +160,7 @@ apis:
   - type: Overlay
     url: overlays/se-ranking-ai-search-api-overlay.yaml
 - aid: se-ranking:se-ranking-backlinks-api
-  name: SE Ranking backlinks API
+  name: SE Ranking Backlinks API
   description: "# Backlinks API\n\nThis collection of requests allows you to conduct a comprehensive analysis\
     \ of the backlink profile for any given target, whether it's a root domain, a specific host (subdomain),\
     \ or a particular URL.\n\nYou can use these endpoints to retrieve high-level statistics, fetch detailed\
