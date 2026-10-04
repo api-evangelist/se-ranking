@@ -330,6 +330,9 @@ apis:
     email: api@seranking.com
     url: https://seranking.com/api/mcp/
 common:
+  - type: CapabilityMap
+    url: capabilities/se-ranking-capability-edges.yml
+    name: SE Ranking Business Capability Map
   - type: License
     name: MIT
     url: https://github.com/seranking/openapi/blob/main/LICENSE

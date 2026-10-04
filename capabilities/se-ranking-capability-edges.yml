@@ -1,0 +1,44 @@
+slug: se-ranking
+provider: SE Ranking
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Backlinks
+  spec_file: se-ranking-backlinks-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: 'GET /v1/backlinks/summary "summary"; GET /v1/backlinks/history; vendor: "backlink monitoring"'
+  reason: Backlink profile summary, metrics, counts and history are off-page SEO measurement data, supporting
+    web/SEO activity within Digital Marketing Management.
+- tag: Keyword Research
+  spec_file: se-ranking-keyword-research-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: GET /v1/keywords/related "Get related keywords"; GET /v1/keywords/longtail "Get longtail keywords"
+  reason: Keyword discovery and metrics export is core SEO research feeding web/search marketing, mapping
+    to Digital Marketing Management.
+- tag: AI search
+  spec_file: se-ranking-ai-search-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: 'GET /v1/ai-search/discover-brand; GET /v1/ai-search/prompts-by-brand; vendor: "AI search
+    visibility"'
+  reason: Operations measure a brand's visibility and prompt coverage across AI search engines over time
+    — digital/search channel performance analytics, which sits in Digital Marketing Management (SEO/search).
+    Some overlap with brand and market-intelligence sub-capabilities keeps confidence moderate.
