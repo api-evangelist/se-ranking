@@ -100,3 +100,48 @@ plans:
       - Dedicated support
       - Data API and Project API access
       - API add-on available for +$45/mo (250K–60M credits)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  - subscription
+  units: []
+  plans:
+  - name: Free Trial
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Wallet (Pay-As-You-Go)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Standalone Annual
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Core (Platform + API Add-on)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Growth (Platform + API Add-on)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
