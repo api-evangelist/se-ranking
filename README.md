@@ -64,35 +64,203 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-SE Ranking is an SEO platform providing a REST API for keyword rank tracking, competitor analysis, backlink monitoring, on-page auditing, AI search visibility, and generating white-label SEO reports. The platform covers 5.4B keywords, 2.2B domain profiles, and 188+ regions.
+SE Ranking is an SEO platform providing a REST API for keyword rank tracking, competitor analysis, backlink monitoring, on-page auditing, AI search visibility, and generating white-label SEO reports. The platform offers two API layers — a Data API with pay-as-you-go credits for SEO data retrieval and a Project API for managing SEO workflows — covering 5.4B keywords, 2.2B domain profiles, and 188+ regions.
 
-## APIs
+**Areas:** SEO · Keyword Research · Rank Tracking · Backlinks · Competitor Analysis · Website Audit · AI Search · Geo · Digital Marketing · MCP · AI Agents · Agent Skills
 
-SE Ranking exposes two API layers:
+## SE Ranking on APIs.io
 
-- **Data API** — Pay-as-you-go credit-based access to SE Ranking's SEO datasets: keyword research, backlink analysis, domain analysis, SERP data, website audits, and AI search visibility. Base URL: `https://api.seranking.com`
-- **Project API** — Programmatic management of SEO tracking projects, including keyword monitoring, competitor tracking, website audits, and backlink management. Consumes subscription plan limits rather than separate API credits.
+Everything profiled for SE Ranking is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/se-ranking/](https://apis.io/providers/se-ranking/)** — or go straight to one of the APIs or properties below.
 
-## Authentication
+### APIs (10)
 
-All API requests require an API key obtained from the SE Ranking account dashboard. The recommended method is passing the key in the `Authorization: Token YOUR_API_KEY` header. Query parameter (`apikey=YOUR_API_KEY`) is also supported.
+- [SE Ranking Data API](https://apis.io/apis/se-ranking/data-api/) — REST API providing access to SE Ranking's SEO datasets including keyword research, backlink analysis, domain analysis, SERP data, website audits, and AI…
+- [SE Ranking Project API](https://apis.io/apis/se-ranking/project-api/) — REST API for creating and managing SEO tracking projects programmatically, including keyword monitoring, competitor tracking, website audits, backlink…
+- [SE Ranking Account & system API](https://apis.io/apis/se-ranking/se-ranking-account-system-api/) — This collection contains endpoints for retrieving information about your account status, subscription details, and current credit and API unit balances. Use…
+- [SE Ranking AI search API](https://apis.io/apis/se-ranking/se-ranking-ai-search-api/) — This collection of endpoints allows you to analyze a domain or brand's visibility and performance within various Large Language Model (LLM) results, such as…
+- [SE Ranking Backlinks API](https://apis.io/apis/se-ranking/se-ranking-backlinks-api/) — # Backlinks API This collection of requests allows you to conduct a comprehensive analysis of the backlink profile for any given target, whether it's a root…
+- [SE Ranking Domain Analysis API](https://apis.io/apis/se-ranking/se-ranking-domain-analysis-api/) — This collection of endpoints allows you to perform in-depth competitive analysis on any domain. Use these requests to uncover keyword strategies, traffic…
+- [SE Ranking Keyword Research API](https://apis.io/apis/se-ranking/se-ranking-keyword-research-api/) — This collection of endpoints is designed for comprehensive keyword analysis and discovery. Use these requests to retrieve performance metrics for large…
+- [SE Ranking SERP Results > classic API](https://apis.io/apis/se-ranking/se-ranking-serp-results-classic-api/) — The SERP Results > classic API from SE Ranking — 4 operation(s) for serp results > classic.
+- [SE Ranking Website Audit API](https://apis.io/apis/se-ranking/se-ranking-website-audit-api/) — This collection of endpoints provides a comprehensive suite of tools to programmatically manage the full lifecycle of your technical SEO audits. These…
+- [SE Ranking MCP Server](https://apis.io/apis/se-ranking/mcp-server/) — Hosted remote Model Context Protocol server exposing 217 tools and 5 prompts across three SE Ranking surfaces: the credit-billed Data API (66 DATA_* tools,…
 
-## Links
+### Published properties
 
-- Website: https://seranking.com
-- API Overview: https://seranking.com/api.html
-- Data API Reference: https://seranking.com/api/data/reference/
-- Project API Reference: https://seranking.com/api/project/
-- API Pricing: https://seranking.com/api-pricing.html
-- Rate Limits: https://seranking.com/api/rate-limits/
-- Credit System: https://seranking.com/api/api-credits-system/
-- Blog: https://seranking.com/blog/
-- Status: https://status.seranking.com
-- GitHub: https://github.com/seranking
-- LinkedIn: https://www.linkedin.com/company/se-ranking
-- X: https://x.com/SERanking
-- Postman: https://www.postman.com/serankingdev/se-ranking-developers/overview
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Maintainer
+#### MCP servers (1)
 
-Kin Lane (kin@apievangelist.com)
+Model Context Protocol servers that expose the API to agents.
+
+- [se-ranking](https://apis.io/servers/se-ranking/se-ranking/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Se Ranking Agentic Access](https://apis.io/agentic-access/se-ranking/se-ranking-agentic-access/)
+
+#### JSON Schema (4)
+
+The data models the API reads and writes.
+
+- [SE Ranking AI Search Visibility](https://apis.io/schemas/se-ranking/se-ranking-ai-search/)
+- [SE Ranking Backlink Summary](https://apis.io/schemas/se-ranking/se-ranking-backlink-summary/)
+- [SE Ranking Domain Overview](https://apis.io/schemas/se-ranking/se-ranking-domain-overview/)
+- [SE Ranking Keyword Research Result](https://apis.io/schemas/se-ranking/se-ranking-keyword-research/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Se Ranking Context](https://apis.io/jsonld/se-ranking/se-ranking-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Se Ranking Vocabulary](https://apis.io/vocabularies/se-ranking/se-ranking-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Se Ranking Ai Search Example](https://apis.io/examples/se-ranking/se-ranking-ai-search-example/)
+- [Se Ranking Backlink Summary Example](https://apis.io/examples/se-ranking/se-ranking-backlink-summary-example/)
+- [Se Ranking Domain Overview Example](https://apis.io/examples/se-ranking/se-ranking-domain-overview-example/)
+- [Se Ranking Keyword Research Example](https://apis.io/examples/se-ranking/se-ranking-keyword-research-example/)
+- [Se Ranking Site Audit Example](https://apis.io/examples/se-ranking/se-ranking-site-audit-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [SE Ranking Data Account & system API](https://apis.io/collections/se-ranking/open-se-ranking-account-system-api/)
+- [SE Ranking Data Account & system AI search API](https://apis.io/collections/se-ranking/open-se-ranking-ai-search-api/)
+- [SE Ranking Data Account & system backlinks API](https://apis.io/collections/se-ranking/open-se-ranking-backlinks-api/)
+- [SE Ranking Data Account & system Domain Analysis API](https://apis.io/collections/se-ranking/open-se-ranking-domain-analysis-api/)
+- [SE Ranking Data Account & system Keyword Research API](https://apis.io/collections/se-ranking/open-se-ranking-keyword-research-api/)
+- [SE Ranking Data Account & system SERP Results > classic API](https://apis.io/collections/se-ranking/open-se-ranking-serp-results-classic-api/)
+- [SE Ranking Data Account & system Website Audit API](https://apis.io/collections/se-ranking/open-se-ranking-website-audit-api/)
+
+#### Overlays (7)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Se Ranking Account System Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-account-system-api-overlay/)
+- [Se Ranking Ai Search Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-ai-search-api-overlay/)
+- [Se Ranking Backlinks Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-backlinks-api-overlay/)
+- [Se Ranking Domain Analysis Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-domain-analysis-api-overlay/)
+- [Se Ranking Keyword Research Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-keyword-research-api-overlay/)
+- [Se Ranking Serp Results Classic Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-serp-results-classic-api-overlay/)
+- [Se Ranking Website Audit Api Overlay](https://apis.io/overlays/se-ranking/se-ranking-website-audit-api-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [SE Ranking — jsonschema rules](https://apis.io/rules/se-ranking/se-ranking-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Se Ranking Authentication](https://apis.io/security/se-ranking/se-ranking-authentication/)
+- [Se Ranking Domain Security](https://apis.io/security/se-ranking/se-ranking-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Se Ranking Scopes](https://apis.io/scopes/se-ranking/se-ranking-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Se Ranking Plans Pricing](https://apis.io/plans/se-ranking/se-ranking-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Se Ranking Rate Limits](https://apis.io/rate-limits/se-ranking/se-ranking-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Se Ranking Finops](https://apis.io/finops/se-ranking/se-ranking-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://seranking.com)
+- [Documentation](https://seranking.com/api.html)
+- [Getting started](https://seranking.com/api/data/getting-started/)
+- [API reference](https://seranking.com/api/data/reference/)
+- [Pricing](https://seranking.com/api-pricing.html)
+- [Sign up](https://seranking.com/sign-up.html)
+- [Support](https://seranking.com/contact.html)
+- [Blog](https://seranking.com/blog/)
+- [Terms of service](https://seranking.com/terms-of-use.html)
+- [Privacy policy](https://seranking.com/privacy-policy.html)
+- [GitHub](https://github.com/seranking)
+- [Status](https://status.seranking.com)
+
+## API Evangelist rating
+
+**Kin Score 60.3** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 53.8 |
+| Contract governance | 14.4 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 66.7 |
+| Access clarity | 76.3 |
+
+**Agent readiness 34.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 34.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/se-ranking/](https://apis.io/providers/se-ranking/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SE Ranking: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/se-ranking/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
